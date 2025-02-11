@@ -32,13 +32,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
 
 $errors = FALSE;
-if (empty($_POST['fio'])) {
+if (empty($_POST['name'])) {
   print('Заполните имя.<br/>');
   $errors = TRUE;
 }
 else{
   // Проверка длины
-    if (strlen($_POST['fio']) > 128) {
+    if (strlen($_POST['name']) > 128) {
       print( "Ошибка: ФИО не должно превышать 150 символов.<br>");
       $errors = TRUE;
     }
@@ -94,8 +94,8 @@ $db = new PDO('mysql:host=localhost;dbname=u68600', $user, $pass,
 
 // Подготовленный запрос. Не именованные метки.
 try {
-  $stmt = $db->prepare("INSERT INTO application(fio, number, email, gen, bday, bio, checkbox) values(?,?,?,?,?,?,?)");
-  $stmt->execute([$_POST['fio'], $_POST['number'], $_POST['email'], $_POST['gen'], $_POST['bdate'], $_POST['bio'], isset($_POST["checkbox"]) ? 1 : 0]);
+  $stmt = $db->prepare("INSERT INTO application(name, number, email, gen, bday, bio, checkbox) values(?,?,?,?,?,?,?)");
+  $stmt->execute([$_POST['name'], $_POST['number'], $_POST['email'], $_POST['gen'], $_POST['bdate'], $_POST['bio'], isset($_POST["checkbox"]) ? 1 : 0]);
 }
 catch(PDOException $e){
   print('Error : ' . $e->getMessage());
@@ -105,7 +105,7 @@ catch(PDOException $e){
 $user_id = $db->lastInsertId(); // ID последнего вставленного пользователя
 try{
   $stmt = $db->prepare("SELECT id FROM prog WHERE name = ?");
-  $insert_stmt = $db->prepare("INSERT INTO prog_lang (id, c) VALUES (?, ?)");
+  $insert_stmt = $db->prepare("INSERT INTO prog_lang (id, id_lang_name) VALUES (?, ?)");
   
   foreach ($fav_languages as $language) {
       // Получаем ID языка программирования
