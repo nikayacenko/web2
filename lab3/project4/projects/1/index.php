@@ -50,7 +50,7 @@ else{
     } 
 }
 
-if (empty($_POST['number']) || !preg_match('/^\+7\d{10}$/', $_POST['number'])) {
+if (empty($_POST['number'])) {
   print('Заполните номер.<br/>');
   $errors = TRUE;
 }
