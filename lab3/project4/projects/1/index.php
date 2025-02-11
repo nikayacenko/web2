@@ -24,7 +24,7 @@ $fio = $_POST['name'];
 $number = $_POST['number'];
 $email = $_POST['email'];
 $bday = $_POST['bdate'];
-$gen = $_POST['gen'];
+$gen = $_POST['gender'];
 $bio = $_POST['bio'];
 $checkbox = $_POST['checkbox'];
 $fav_languages = $_POST['languages'] ?? [];
@@ -95,7 +95,7 @@ $table_ul = 'user_lang';
 // Подготовленный запрос. Не именованные метки.
 try {
   $stmt = $db->prepare("INSERT INTO application(name, number, email, gen, bday, bio, checkbox) values(?,?,?,?,?,?,?)");
-  $stmt->execute([$_POST['name'], $_POST['number'], $_POST['email'], $_POST['gen'], $_POST['bdate'], $_POST['bio'], isset($_POST["checkbox"]) ? 1 : 0]);
+  $stmt->execute([$_POST['name'], $_POST['number'], $_POST['email'], $_POST['gender'], $_POST['bdate'], $_POST['bio'], isset($_POST["checkbox"]) ? 1 : 0]);
 }
 catch(PDOException $e){
   print('Error : ' . $e->getMessage());
