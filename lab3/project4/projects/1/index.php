@@ -20,14 +20,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
 // Проверяем ошибки.
 
-&fio = &_POST['name'];
-&number = &_POST['number'];
-&email = &_POST['email'];
-&bday = &_POST['bdate'];
-&gen = &_POST['gen'];
-&bio = &_POST['bio'];
-&checkbox = &_POST['checkbox'];
-&fav_languages = &_POST['languages'] ?? [];
+$fio = &_POST['name'];
+$number = &_POST['number'];
+$email = &_POST['email'];
+$bday = &_POST['bdate'];
+$gen = &_POST['gen'];
+$bio = &_POST['bio'];
+$checkbox = &_POST['checkbox'];
+$fav_languages = &_POST['languages'] ?? [];
 
 
 
@@ -55,7 +55,7 @@ if (empty($_POST['number']) || !preg_match('/^\+7\d{10}$/', $_POST['phone'])) {
   $errors = TRUE;
 }
 
-if (empty($_POST['email'])|| !filter_var($_POST["email"], FILTER_VALIDATE_EMAIL) {
+if (empty($_POST['email'])|| !filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)) {
   print('Заполните email.<br/>');
   $errors = TRUE;
 }
