@@ -4,7 +4,7 @@ CREATE TABLE application (
  number int(11) NOT NULL,
  email varchar(64),
  bdate DATE,
- gen varchar(8) NOT NULL,
+ gender varchar(8) NOT NULL,
  biography varchar(512),
  checkbox varchar(8) NOT NULL,
  PRIMARY KEY (id)
