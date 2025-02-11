@@ -94,7 +94,7 @@ $db = new PDO('mysql:host=localhost;dbname=u68600', $user, $pass,
 
 // Подготовленный запрос. Не именованные метки.
 try {
-  $stmt = $db->prepare("INSERT INTO application(name, number, email, gen, bday, bio, checkbox) values(?,?,?,?,?,?,?)");
+  $stmt = $db->prepare("INSERT INTO application(fio, number, email, gen, bday, bio, checkbox) values(?,?,?,?,?,?,?)");
   $stmt->execute([$_POST['fio'], $_POST['number'], $_POST['email'], $_POST['gen'], $_POST['bdate'], $_POST['bio'], isset($_POST["checkbox"]) ? 1 : 0]);
 }
 catch(PDOException $e){
