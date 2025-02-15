@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   }
   // Включаем содержимое файла form.php.
   //include('form.php');
-  include('index.html');
+  //include('index.html');
   // Завершаем работу скрипта.
   exit();
 }
