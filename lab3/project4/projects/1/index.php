@@ -27,7 +27,7 @@ $email = $_POST['email'];
 $bdate = $_POST['bdate'];
 $gender = $_POST['gender'];
 $biography = $_POST['biography'];
-$checkbox = $_POST['checkbox'];
+//$checkbox = $_POST['checkbox'];
 $fav_languages = $_POST['languages'] ?? [];
 
 
