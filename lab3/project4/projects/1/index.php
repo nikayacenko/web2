@@ -51,13 +51,13 @@ else{
     } 
 }
 
-if (empty($_POST['number'])) {
+/*if (empty($_POST['number'])) {
   print('Заполните номер телефона.<br/>');
   $errors = TRUE;
-}
+}*/
 $_POST['number']=trim($_POST['number']);
-if(!preg_match('/^[0-9+]+$/', $_POST['number'])) {
-  print('Телефон должен содержать толко цифры.<br/>');
+if(empty($_POST['number']) || !preg_match('/^[0-9+]+$/', $_POST['number'])) {
+  print('Заполните корректно номер телефона (номер телефона должен содержать только цифры!).<br/>');
   $errors= TRUE;
 }
 
