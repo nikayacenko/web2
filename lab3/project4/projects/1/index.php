@@ -56,7 +56,7 @@ if (empty($_POST['number'])) {
   $errors = TRUE;
 }
 $_POST['number']=trim($_POST['number']);
-if(!preg_match('/^\8\d{10}$/', $_POST['number'])) {
+if(!preg_match('/^[0-9+]+$/', $_POST['number'])) {
   print('Телефон должен содержать толко цифры.<br/>');
   $errors= TRUE;
 }
