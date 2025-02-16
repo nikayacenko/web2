@@ -39,38 +39,47 @@ if (empty($_POST['name'])) {
 }
 else{
   // Проверка длины
-    if (strlen($_POST['name']) > 128) {
-      print( "Ошибка: ФИО не должно превышать 150 символов.<br>");
+    if (strlen($_POST['name']) > 150) {
+      print( "ФИО не должно превышать 150 символов.<br>");
       $errors = TRUE;
     }
 
   // Проверка на только буквы и пробелы (кириллица и латиница)
     elseif (!preg_match("/^[a-zA-Zа-яА-ЯёЁ\s]+$/u", $_POST['name'])) {
-        print("Ошибка: ФИО должно содержать только буквы и пробелы.<br>");
+        print("ФИО должно содержать только буквы и пробелы.<br>");
         $errors = TRUE;
     } 
 }
 
 if (empty($_POST['number'])) {
-  print('Заполните номер.<br/>');
+  print('Заполните номер телефона.<br/>');
   $errors = TRUE;
+}
+$_POST['number']=trim($_POST['number']);
+if(!preg_match('/^[0-9+]+$/', $_POST['number'])) {
+  print('Телефон должен содержать толко цифры.<br/>');
+  $errors= TRUE;
 }
 
 if (empty($_POST['email'])|| !filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)) {
-  print('Заполните email.<br/>');
+  print('Заполните email корректно.<br/>');
   $errors = TRUE;
 }
 
 $allowed_languages = ["Pascal", "C", "C++", "JavaScript", "PHP", "Python", "Java", "Haskell", "Clojure", "Prolog", "Scala"];
 if (empty($fav_languages)) {
-  print('Ошибка: Выберите хотя бы один язык программирования.<br/>');
+  print('Выберите хотя бы один язык программирования.<br/>');
   $errors = TRUE;
 } 
 
+if (empty($_POST['field-date'])) {
+  print('Заполните дату.<br/>');
+  $errors = TRUE;
+}
 
 // С КОНТРАКТОМ ОЗНАКОМЛЕН
 if (!isset($_POST["checkbox"])) {
-  print('Ошибка: Вы должны подтвердить ознакомление с контрактом.<br/>');
+  print('Вы должны подтвердить ознакомление с контрактом.<br/>');
   $errors = TRUE;
 }
 
