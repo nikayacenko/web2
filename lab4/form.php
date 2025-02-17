@@ -76,7 +76,7 @@
                                 type="date">
                             </label><br>
                             <label>Пол:<br>
-                            <input type="radio" checked="checked" 
+                            <input type="radio" <?php value="<?php print $values['bdate']; ?>" checked="checked" 
                             name="gender" value="ж">
                             Женский</label>
                             <label><input type="radio"
