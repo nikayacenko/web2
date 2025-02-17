@@ -17,7 +17,7 @@
     <body>
         <header>
             <div id = "fir">
-                <img id="logo" src="static/image/флаг.png" alt="Логотип">
+                <img id="logo" src="project4/projects/1/static/image/флаг.png" alt="Логотип">
                 <h1 class="name">Мистер Гиббс: все о пиратах</h1>
             </div>
             </header>
