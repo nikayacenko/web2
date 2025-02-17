@@ -21,6 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   $errors['email'] = !empty($_COOKIE['email_error']);
   $errors['checkbox'] = !empty($_COOKIE['check_error']);
   $errors['bdate'] = !empty($_COOKIE['date_error']);
+  
 
   // TODO: аналогично все поля.
 
@@ -70,6 +71,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   $values['email'] = empty($_COOKIE['email_value']) ? '' : $_COOKIE['email_value'];
   $values['bdate'] = empty($_COOKIE['date_value']) ? '' : $_COOKIE['date_value'];
   $values['checkbox'] = empty($_COOKIE['check_value']) ? '' : $_COOKIE['check_value'];
+  $values['gender'] = empty($_COOKIE['gen_value']) ? '' : $_COOKIE['gen_value'];
+
 
   // Включаем содержимое файла form.php.
 
@@ -147,6 +150,8 @@ else{
     $errors = TRUE;
   }
   setcookie('date_value', $_POST['bdate'], time() + 30 * 24 * 60 * 60);
+  setcookie('gen_value', $_POST['gender'], time() + 30 * 24 * 60 * 60);
+
 
   // С КОНТРАКТОМ ОЗНАКОМЛЕН
   if (!isset($_POST["checkbox"])) {
