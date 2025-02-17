@@ -76,7 +76,10 @@ if (empty($_POST['bdate'])) {
   print('Заполните дату.<br/>');
   $errors = TRUE;
 }
-
+if (empty($_POST['biography'])) {
+  print('Заполните биографию.<br/>');
+  $errors = TRUE;
+}
 // С КОНТРАКТОМ ОЗНАКОМЛЕН
 if (!isset($_POST["checkbox"])) {
   print('Вы должны подтвердить ознакомление с контрактом.<br/>');
