@@ -21,6 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   $errors['email'] = !empty($_COOKIE['email_error']);
   $errors['checkbox'] = !empty($_COOKIE['check_error']);
   $errors['bdate'] = !empty($_COOKIE['date_error']);
+  $errors['languages'] = !empty($_COOKIE['lang_error']);
   
 
   // TODO: аналогично все поля.
@@ -61,6 +62,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     // Выводим сообщение.
     $messages[] = '<div class="error">Отметьте чекбокс верно.</div>';
   }
+  if ($errors['languages']) {
+    // Удаляем куки, указывая время устаревания в прошлом.
+    setcookie('lang_error', '', 100000);
+    setcookie('lang_value', '', 100000);
+    // Выводим сообщение.
+    $messages[] = '<div class="error">Отметьте чекбокс верно.</div>';
+  }
+
 
   // TODO: тут выдать сообщения об ошибках в других полях.
 
@@ -72,6 +81,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   $values['bdate'] = empty($_COOKIE['date_value']) ? '' : $_COOKIE['date_value'];
   $values['checkbox'] = empty($_COOKIE['check_value']) ? '' : $_COOKIE['check_value'];
   $values['gender'] = empty($_COOKIE['gen_value']) ? '' : $_COOKIE['gen_value'];
+  $values['languages'] = empty($_COOKIE['lang_value']) ? '' : $_COOKIE['lang_value'];
+
 
 
   // Включаем содержимое файла form.php.
@@ -140,9 +151,11 @@ else{
   $allowed_languages = ["Pascal", "C", "C++", "JavaScript", "PHP", "Python", "Java", "Haskell", "Clojure", "Prolog", "Scala"];
   if (empty($fav_languages)) {
     print('Выберите хотя бы один язык программирования.<br/>');
-    //setcookie('lang_error', $_POST['languages'], time() + 24 * 60 * 60);
+    setcookie('lang_error', $_POST['languages'], time() + 24 * 60 * 60);
     $errors = TRUE;
   } 
+  setcookie('lang_value', $_POST['languages'], time() + 30 * 24 * 60 * 60);
+
 
   if (empty($_POST['bdate'])) {
     print('Заполните дату.<br/>');
@@ -150,7 +163,7 @@ else{
     $errors = TRUE;
   }
   setcookie('date_value', $_POST['bdate'], time() + 30 * 24 * 60 * 60);
-  setcookie('gen_value', $_POST['gender'], time() + 30 * 24 * 60 * 60);
+  //setcookie('gen_value', $_POST['gender'], time() + 30 * 24 * 60 * 60);
 
 
   // С КОНТРАКТОМ ОЗНАКОМЛЕН
@@ -159,7 +172,7 @@ else{
     setcookie('check_error', $_POST['checkbox'], time() + 24 * 60 * 60);
     $errors = TRUE;
   }
-  setcookie('check_value', "1", time() + 30 * 24 * 60 * 60);
+  setcookie('check_value', $_POST['checkbox'], time() + 30 * 24 * 60 * 60);
 
   // *************
   // Тут необходимо проверить правильность заполнения всех остальных полей.
