@@ -54,8 +54,8 @@
                             ?>
                             <label>
                                 ФИО:<br>
-                                <input name="name"
-                                value="">
+                                <input name="name" <?php if ($errors['name']) {print 'class="error"';} ?> value="<?php print $values['name']; ?>"
+                                value="ok">
                             </label><br>
                             <label>
                                 Номер телефона:<br>
