@@ -118,7 +118,7 @@ else{
 
   $errors = FALSE;
   if (empty($_POST['name'])) {
-    setcookie('fio_error', "1", time() + 365*24*60*60);
+    setcookie('fio_error', "", time() + 365*24*60*60);
     $errors = TRUE;
   }
   else{
