@@ -20,6 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   $errors['number'] = !empty($_COOKIE['number_error']);
   $errors['email'] = !empty($_COOKIE['email_error']);
   $errors['checkbox'] = !empty($_COOKIE['checkbox_error']);
+  $errors['bdate'] = !empty($_COOKIE['date_error']);
 
   // TODO: аналогично все поля.
 
