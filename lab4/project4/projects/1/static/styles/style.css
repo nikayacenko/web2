@@ -1,0 +1,174 @@
+.name {padding:40px;text-align: left;font-size:25pt;font-family:B, Haettenschweiler, 'Arial Narrow Bold', sans-serif;color:#128ee8;font-weight:normal}
+#logo {float:left; margin:10px; width:100px; height:100px; border-radius: 100px;}
+
+body{
+    background-color:#128ee8;
+    background-image: url(../image/корабль.jpg);
+    background-attachment: fixed;
+}
+a {
+    color:rgb(255, 255, 255); 
+    text-decoration:underline;
+ }
+ a:hover{
+    color:#042339;
+ }
+img{
+    border-radius: 10px;
+}
+p{
+    color: rgb(102, 127, 236);
+}
+header{
+    background-color: #000000a7;
+}
+nav ul li{
+    float : none;
+    padding : 5px;
+    background-color: #128ee8;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    list-style: none;
+}
+nav ul li a{
+    font-family: 'B';
+    color:black;
+    text-decoration: none;
+    font-size: 18pt;
+}
+nav ul li buttom{
+    font-family: 'B';
+    color:black;
+    text-decoration: none;
+    font-size: 18pt;
+}
+div.content
+{
+    border-radius: 10px;
+    font-family:'B';
+    background-color: #1a1b228c;
+}
+h1{
+    text-align: center;
+    color: #128ee8;
+}
+h2{
+    color: #128ee8;
+    text-align: center;
+}
+
+p.f{
+    color: #128ee8;
+}
+table {
+    text-align: center;
+    border-collapse: separate;
+    border-spacing: 2px;
+    background-color:rgba(0, 0, 0, 0.11);
+    max-width: fit-content;
+    color:aliceblue;
+}
+
+table.tt{
+    overflow: scroll;
+    margin:0 auto;
+}
+tr{
+    background-color:rgba(8, 12, 249, 0.5);
+    height:100px;
+}
+
+footer {
+    font-size: 20pt;
+    color : rgb(27, 1, 66);
+    background-color: #000000a7;
+    padding: 20px; 
+    height:60px;
+    font-family: "B";
+    margin: 0%;
+    margin-top:15px;
+}
+#ex:hover{color: aliceblue;}
+tr.tb{
+    background-color: #0b094f8a;
+}
+
+label{
+    color: #128ee8;
+}
+
+#kn{ padding-bottom: 20px;}
+#й{
+    width:300px;
+}
+@font-face {
+    font-family: "B";
+    src: url("../font/Blackcraft.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@media screen and (min-width: 800px)
+{
+    nav{
+        position:absolute;
+        top:0;
+        width: 100%;
+        display: flex; 
+        
+    }
+    nav ul li{
+    float: right;
+    background-color: #128ee8;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    list-style: none;
+    }
+    nav ul{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
+    nav ul li a{
+    font-family: 'B';
+    color:black;
+    text-decoration: none;
+    font-size: 17pt;
+    }
+    table.tt{
+        overflow: hidden;
+    }
+    div.content
+    {
+    border-radius: 10px;
+    max-width:90%;
+    font-family:'B';
+    background-color: #1a1b228c;
+    }
+    header{
+    background-color: #000000a7;
+    margin-bottom: 15px;
+    }
+    table {
+    text-align: center;
+    border-collapse: separate;
+    border-spacing: 2px;
+    background-color:rgba(0, 0, 0, 0.11);
+    width: 960px;
+    height: auto;
+    color:aliceblue;
+
+}
+    div.ns div.links{
+        order:1;
+    }
+    div.ns div.t1{
+        order:2;
+        overflow:auto;
+    }
+    #й{
+        width:300px;
+    }
+}
+
