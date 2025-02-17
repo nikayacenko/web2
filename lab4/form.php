@@ -76,10 +76,10 @@
                                 type="date">
                             </label><br>
                             <label>Пол:<br>
-                            <input type="radio" 
+                            <input type="radio" <?php if ($errors['gender']) {print 'class="error"';} ?> value="<?php print $values['gender']; ?>"
                             name="gender" value="ж">
                             Женский</label>
-                            <label><input type="radio" 
+                            <label><input type="radio" <?php if ($errors['gender']) {print 'class="error"';} ?> value="<?php print $values['gender']; ?>"
                             name="gender" value="м">
                             Мужской</label><br>
                             <label>
