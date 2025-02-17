@@ -14,7 +14,7 @@
           src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
         <style>
 /* Сообщения об ошибках и поля с ошибками выводим с красным бордюром. */
-            .error {
+            .errors {
               border: 2px solid red;
             }
         </style>
