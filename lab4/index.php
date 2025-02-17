@@ -24,7 +24,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   $errors['languages'] = !empty($_COOKIE['lang_error']);
   $errors['gender'] = !empty($_COOKIE['gen_error']);
 
-  $messages[] = '<div class="messages"></div>';
 
   // TODO: аналогично все поля.
 
@@ -34,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     setcookie('fio_error', '', 100000);
     setcookie('fio_value', '', 100000);
     // Выводим сообщение.
-    $messages[] = '<div>Заполните имя верно.</div>';
+    $messages[] = '<div class="messages">Заполните имя верно.</div>';
   }
   if ($errors['number']) {
     // Удаляем куки, указывая время устаревания в прошлом.
