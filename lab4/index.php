@@ -22,6 +22,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   $errors['checkbox'] = !empty($_COOKIE['check_error']);
   $errors['bdate'] = !empty($_COOKIE['date_error']);
   $errors['languages'] = !empty($_COOKIE['lang_error']);
+  $errors['gender'] = !empty($_COOKIE['gen_error']);
+
   
 
   // TODO: аналогично все поля.
@@ -69,6 +71,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     // Выводим сообщение.
     $messages[] = '<div class="error">Отметьте язык программирования.</div>';
   }
+  if ($errors['gender']) {
+    // Удаляем куки, указывая время устаревания в прошлом.
+    setcookie('gen_error', '', 100000);
+    setcookie('gen_value', '', 100000);
+    // Выводим сообщение.
+    $messages[] = '<div class="error">Отметьте пол.</div>';
+  }
 
 
   // TODO: тут выдать сообщения об ошибках в других полях.
@@ -82,6 +91,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   $values['checkbox'] = empty($_COOKIE['check_value']) ? '' : $_COOKIE['check_value'];
   $values['gender'] = empty($_COOKIE['gen_value']) ? '' : $_COOKIE['gen_value'];
   $values['languages'] = empty($_COOKIE['lang_value']) ? '' : $_COOKIE['lang_value'];
+
 
 
 
@@ -164,7 +174,11 @@ else{
   }
   setcookie('date_value', $_POST['bdate'], time() + 30 * 24 * 60 * 60);
   //setcookie('gen_value', $_POST['gender'], time() + 30 * 24 * 60 * 60);
-
+  if (!isset($_POST["gender"])) {
+    setcookie('gen_error', $_POST['gender'], time() + 24 * 60 * 60);
+    $errors = TRUE;
+  }
+  setcookie('gen_value', $_POST['gender'], time() + 30 * 24 * 60 * 60);
 
   // С КОНТРАКТОМ ОЗНАКОМЛЕН
   if (!isset($_POST["checkbox"])) {
@@ -190,6 +204,8 @@ else{
     setcookie('email_error', "", time() + 24 * 60 * 60);
     setcookie('date_error', "", time() + 24 * 60 * 60);
     setcookie('check_error', "", time() + 24 * 60 * 60);
+    setcookie('gen_error', "", time() + 24 * 60 * 60);
+
 
     // TODO: тут необходимо удалить остальные Cookies.
   }
