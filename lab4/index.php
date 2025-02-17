@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   $errors['email'] = !empty($_COOKIE['email_error']);
   $errors['checkbox'] = !empty($_COOKIE['check_error']);
   $errors['bdate'] = !empty($_COOKIE['date_error']);
-  $errors['languages'] = !empty($_COOKIE['lang_error']);
+  $errors['languages'] = empty($_COOKIE['lang_error']);
   
 
   // TODO: аналогично все поля.
@@ -67,7 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     setcookie('lang_error', '', 100000);
     setcookie('lang_value', '', 100000);
     // Выводим сообщение.
-    $messages[] = '<div class="error">Отметьте чекбокс верно.</div>';
+    $messages[] = '<div class="error">Отметьте язык программирования.</div>';
   }
 
 
