@@ -150,7 +150,7 @@ else{
 
   $allowed_languages = ["Pascal", "C", "C++", "JavaScript", "PHP", "Python", "Java", "Haskell", "Clojure", "Prolog", "Scala"];
   if (empty($fav_languages)) {
-    print('Выберите хотя бы один язык программирования.<br/>');
+    //print('Выберите хотя бы один язык программирования.<br/>');
     setcookie('lang_error', $_POST['languages'], time() + 24 * 60 * 60);
     $errors = TRUE;
   } 
