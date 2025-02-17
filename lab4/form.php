@@ -12,6 +12,12 @@
           href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
         <script
           src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <style>
+/* Сообщения об ошибках и поля с ошибками выводим с красным бордюром. */
+            .error {
+              border: 2px solid red;
+            }
+        </style>
 
     </head>
     <body>
@@ -33,7 +39,19 @@
                 <div class = "content container-fluid mt-sm-0">   
                     <div id="Форма"><h1>Форма</h1>
                         <form class="pl-sm-3" action="index.php"
-                            method="POST">
+                            method="POST"><?php
+                            if (!empty($messages)) {
+                              print('<div id="messages">');
+                              // Выводим все сообщения.
+                              foreach ($messages as $message) {
+                                print($message);
+                              }
+                              print('</div>');
+                            }
+                            
+                            // Далее выводим форму отмечая элементы с ошибками классом error
+                            // и задавая начальные значения элементов ранее сохраненными.
+                            ?>
                             <label>
                                 ФИО:<br>
                                 <input name="name"
