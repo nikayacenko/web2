@@ -118,21 +118,21 @@ else{
 
   $errors = FALSE;
   if (empty($_POST['name'])) {
-    setcookie('fio_error', "", time() + 365*24*60*60);
+    setcookie('fio_error', "1", time() + 365*24*60*60);
     $errors = TRUE;
   }
   else{
     // Проверка длины
       if (strlen($_POST['name']) > 150) {
         //print( "ФИО не должно превышать 150 символов.<br>");
-        setcookie('fio_error', $_POST['name'], time() + 365*24*60*60);
+        setcookie('fio_error', "1", time() + 365*24*60*60);
         $errors = TRUE;
       }
 
     // Проверка на только буквы и пробелы (кириллица и латиница)
       elseif (!preg_match("/^[a-zA-Zа-яА-ЯёЁ\s]+$/u", $_POST['name'])) {
           //print("ФИО должно содержать только буквы и пробелы.<br>");
-          setcookie('fio_error', $_POST['name'], time() + 24 * 60 * 60);
+          setcookie('fio_error', "1", time() + 24 * 60 * 60);
           $errors = TRUE;
       } 
   }
@@ -145,14 +145,14 @@ else{
   $_POST['number']=trim($_POST['number']);
   if(empty($_POST['number']) || !preg_match('/^[0-9+]+$/', $_POST['number'])) {
     //print('Заполните корректно номер телефона (номер телефона должен содержать только цифры!).<br/>');
-    setcookie('number_error', $_POST['number'], time() + 24 * 60 * 60);
+    setcookie('number_error', "1", time() + 24 * 60 * 60);
     $errors= TRUE;
   }
   setcookie('number_value', $_POST['number'], time() + 30 * 24 * 60 * 60);
 
   if (empty($_POST['email'])|| !filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)) {
     //print('Заполните email корректно.<br/>');
-    setcookie('email_error', $_POST['email'], time() + 24 * 60 * 60);
+    setcookie('email_error', "1", time() + 24 * 60 * 60);
     $errors = TRUE;
   }
   setcookie('email_value', $_POST['email'], time() + 30 * 24 * 60 * 60);
@@ -160,7 +160,7 @@ else{
   $allowed_languages = ["Pascal", "C", "C++", "JavaScript", "PHP", "Python", "Java", "Haskell", "Clojure", "Prolog", "Scala"];
   if (empty($fav_languages)) {
     //print('Выберите хотя бы один язык программирования.<br/>');
-    setcookie('lang_error', $_POST['languages'], time() + 24 * 60 * 60);
+    setcookie('lang_error', "1", time() + 24 * 60 * 60);
     $errors = TRUE;
   } 
   setcookie('lang_value', $_POST['languages'], time() + 30 * 24 * 60 * 60);
@@ -168,13 +168,13 @@ else{
 
   if (empty($_POST['bdate'])) {
     print('Заполните дату.<br/>');
-    setcookie('date_error', $_POST['bdate'], time() + 24 * 60 * 60);
+    setcookie('date_error', "1", time() + 24 * 60 * 60);
     $errors = TRUE;
   }
   setcookie('date_value', $_POST['bdate'], time() + 30 * 24 * 60 * 60);
   //setcookie('gen_value', $_POST['gender'], time() + 30 * 24 * 60 * 60);
   if (!isset($_POST["gender"])) {
-    setcookie('gen_error', $_POST['gender'], time() + 24 * 60 * 60);
+    setcookie('gen_error', "1", time() + 24 * 60 * 60);
     $errors = TRUE;
   }
   setcookie('gen_value', $_POST['gender'], time() + 30 * 24 * 60 * 60);
@@ -182,7 +182,7 @@ else{
   // С КОНТРАКТОМ ОЗНАКОМЛЕН
   if (!isset($_POST["checkbox"])) {
     print('Вы должны подтвердить ознакомление с контрактом.<br/>');
-    setcookie('check_error', $_POST['checkbox'], time() + 24 * 60 * 60);
+    setcookie('check_error', "1", time() + 24 * 60 * 60);
     $errors = TRUE;
   }
   setcookie('check_value', $_POST['checkbox'], time() + 30 * 24 * 60 * 60);
