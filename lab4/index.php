@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   $errors['name'] = !empty($_COOKIE['fio_error']);
   $errors['number'] = !empty($_COOKIE['number_error']);
   $errors['email'] = !empty($_COOKIE['email_error']);
-  $errors['checkbox'] = !empty($_COOKIE['checkbox_error']);
+  $errors['checkbox'] = !empty($_COOKIE['check_error']);
   $errors['bdate'] = !empty($_COOKIE['date_error']);
 
   // TODO: аналогично все поля.
@@ -154,7 +154,7 @@ else{
     setcookie('check_error', $_POST['checkbox'], time() + 24 * 60 * 60);
     $errors = TRUE;
   }
-  setcookie('check_value', $_POST['ckeckbox'], time() + 30 * 24 * 60 * 60);
+  setcookie('check_value', "1", time() + 30 * 24 * 60 * 60);
 
   // *************
   // Тут необходимо проверить правильность заполнения всех остальных полей.
@@ -167,11 +167,11 @@ else{
   }
   else {
     // Удаляем Cookies с признаками ошибок.
-    setcookie('fio_error', $_POST['name'], time() + 24 * 60 * 60);
-    setcookie('number_error', $_POST['number'], time() + 24 * 60 * 60);
-    setcookie('email_error', $_POST['email'], time() + 24 * 60 * 60);
-    setcookie('date_error', $_POST['bdate'], time() + 24 * 60 * 60);
-    setcookie('check_error', $_POST['checkbox'], time() + 24 * 60 * 60);
+    setcookie('fio_error', "", time() + 24 * 60 * 60);
+    setcookie('number_error',"", time() + 24 * 60 * 60);
+    setcookie('email_error', "", time() + 24 * 60 * 60);
+    setcookie('date_error', "", time() + 24 * 60 * 60);
+    setcookie('check_error', "", time() + 24 * 60 * 60);
 
     // TODO: тут необходимо удалить остальные Cookies.
   }
