@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   // TODO: аналогично все поля.
 
   // Выдаем сообщения об ошибках.
-  if ($errors['name'] || empty($_POST['name'])) {
+  if ($errors['name']) {
     // Удаляем куки, указывая время устаревания в прошлом.
     setcookie('fio_error', '', 100000);
     setcookie('fio_value', '', 100000);
@@ -40,42 +40,42 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     setcookie('number_error', '', 100000);
     setcookie('number_value', '', 100000);
     // Выводим сообщение.
-    $messages[] = '<div>Заполните номер телефона верно.</div>';
+    $messages[] = '<div class="messages">Заполните номер телефона верно.</div>';
   }
   if ($errors['email']) {
     // Удаляем куки, указывая время устаревания в прошлом.
     setcookie('email_error', '', 100000);
     setcookie('email_value', '', 100000);
     // Выводим сообщение.
-    $messages[] = '<div>Заполните email верно.</div>';
+    $messages[] = '<div class="messages">Заполните email верно.</div>';
   }
   if ($errors['bdate']) {
     // Удаляем куки, указывая время устаревания в прошлом.
     setcookie('date_error', '', 100000);
     setcookie('date_value', '', 100000);
     // Выводим сообщение.
-    $messages[] = '<div>Заполните дату верно.</div>';
+    $messages[] = '<div class="messages">Заполните дату верно.</div>';
   }
   if ($errors['checkbox']) {
     // Удаляем куки, указывая время устаревания в прошлом.
     setcookie('check_error', '', 100000);
     setcookie('check_value', '', 100000);
     // Выводим сообщение.
-    $messages[] = '<div>Отметьте чекбокс верно.</div>';
+    $messages[] = '<div class="messages">Отметьте чекбокс верно.</div>';
   }
   if ($errors['languages']) {
     // Удаляем куки, указывая время устаревания в прошлом.
     setcookie('lang_error', '', 100000);
     setcookie('lang_value', '', 100000);
     // Выводим сообщение.
-    $messages[] = '<div>Отметьте язык программирования.</div>';
+    $messages[] = '<div class="messages">Отметьте язык программирования.</div>';
   }
   if ($errors['gender']) {
     // Удаляем куки, указывая время устаревания в прошлом.
     setcookie('gen_error', '', 100000);
     setcookie('gen_value', '', 100000);
     // Выводим сообщение.
-    $messages[] = '<div>Отметьте пол.</div>';
+    $messages[] = '<div class="messages">Отметьте пол.</div>';
   }
 
 
