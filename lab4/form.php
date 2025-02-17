@@ -59,24 +59,24 @@
                             </label><br>
                             <label>
                                 Номер телефона:<br>
-                                <input name="number"
-                                value=""
+                                <input name="number" <?php if ($errors['number']) {print 'class="error"';} ?> value="<?php print $values['number']; ?>"
+                                value="ok"
                                 type="tel">
                             </label><br>
                             <label>
                                 email:<br>
-                                <input name="email"
-                                value=""
+                                <input name="email" <?php if ($errors['email']) {print 'class="error"';} ?> value="<?php print $values['email']; ?>"
+                                value="ok"
                                 type="email">
                             </label><br>
                             <label>
                                 Дата рождения:<br>
-                                <input name="bdate"
-                                value=""
+                                <input name="bdate" <?php if ($errors['bdate']) {print 'class="error"';} ?> value="<?php print $values['bdate']; ?>"
+                                value="ok"
                                 type="date">
                             </label><br>
                             <label>Пол:<br>
-                            <input type="radio" checked="checked"
+                            <input type="radio" checked="checked" 
                             name="gender" value="ж">
                             Женский</label>
                             <label><input type="radio"
@@ -106,7 +106,7 @@
                             </label><br>
                             <label>   
                             С контрактом ознакомлен:<br>
-                            <input type="checkbox" name="checkbox">
+                            <input type="checkbox" name="checkbox" <?php if ($errors['checkbox']) {print 'class="error"';} ?> value="<?php print $values['checkbox']; ?>">
                             </label><br>
                             <input type = "submit" value = "Сохранить">
                         </form>
