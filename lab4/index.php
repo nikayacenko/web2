@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   $errors['languages'] = !empty($_COOKIE['lang_error']);
   $errors['gender'] = !empty($_COOKIE['gen_error']);
 
-  
+  $messages[] = '<div class="messages"></div>';
 
   // TODO: аналогично все поля.
 
