@@ -95,17 +95,17 @@
                                 <br>
                                 <select name="languages[]" <?php if ($errors['languages']) {print 'class="error"';} ?>
                                 multiple="multiple">
-                                <option  <?php if(in_array('Pascal', $user_languages)) {print 'selected="selected"';}?>>Pascal</option>
-                                <option  <?php if(in_array('C', $user_languages)) {print 'selected="selected"';}?>>C
-                                <option  <?php if(in_array('C++', $user_languages)) {print 'selected="selected"';}?>>C++
-                                <option  <?php if(in_array('JavaScript', $user_languages)) {print 'selected="selected"';}?>>JavaScript
-                                <option  <?php if(in_array('PHP', $user_languages)) {print 'selected="selected"';}?>>PHP
-                                <option  <?php if(in_array('Python', $user_languages)) {print 'selected="selected"';}?>>Python
-                                <option  <?php if(in_array('Java', $user_languages)) {print 'selected="selected"';}?>>Java
-                                <option  <?php if(in_array('Haskel', $user_languages)) {print 'selected="selected"';}?>>Haskel
-                                <option  <?php if(in_array('Clojure', $user_languages)) {print 'selected="selected"';}?>>Clojure
-                                <option  <?php if(in_array('Prolog', $user_languages)) {print 'selected="selected"';}?>>Prolog
-                                <option  <?php if(in_array('Scala', $user_languages)) {print 'selected="selected"';}?>>Scala
+                                <option value="Pascal" <?php if(in_array('Pascal', $user_languages)) {print 'selected="selected"';}?>>Pascal</option>
+                                <option value="C" <?php if(in_array('C', $user_languages)) {print 'selected="selected"';}?>>C
+                                <option value="C++" <?php if(in_array('C++', $user_languages)) {print 'selected="selected"';}?>>C++
+                                <option value="JavaScript" <?php if(in_array('JavaScript', $user_languages)) {print 'selected="selected"';}?>>JavaScript
+                                <option value="PHP" <?php if(in_array('PHP', $user_languages)) {print 'selected="selected"';}?>>PHP
+                                <option value="Python" <?php if(in_array('Python', $user_languages)) {print 'selected="selected"';}?>>Python
+                                <option value="Java" <?php if(in_array('Java', $user_languages)) {print 'selected="selected"';}?>>Java
+                                <option value="Haskel" <?php if(in_array('Haskel', $user_languages)) {print 'selected="selected"';}?>>Haskel
+                                <option value="Clojure" <?php if(in_array('Clojure', $user_languages)) {print 'selected="selected"';}?>>Clojure
+                                <option value="Prolog" <?php if(in_array('Prolog', $user_languages)) {print 'selected="selected"';}?>>Prolog
+                                <option value="Scala" <?php if(in_array('Scala', $user_languages)) {print 'selected="selected"';}?>>Scala
                                 </select>
                             </label><br>
                             <label>
