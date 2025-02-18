@@ -96,7 +96,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   $values['email'] = empty($_COOKIE['email_value']) ? '' : $_COOKIE['email_value'];
   $values['bdate'] = empty($_COOKIE['date_value']) ? '' : $_COOKIE['date_value'];
   $values['checkbox'] = empty($_COOKIE['check_value']) ? '' : $_COOKIE['check_value'];
-  $values['gender'] = empty($_COOKIE['gen_value']) ? '' : $_COOKIE['gen_value'];
   $values['languages'] = empty($_COOKIE['lang_value']) ? '' : $_COOKIE['lang_value'];
   $values['biography'] = empty($_COOKIE['bio_value']) ? '' : $_COOKIE['bio_value'];
   $values['gen'] = empty($_COOKIE['gen_value']) ? '' : $_COOKIE['gen_value'];
