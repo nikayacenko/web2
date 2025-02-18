@@ -79,11 +79,13 @@
                                 type="date">
                             </label><br>
                             <label>Пол:<br>
-                            <input type="radio" <?php if ($errors['gender']) {print 'class="error"';} ?> value="<?php print $values['gender']; ?>"
-                            name="gender" value="ж">
+                            <input type="radio"  <?php if ($errors['gen1'] || $errors['gen2']) {print 'class="error"';} ?>
+      <?php if ($values['gen']=='female') {print 'checked="checked"';} ?>
+                            name="gender" value="female">
                             Женский</label>
-                            <label><input type="radio" <?php if ($errors['gender']) {print 'class="error"';} ?> value="<?php print $values['gender']; ?>"
-                            name="gender" value="м">
+                            <label><input type="radio"  <?php if ($errors['gen1'] || $errors['gen2']) {print 'class="error"';} ?>
+      <?php if ($values['gen']=='male') {print 'checked="checked"';} ?>
+                            name="gender" value="male">
                             Мужской</label><br>
                             <label>
                                 Любимый язык программирования:
