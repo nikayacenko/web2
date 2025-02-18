@@ -167,7 +167,7 @@ else{
 
 
   if (empty($_POST['bdate'])) {
-    print('Заполните дату.<br/>');
+    //print('Заполните дату.<br/>');
     setcookie('date_error', "1", time() + 24 * 60 * 60);
     $errors = TRUE;
   }
@@ -181,7 +181,7 @@ else{
 
   // С КОНТРАКТОМ ОЗНАКОМЛЕН
   if (!isset($_POST["checkbox"])) {
-    print('Вы должны подтвердить ознакомление с контрактом.<br/>');
+    //print('Вы должны подтвердить ознакомление с контрактом.<br/>');
     setcookie('check_error', "1", time() + 24 * 60 * 60);
     $errors = TRUE;
   }
