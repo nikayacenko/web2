@@ -22,7 +22,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   $errors['checkbox'] = !empty($_COOKIE['check_error']);
   $errors['bdate'] = !empty($_COOKIE['date_error']);
   $errors['languages'] = !empty($_COOKIE['lang_error']);
-  $errors['gender'] = !empty($_COOKIE['gen_error']);
+  $errors['gender'] = !empty($_COOKIE['gen_error']);    
+  $errors['biography'] = !empty($_COOKIE['bio_error']);
+
 
 
   // TODO: аналогично все поля.
@@ -79,7 +81,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     // Выводим сообщение.
     $messages[] = '<div class="messages">Отметьте пол.</div>';
   }
-
+    if ($errors['biography']) {
+    // Удаляем куки, указывая время устаревания в прошлом.
+    setcookie('bio_error', '', 100000);
+    setcookie('bio_value', '', 100000);
+    // Выводим сообщение.
+    $messages[] = '<div class="messages">Внесите данные биографии.</div>';
+  }
 
   // TODO: тут выдать сообщения об ошибках в других полях.
 
@@ -92,6 +100,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   $values['checkbox'] = empty($_COOKIE['check_value']) ? '' : $_COOKIE['check_value'];
   $values['gender'] = empty($_COOKIE['gen_value']) ? '' : $_COOKIE['gen_value'];
   $values['languages'] = empty($_COOKIE['lang_value']) ? '' : $_COOKIE['lang_value'];
+  $values['biography'] = empty($_COOKIE['bio_value']) ? '' : $_COOKIE['bio_value'];
+
 
 
 
@@ -180,6 +190,13 @@ else{
     $errors = TRUE;
   }
   setcookie('gen_value', $_POST['gender'], time() + 30 * 24 * 60 * 60);
+  
+  if (empty($_POST['biography'])) {
+    //print('Заполните дату.<br/>');
+    setcookie('bio_error', "1", time() + 24 * 60 * 60);
+    $errors = TRUE;
+  }
+  setcookie('bio_value', $_POST['biography'], time() + 30 * 24 * 60 * 60);
 
   // С КОНТРАКТОМ ОЗНАКОМЛЕН
   if (!isset($_POST["checkbox"])) {
@@ -206,6 +223,8 @@ else{
     setcookie('date_error', "", time() + 24 * 60 * 60);
     setcookie('check_error', "", time() + 24 * 60 * 60);
     setcookie('gen_error', "", time() + 24 * 60 * 60);
+    setcookie('bio_error', "", time() + 24 * 60 * 60);
+
 
 
     // TODO: тут необходимо удалить остальные Cookies.
