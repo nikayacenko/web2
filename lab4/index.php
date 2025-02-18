@@ -21,7 +21,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   $errors['email'] = !empty($_COOKIE['email_error']);
   $errors['checkbox'] = !empty($_COOKIE['check_error']);
   $errors['bdate'] = !empty($_COOKIE['date_error']);
-  $errors['languages'] = !empty($_COOKIE['lang_error']);
+  $errors['languages1'] = !empty($_COOKIE['lang_error1']);
+  $errors['languages2'] = !empty($_COOKIE['lang_error2']);
   $errors['gen1'] = !empty($_COOKIE['gen_error']);
   $errors['biography'] = !empty($_COOKIE['bio_error']);
 
@@ -67,12 +68,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     // Выводим сообщение.
     $messages[] = '<div class="messages">Подтвердите, что согласны с контрактом.</div>';
   }
-  if ($errors['languages']) {
+  if ($errors['languages1']) {
     // Удаляем куки, указывая время устаревания в прошлом.
-    setcookie('lang_error', '', 100000);
+    setcookie('lang_error1', '', 100000);
     setcookie('lang_value', '', 100000);
     // Выводим сообщение.
     $messages[] = '<div class="messages">Отметьте любимый язык программирования.</div>';
+  }
+  if ($errors['languages2']) {
+    // Удаляем куки, указывая время устаревания в прошлом.
+    setcookie('lang_error2', '', 100000);
+    setcookie('lang_value', '', 100000);
+    // Выводим сообщение.
+    $messages[] = '<div class="messages">Указан недопустимый язык.</div>';
   }
   if ($errors['gen1']) {
     setcookie('gen_error1', '', 100000);
@@ -178,9 +186,17 @@ else{
   $allowed_languages = ["Pascal", "C", "C++", "JavaScript", "PHP", "Python", "Java", "Haskell", "Clojure", "Prolog", "Scala"];
   if (empty($fav_languages)) {
     //print('Выберите хотя бы один язык программирования.<br/>');
-    setcookie('lang_error', "1", time() + 24 * 60 * 60);
+    setcookie('lang_error1', "1", time() + 24 * 60 * 60);
     $errors = TRUE;
-  } 
+  } else {
+    foreach ($fav_languages as $lang) {
+      if (!in_array($lang, $allowed_languages)) {
+          //print('Указан недопустимый язык ($lang).<br/>');
+          setcookie('lang_error2', '2', time() + 24 * 60 * 60);
+          $errors = TRUE;
+      }
+    }
+  }
   $langs_value =(implode(",", $fav_languages));
   setcookie('lang_value', $langs_value, time() + 30 * 24 * 60 * 60);
   
