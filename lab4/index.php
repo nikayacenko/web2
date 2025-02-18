@@ -287,7 +287,7 @@ else{
         
         if ($language_id) {
             // Связываем пользователя с языком
-            $insert_stmt->execute([$user_id, $id_lang_name]);
+            $insert_stmt->execute([$user_id, $language_id]);
         }
     }
   }
