@@ -27,6 +27,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
   // TODO: аналогично все поля.
 
+  // получаете данные с формы
+$var1 = $_GET['м'];
+$var2 = $_GET['ж'];
+
+$value = 'your data in cookie';
+// проверяете, если чек был установлен, то это true 
+if($var1){
+    // ставим куку
+    setcookie ("your_cookie_name", $value);
+}else if($var1 == false && $_COOKIE["check_error"]){
+   // если чек не установлен и существует кука с именем your_cookie_name
+   // то ее удаляем, ставя ей отрицательное время жизни
+    setcookie ("check_error", "", time() - 3600);
+}
+
+  
   // Выдаем сообщения об ошибках.
   if ($errors['name']) {
     // Удаляем куки, указывая время устаревания в прошлом.
