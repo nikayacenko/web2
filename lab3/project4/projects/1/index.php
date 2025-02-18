@@ -115,21 +115,21 @@ catch(PDOException $e){
   exit();
 }
 $user_id = $db->lastInsertId(); // ID последнего вставленного пользователя
-  try{
-    $stmt = $db->prepare("SELECT id_lang_name FROM prog WHERE lang_name = ?");
-    $insert_stmt = $db->prepare("INSERT INTO prog_lang (id, id_lang_name) VALUES (?, ?)");
-    
-    foreach ($fav_languages as $language) {
-        // Получаем ID языка программирования
-        $stmt->execute([$language]);
-        $language_id = $stmt->fetchColumn();
-        
-        if ($language_id) {
-            // Связываем пользователя с языком
-            $insert_stmt->execute([$user_id, $language_id]);
-        }
-    }
+try{
+  $stmt = $db->prepare("SELECT id_lang_name FROM prog WHERE lang_name = ?");
+  $insert_stmt = $db->prepare("INSERT INTO prog_lang (id, id_lang_name) VALUES (?, ?)");
+  
+  foreach ($fav_languages as $language) {
+      // Получаем ID языка программирования
+      $stmt->execute([$language]);
+      $language_id = $stmt->fetchColumn();
+      
+      if ($language_id) {
+          // Связываем пользователя с языком
+          $insert_stmt->execute([$user_id, $language_id]);
+      }
   }
+}
 /*$user_id = $db->lastInsertId(); // ID последнего вставленного пользователя
 try{
   $stmt = $db->prepare("SELECT id FROM prog WHERE name = ?");
