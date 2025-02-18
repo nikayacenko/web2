@@ -188,7 +188,7 @@ else{
     //print('Выберите хотя бы один язык программирования.<br/>');
     setcookie('lang_error1', "1", time() + 24 * 60 * 60);
     $errors = TRUE;
-  } else {
+  } /*else {
     foreach ($fav_languages as $lang) {
       if (!in_array($lang, $allowed_languages)) {
           //print('Указан недопустимый язык ($lang).<br/>');
@@ -196,7 +196,7 @@ else{
           $errors = TRUE;
       }
     }
-  }
+  }*/
   $langs_value =(implode(",", $fav_languages));
   setcookie('lang_value', $langs_value, time() + 30 * 24 * 60 * 60);
   
