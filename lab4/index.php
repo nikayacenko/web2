@@ -28,8 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   // TODO: аналогично все поля.
 
   // получаете данные с формы
-$var1 = $_GET['м'];
-$var2 = $_GET['ж'];
+$var1 = $_GET['checkbox'];
 
 $value = 'your data in cookie';
 // проверяете, если чек был установлен, то это true 
