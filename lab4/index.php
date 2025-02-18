@@ -277,7 +277,7 @@ else{
 
   $user_id = $db->lastInsertId(); // ID последнего вставленного пользователя
   try{
-    $stmt = $db->prepare("SELECT id FROM prog WHERE name = ?");
+    $stmt = $db->prepare("SELECT id_lang_name FROM prog WHERE lang_name = ?");
     $insert_stmt = $db->prepare("INSERT INTO prog_lang (id, id_lang_name) VALUES (?, ?)");
     
     foreach ($fav_languages as $language) {
