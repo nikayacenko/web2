@@ -72,7 +72,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     setcookie('lang_error', '', 100000);
     setcookie('lang_value', '', 100000);
     // Выводим сообщение.
-    $messages[] = '<div class="messages">Отметьте язык программирования.</div>';
+    $messages[] = '<div class="messages">Отметьте любимый язык программирования.</div>';
   }
   if ($errors['gen1']) {
     setcookie('gen_error1', '', 100000);
@@ -181,7 +181,9 @@ else{
     setcookie('lang_error', "1", time() + 24 * 60 * 60);
     $errors = TRUE;
   } 
-  setcookie('lang_value', $_POST['languages'], time() + 30 * 24 * 60 * 60);
+  $langs_value =(implode(",", $fav_languages));
+  setcookie('lang_value', $langs_value, time() + 30 * 24 * 60 * 60);
+  
 
 
   if (empty($_POST['bdate'])) {
@@ -230,6 +232,7 @@ else{
     setcookie('check_error', "", time() + 24 * 60 * 60);
     setcookie('gen_error1', "", time() + 24 * 60 * 60);
     setcookie('bio_error', "", time() + 24 * 60 * 60);
+    setcookie('lang_error', "", time() + 24 * 60 * 60);
 
 
 
