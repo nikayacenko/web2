@@ -108,7 +108,7 @@ $table_ul = 'user_lang';
 // Подготовленный запрос. Не именованные метки.
 try {
   $stmt = $db->prepare("INSERT INTO application(name, number, email, gender, bdate, biography, checkbox) values(?,?,?,?,?,?,?)");
-  $stmt->execute([$_POST['name'], $_POST['number'], $_POST['email'], $_POST['gender'], $_POST['bdate'], $_POST['biography'], isset($_POST["checkbox"]) ? 1 : 0]);
+  $stmt->execute([$_POST['name'], $_POST['number'], $_POST['email'], $_POST['gender'], $_POST['bdate'], $_POST['biography'], isset($_POST['checkbox']) ? 1 : 0]);
 }
 catch(PDOException $e){
   print('Error : ' . $e->getMessage());
