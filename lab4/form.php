@@ -109,7 +109,7 @@
                             </label><br>
                             <label>   
                             С контрактом ознакомлен:<br>
-                            <input type="checkbox" name="checkbox" <?php if ($errors['checkbox']) {print 'class="error"';} ?> value="<?php print $values['checkbox']; ?>">
+                            <input type="checkbox" name="checkbox" <?php if($_COOKIE["check_error"]){ echo 'checked="checked"'; }?>>
                             </label><br>
                             <input type = "submit" value = "Сохранить">
                         </form>
