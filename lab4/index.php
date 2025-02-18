@@ -63,7 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     setcookie('check_error', '', 100000);
     setcookie('check_value', '', 100000);
     // Выводим сообщение.
-    $messages[] = '<div class="messages">Отметьте чекбокс верно.</div>';
+    $messages[] = '<div class="messages">Подтвердите, что согласны с контрактом.</div>';
   }
   if ($errors['languages']) {
     // Удаляем куки, указывая время устаревания в прошлом.
