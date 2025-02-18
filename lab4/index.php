@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   $errors['checkbox'] = !empty($_COOKIE['check_error']);
   $errors['bdate'] = !empty($_COOKIE['date_error']);
   $errors['languages'] = !empty($_COOKIE['lang_error']);
-  $errors['gender'] = !empty($_COOKIE['gen_error']);    
+  $errors['gen1'] = !empty($_COOKIE['gen_error']);
   $errors['biography'] = !empty($_COOKIE['bio_error']);
 
 
@@ -74,12 +74,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     // Выводим сообщение.
     $messages[] = '<div class="messages">Отметьте язык программирования.</div>';
   }
-  if ($errors['gender']) {
-    // Удаляем куки, указывая время устаревания в прошлом.
-    setcookie('gen_error', '', 100000);
+  if ($errors['gen1']) {
+    setcookie('gen_error1', '', 100000);
     setcookie('gen_value', '', 100000);
-    // Выводим сообщение.
-    $messages[] = '<div class="messages">Отметьте пол.</div>';
+    $messages[] = '<div class="error">Укажите пол.</div>';
   }
     if ($errors['biography']) {
     // Удаляем куки, указывая время устаревания в прошлом.
@@ -101,6 +99,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   $values['gender'] = empty($_COOKIE['gen_value']) ? '' : $_COOKIE['gen_value'];
   $values['languages'] = empty($_COOKIE['lang_value']) ? '' : $_COOKIE['lang_value'];
   $values['biography'] = empty($_COOKIE['bio_value']) ? '' : $_COOKIE['bio_value'];
+  $values['gen'] = empty($_COOKIE['gen_value']) ? '' : $_COOKIE['gen_value'];
 
 
 
@@ -169,6 +168,14 @@ else{
   }
   setcookie('email_value', $_POST['email'], time() + 30 * 24 * 60 * 60);
 
+   if (empty($_POST['gender'])){
+    //print ('Укажите пол.<br/>');
+    setcookie('gen_error1', '1', time() + 24 * 60 * 60);
+    $errors = TRUE;
+  }
+  setcookie('gen_value', $_POST['gender'], time() + 365 * 24 * 60 * 60);
+
+  
   $allowed_languages = ["Pascal", "C", "C++", "JavaScript", "PHP", "Python", "Java", "Haskell", "Clojure", "Prolog", "Scala"];
   if (empty($fav_languages)) {
     //print('Выберите хотя бы один язык программирования.<br/>');
@@ -222,7 +229,7 @@ else{
     setcookie('email_error', "", time() + 24 * 60 * 60);
     setcookie('date_error', "", time() + 24 * 60 * 60);
     setcookie('check_error', "", time() + 24 * 60 * 60);
-    setcookie('gen_error', "", time() + 24 * 60 * 60);
+    setcookie('gen_error1', "", time() + 24 * 60 * 60);
     setcookie('bio_error', "", time() + 24 * 60 * 60);
 
 
