@@ -114,8 +114,23 @@ catch(PDOException $e){
   print('Error : ' . $e->getMessage());
   exit();
 }
-
 $user_id = $db->lastInsertId(); // ID последнего вставленного пользователя
+  try{
+    $stmt = $db->prepare("SELECT id_lang_name FROM prog WHERE lang_name = ?");
+    $insert_stmt = $db->prepare("INSERT INTO prog_lang (id, id_lang_name) VALUES (?, ?)");
+    
+    foreach ($fav_languages as $language) {
+        // Получаем ID языка программирования
+        $stmt->execute([$language]);
+        $language_id = $stmt->fetchColumn();
+        
+        if ($language_id) {
+            // Связываем пользователя с языком
+            $insert_stmt->execute([$user_id, $language_id]);
+        }
+    }
+  }
+/*$user_id = $db->lastInsertId(); // ID последнего вставленного пользователя
 try{
   $stmt = $db->prepare("SELECT id FROM prog WHERE name = ?");
   $insert_stmt = $db->prepare("INSERT INTO prog_lang (id, id_lang_name) VALUES (?, ?)");
@@ -130,36 +145,10 @@ try{
           $insert_stmt->execute([$id, $id_lang_name]);
       }
   }
-}
+}*/
 catch (PDOException $e) {
   print('Ошибка БД: ' . $e->getMessage());
   exit();
 }
-// Собираем данные для запроса
-//$data = array( 'fio' => $name, 'number' => $number,'email' => $email,'bday' => $bday,'gen' => $gen, 'bio' => $bio, 'checkbox' => $checkbox ); 
-// Подготавливаем SQL-запрос
-//$stmp = $db->execute("INSERT INTO $table_app (fio, number, email, bday, gen, bio, checkbox) values (:fio, :number, :email, :bday, :gen, :bio, :checkbox)");
-// Выполняем запрос с данными
-//$stmp->execute($data);
 
-//  stmt - это "дескриптор состояния".
- 
-//  Именованные метки.
-//$stmt = $db->prepare("INSERT INTO test (label,color) VALUES (:label,:color)");
-//$stmt -> execute(['label'=>'perfect', 'color'=>'green']);
- 
-//Еще вариант
-/*$stmt = $db->prepare("INSERT INTO users (firstname, lastname, email) VALUES (:firstname, :lastname, :email)");
-$stmt->bindParam(':firstname', $firstname);
-$stmt->bindParam(':lastname', $lastname);
-$stmt->bindParam(':email', $email);
-$firstname = "John";
-$lastname = "Smith";
-$email = "john@test.com";
-$stmt->execute();
-*/
-
-// Делаем перенаправление.
-// Если запись не сохраняется, но ошибок не видно, то можно закомментировать эту строку чтобы увидеть ошибку.
-// Если ошибок при этом не видно, то необходимо настроить параметр display_errors для PHP.
 header('Location: ?save=1');
