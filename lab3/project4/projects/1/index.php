@@ -114,7 +114,7 @@ catch(PDOException $e){
   print('Error : ' . $e->getMessage());
   exit();
 }
-/*$user_id = $db->lastInsertId(); // ID последнего вставленного пользователя
+$user_id = $db->lastInsertId(); // ID последнего вставленного пользователя
   try{
     $stmt = $db->prepare("SELECT id_lang_name FROM prog WHERE lang_name = ?");
     $insert_stmt = $db->prepare("INSERT INTO prog_lang (id, id_lang_name) VALUES (?, ?)");
@@ -129,8 +129,8 @@ catch(PDOException $e){
             $insert_stmt->execute([$user_id, $language_id]);
         }
     }
-  }*/
-$user_id = $db->lastInsertId(); // ID последнего вставленного пользователя
+  }
+/*$user_id = $db->lastInsertId(); // ID последнего вставленного пользователя
 try{
   $stmt = $db->prepare("SELECT id FROM prog WHERE name = ?");
   $insert_stmt = $db->prepare("INSERT INTO prog_lang (id, id_lang_name) VALUES (?, ?)");
@@ -145,7 +145,7 @@ try{
           $insert_stmt->execute([$id, $id_lang_name]);
       }
   }
-}
+}*/
 catch (PDOException $e) {
   print('Ошибка БД: ' . $e->getMessage());
   exit();
