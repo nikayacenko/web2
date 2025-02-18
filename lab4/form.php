@@ -105,7 +105,7 @@
                             </label><br>
                             <label>
                                 Биография:<br>
-                                <textarea name="biography"></textarea>
+                                <textarea name="biography"><?php if ($errors['biography']) {print 'class="error"';} ?>><?php print $values['biography']; ?></textarea>
                             </label><br>
                             <label>   
                             С контрактом ознакомлен:<br>
