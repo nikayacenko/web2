@@ -109,7 +109,7 @@
                             </label><br>
                             <label>   
                             С контрактом ознакомлен:<br>
-                            <input type="checkbox" name="checkbox" <?php if ($errors['checkbox']) {print 'class="error"';} ?> checked="<?php if(!errors['checked']){print 'checked';} ?>">
+                            <input type="checkbox" name="checkbox" <?php if ($errors['checkbox']) {print 'class="error"';} ?> checked="<?php if(!$errors['checked']){print 'checked';} ?>">
                             </label><br>
                             <input type = "submit" value = "Сохранить">
                         </form>
