@@ -20,6 +20,9 @@
             .messages{
                 color: #ff2d2d;
             }
+            .result{
+                color: white;
+            }
         </style>
 
     </head>
