@@ -99,7 +99,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $messages[] = '<div class="messages">Указан недопустимый язык.</div>';
   }
   if ($errors['gen1']) {
-    setcookie('gen_error1', '', 100000);
+    setcookie('gen_error', '', 100000);
     setcookie('gen_value', '', 100000);
     $messages[] = '<div class="messages">Укажите пол.</div>';
   }
@@ -256,7 +256,9 @@ else{
   }
   else {
     // Удаляем Cookies с признаками ошибок.
-    setcookie('fio_error', "", time() + 24 * 60 * 60);
+    setcookie('fio_error1', "", time() + 24 * 60 * 60);
+    setcookie('fio_error2', "", time() + 24 * 60 * 60);
+    setcookie('fio_error3', "", time() + 24 * 60 * 60);
     setcookie('number_error',"", time() + 24 * 60 * 60);
     setcookie('email_error', "", time() + 24 * 60 * 60);
     setcookie('date_error', "", time() + 24 * 60 * 60);
