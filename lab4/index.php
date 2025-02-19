@@ -16,7 +16,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $messages[] = 'Спасибо, результаты сохранены.';
   }
   $errors = array();
-  $errors['name'] = !empty($_COOKIE['fio_error']);
+  $errors['name1'] = !empty($_COOKIE['fio_error1']);
+  $errors['name2'] = !empty($_COOKIE['fio_error2']);
+  $errors['name3'] = !empty($_COOKIE['fio_error3']);
   $errors['number'] = !empty($_COOKIE['number_error']);
   $errors['email'] = !empty($_COOKIE['email_error']);
   $errors['checkbox'] = !empty($_COOKIE['check_error']);
@@ -33,19 +35,33 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
   
   // Выдаем сообщения об ошибках.
-  if ($errors['name']) {
+  if ($errors['name1']) {
     // Удаляем куки, указывая время устаревания в прошлом.
-    setcookie('fio_error', '', 100000);
+    setcookie('fio_error1', '', 100000);
     setcookie('fio_value', '', 100000);
     // Выводим сообщение.
-    $messages[] = '<div class="messages">Заполните имя верно.</div>';
+    $messages[] = '<div class="messages">Заполните ФИО.</div>';
+  }
+  if ($errors['name2']) {
+    // Удаляем куки, указывая время устаревания в прошлом.
+    setcookie('fio_error2', '', 100000);
+    setcookie('fio_value', '', 100000);
+    // Выводим сообщение.
+    $messages[] = '<div class="messages">ФИО не должно превышать 128 символов.</div>';
+  }
+  if ($errors['name3']) {
+    // Удаляем куки, указывая время устаревания в прошлом.
+    setcookie('fio_error3', '', 100000);
+    setcookie('fio_value', '', 100000);
+    // Выводим сообщение.
+    $messages[] = '<div class="messages">ФИО должно содержать только символы букв и пробелы.</div>';
   }
   if ($errors['number']) {
     // Удаляем куки, указывая время устаревания в прошлом.
     setcookie('number_error', '', 100000);
     setcookie('number_value', '', 100000);
     // Выводим сообщение.
-    $messages[] = '<div class="messages">Заполните номер телефона верно.</div>';
+    $messages[] = '<div class="messages">Укажите номер телефона или заполните его верно.</div>';
   }
   if ($errors['email']) {
     // Удаляем куки, указывая время устаревания в прошлом.
@@ -85,7 +101,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   if ($errors['gen1']) {
     setcookie('gen_error1', '', 100000);
     setcookie('gen_value', '', 100000);
-    $messages[] = '<div class="error">Укажите пол.</div>';
+    $messages[] = '<div class="messages">Укажите пол.</div>';
   }
     if ($errors['biography']) {
     // Удаляем куки, указывая время устаревания в прошлом.
@@ -136,21 +152,20 @@ else{
 
   $errors = FALSE;
   if (empty($_POST['name'])) {
-    setcookie('fio_error', "1", time() + 365*24*60*60);
+    setcookie('fio_error1', "1", time() + 365*24*60*60);
     $errors = TRUE;
   }
   else{
     // Проверка длины
-      if (strlen($_POST['name']) > 150) {
-        //print( "ФИО не должно превышать 150 символов.<br>");
-        setcookie('fio_error', "1", time() + 365*24*60*60);
+      if (strlen($_POST['name']) > 128) {
+        //print( "ФИО не должно превышать 128 символов.<br>");
+        setcookie('fio_error2', "1", time() + 365*24*60*60);
         $errors = TRUE;
       }
-
     // Проверка на только буквы и пробелы (кириллица и латиница)
       elseif (!preg_match("/^[a-zA-Zа-яА-ЯёЁ\s]+$/u", $_POST['name'])) {
           //print("ФИО должно содержать только буквы и пробелы.<br>");
-          setcookie('fio_error', "1", time() + 24 * 60 * 60);
+          setcookie('fio_error3', "1", time() + 24 * 60 * 60);
           $errors = TRUE;
       } 
   }
@@ -161,7 +176,7 @@ else{
     $errors = TRUE;
   }*/
   $_POST['number']=trim($_POST['number']);
-  if(empty($_POST['number']) || !preg_match('/^[0-9+]+$/', $_POST['number'])) {
+  if(empty($_POST['number']) || !preg_match('/^\+7\d{10}$/', $_POST['number'])) {
     //print('Заполните корректно номер телефона (номер телефона должен содержать только цифры!).<br/>');
     setcookie('number_error', "1", time() + 24 * 60 * 60);
     $errors= TRUE;
