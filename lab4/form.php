@@ -14,7 +14,7 @@
           src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
         <style>
 /* Сообщения об ошибках и поля с ошибками выводим с красным бордюром. */
-            .errors {
+            .error {
               border: 2px solid red;
             }
             .messages{
@@ -57,7 +57,7 @@
                             ?>
                             <label>
                                 ФИО:<br>
-                                <input name="name" <?php if ($errors['name']) {print 'class="error"';} ?> value="<?php print $values['name']; ?>"
+                                <input name="name" <?php if ($errors['name1']||$errors['name2']) {print 'class="error"';} ?> value="<?php print $values['name']; ?>"
                                 value="ok">
                             </label><br>
                             <label>
