@@ -18,7 +18,7 @@
               border: 2px solid red;
             }
             .messages{
-                color: white;
+                color: #ff2d2d;
             }
         </style>
 
