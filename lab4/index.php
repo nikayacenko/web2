@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     // Удаляем куку, указывая время устаревания в прошлом.
     setcookie('save', '', 100000);
     // Если есть параметр save, то выводим сообщение пользователю.
-    $messages[] = 'Спасибо, результаты сохранены.';
+    $messages[] = '<div class="result">Спасибо, результаты сохранены.</div>';
   }
   $errors = array();
   $errors['name1'] = !empty($_COOKIE['fio_error1']);
