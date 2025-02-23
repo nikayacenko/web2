@@ -60,7 +60,7 @@
                             ?>
                             <label>
                                 ФИО:<br>
-                                <input name="name" <?php if ($errors['name1'] || $errors['name2']) {print 'class="error"';} ?> value="<?php print $values['name']; ?>"
+                                <input name="name" <?php if ($errors['name1'] || $errors['name2'] || $errors['name3']) {print 'class="error"';} ?> value="<?php print $values['name']; ?>"
                                 value="ok">
                             </label><br>
                             <label>
