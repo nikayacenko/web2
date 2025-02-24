@@ -271,6 +271,24 @@ else{
 
     // TODO: тут необходимо удалить остальные Cookies.
   }
+   // Проверяем меняются ли ранее сохраненные данные или отправляются новые.
+  if (!empty($_COOKIE[session_name()]) &&
+      session_start() && !empty($_SESSION['login'])) {
+    // TODO: перезаписать данные в БД новыми данными,
+    // кроме логина и пароля.
+  }
+  else {
+    // Генерируем уникальный логин и пароль.
+    // TODO: сделать механизм генерации, например функциями rand(), uniquid(), md5(), substr().
+    $login = '123';
+    $pass = '123';
+    // Сохраняем в Cookies.
+    setcookie('login', $login);
+    setcookie('pass', $pass);
+
+    // TODO: Сохранение данных формы, логина и хеш md5() пароля в базу данных.
+    // ...
+  }
 
   // Сохранение в базу данных.
 
@@ -314,7 +332,7 @@ else{
   }
 
   setcookie('save', '1');
-  header('Location: index.php');
+  //header('Location: index.php');
 }
 
 
