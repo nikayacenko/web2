@@ -180,7 +180,7 @@ else{
   setcookie('number_value', $_POST['number'], time() + 365 * 24 * 60 * 60);
 
 
-  if(empty($_POST['email']){
+  if(empty($_POST['email'])){
     setcookie('email_error', '1', time() + 24 * 60 * 60);
     $errors = TRUE;
   }elseif(!filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)){
