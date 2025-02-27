@@ -176,7 +176,7 @@ else{
     $errors = TRUE;
   }*/
   $_POST['number']=trim($_POST['number']);
-  if(empty($_POST['number']) || !preg_match('/^\+7\d{10}$/', $_POST['number'])) {
+  if(empty($_POST['number']) || !preg_match('/^[0-9+]+$/', $_POST['number'])) {
     //print('Заполните корректно номер телефона (номер телефона должен содержать только цифры!).<br/>');
     setcookie('number_error', "1", time() + 24 * 60 * 60);
     $errors= TRUE;
