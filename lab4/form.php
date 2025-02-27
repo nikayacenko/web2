@@ -18,9 +18,9 @@
                 border: 2px solid red;
                 background-color:#b3350379
             }
-            .messages{
+            /*.messages{
                 color: #ff2d2d;
-            }
+            }*/
             .result{
                 color: white;
             }
