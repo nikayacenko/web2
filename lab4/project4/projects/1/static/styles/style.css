@@ -1,4 +1,4 @@
-.name {padding:40px;text-align: left;font-size:25pt;font-family:B, Haettenschweiler, 'Arial Narrow Bold', sans-serif;color:#128ee8;font-weight:normal}
+.name {padding:40px;text-align: left;font-size:25pt;font-family:B, Haettenschweiler, 'Arial Narrow Bold', sans-serif;/*color:#128ee8;*/font-weight:normal}
 #logo {float:left; margin:10px; width:100px; height:100px; border-radius: 100px;}
 .error_gen {
     color:rgb(160, 32, 0);
@@ -62,12 +62,12 @@ h1{
     /*color: #128ee8;*/
 }
 h2{
-    color: #128ee8;
+    /*color: #128ee8;*/
     text-align: center;
 }
 
 p.f{
-    color: #128ee8;
+    /*color: #128ee8;*/
 }
 table {
     text-align: center;
