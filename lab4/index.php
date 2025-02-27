@@ -173,6 +173,7 @@ else{
   if(empty($_POST['number']){
     setcookie('number_error', '1', time() + 24 * 60 * 60);
     $errors= TRUE;
+  }
   }elseif(!preg_match('/^[0-9+]+$/', $_POST['number'])){
     setcookie('number_error', '2', time() + 24 * 60 * 60); 
     $errors= TRUE;
