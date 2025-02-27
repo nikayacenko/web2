@@ -24,6 +24,9 @@
             .result{
                 color: white;
             }
+            .error_gen {
+                color:rgb(160, 32, 0);
+            }
         </style>
 
     </head>
