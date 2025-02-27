@@ -10,7 +10,9 @@ div.messages{
     border: 2px solid red;
     background-color:#b3350379
 }
-
+.result{
+    color: white;
+}
 body{
     background-color:#128ee8;
     background-image: url(../image/корабль.jpg);
