@@ -48,20 +48,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   }
  if ($errors['number']) {
     if($_COOKIE['number_error']=='1'){
-      $messages[] = '<div class="error">Номер не указан.</div>';
+      $messages[] = '<div class="messages">Номер не указан.</div>';
     }
     elseif($_COOKIE['number_error']=='2'){
-      $messages[] = '<div class="error">Номер заполнен некорректно.</div>';
+      $messages[] = '<div class="messages">Номер заполнен некорректно.</div>';
     }
     setcookie('number_error', '', 100000);
     setcookie('number_value', '', 100000);
   }
   if ($errors['email']) {
     if($_COOKIE['email_error']=='1') {
-      $messages[] = '<div class="error">Email не указан.</div>';
+      $messages[] = '<div class="messages">Email не указан.</div>';
     }
     elseif($_COOKIE['email_error']=='2') {
-      $messages[] = '<div class="error">Введенный email указан некорректно.</div>';
+      $messages[] = '<div class="messages">Введенный email указан некорректно.</div>';
     }
     setcookie('email_error', '', 100000);
     setcookie('email_value', '', 100000);
@@ -88,7 +88,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
       $messages[] = '<div class="messages">Указан недопустимый язык.</div>';
     }
     // Удаляем куки, указывая время устаревания в прошлом.
-    setcookie('lang_error1', '', 100000);
+    setcookie('lang_error', '', 100000);
     setcookie('lang_value', '', 100000);
   }
   
@@ -102,7 +102,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         $messages[] = '<div class="messages">Внесите данные биографии.</div>';
       }
       elseif($_COOKIE['bio_error']=='2'){
-        $messages[] = '<div>Используйте только допустимые символы: буквы, цифры, знаки препинания.</div>';
+        $messages[] = '<div class="messages">Используйте только допустимые символы: буквы, цифры, знаки препинания.</div>';
       }
     // Удаляем куки, указывая время устаревания в прошлом.
     setcookie('bio_error', '', 100000);
