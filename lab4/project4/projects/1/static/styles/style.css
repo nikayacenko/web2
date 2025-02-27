@@ -6,6 +6,10 @@
 .messages{
     color: #ff2d2d;
 }
+.error {
+    border: 2px solid red;
+    background-color:#b3350379
+}
 body{
     background-color:#128ee8;
     background-image: url(../image/корабль.jpg);
