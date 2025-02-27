@@ -85,13 +85,13 @@
                                 value="ok"
                                 type="date">
                             </label><br>
-                             <div <?php if ($errors['gen']) {print 'class="error_gen"';} ?>>
-                            <label class="l">Пол:<br>
+                             <div <?php if ($errors['gen']) {print 'class="error_gen"';} ?><?php if (!$errors['gen']) {print 'class="l"';} ?>>
+                            <label>Пол:<br>
                             <input type="radio"  <?php if ($errors['gen']) {print 'class="error"';} ?>
       <?php if ($values['gen']=='female') {print 'checked="checked"';} ?>
                             name="gender" value="female">
                             Женский</label>
-                            <label class="l"><input type="radio"  <?php if ($errors['gen']) {print 'class="error"';} ?>
+                            <label><input type="radio"  <?php if ($errors['gen']) {print 'class="error"';} ?>
       <?php if ($values['gen']=='male') {print 'checked="checked"';} ?>
                             name="gender" value="male">
                             Мужской</label><br>
