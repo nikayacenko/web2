@@ -15,7 +15,8 @@
         <style>
 /* Сообщения об ошибках и поля с ошибками выводим с красным бордюром. */
             .error {
-              border: 2px solid red;
+                border: 2px solid red;
+                background-color:#b3350379
             }
             .messages{
                 color: #ff2d2d;
