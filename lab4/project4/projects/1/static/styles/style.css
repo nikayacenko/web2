@@ -3,7 +3,7 @@
 .error_gen {
     color:rgb(160, 32, 0);
 }
-.messages{
+div.messages{
     color: #ff2d2d;
 }
 .error {
