@@ -67,31 +67,31 @@
                                 <input name="name" <?php if ($errors['name']) {print 'class="error"';} ?> value="<?php print $values['name']; ?>"
                                 value="ok">
                             </label><br>
-                            <label>
+                            <label class="l">
                                 Номер телефона:<br>
                                 <input name="number" <?php if ($errors['number']) {print 'class="error"';} ?> value="<?php print $values['number']; ?>"
                                 value="ok"
                                 type="tel">
                             </label><br>
-                            <label>
+                            <label class="l">
                                 email:<br>
                                 <input name="email" <?php if ($errors['email']) {print 'class="error"';} ?> value="<?php print $values['email']; ?>"
                                 value="ok"
                                 type="email">
                             </label><br>
-                            <label>
+                            <label class="l">
                                 Дата рождения:<br>
                                 <input name="bdate" <?php if ($errors['bdate']) {print 'class="error"';} ?> value="<?php print $values['bdate']; ?>"
                                 value="ok"
                                 type="date">
                             </label><br>
                              <div <?php if ($errors['gen']) {print 'class="error_gen"';} ?>>
-                            <label>Пол:<br>
+                            <label class="l">Пол:<br>
                             <input type="radio"  <?php if ($errors['gen']) {print 'class="error"';} ?>
       <?php if ($values['gen']=='female') {print 'checked="checked"';} ?>
                             name="gender" value="female">
                             Женский</label>
-                            <label><input type="radio"  <?php if ($errors['gen']) {print 'class="error"';} ?>
+                            <label class="l"><input type="radio"  <?php if ($errors['gen']) {print 'class="error"';} ?>
       <?php if ($values['gen']=='male') {print 'checked="checked"';} ?>
                             name="gender" value="male">
                             Мужской</label><br>
@@ -99,7 +99,7 @@
                              <?php 
       $user_languages = explode(",",  $values['languages']);
       ?>
-                            <label>
+                            <label class="l">
                                 Любимый язык программирования:
                                 <br>
                                 <select name="languages[]" multiple="multiple" <?php if ($errors['languages']) {print 'class="error"';} ?>>
@@ -116,11 +116,11 @@
                                 <option value="Scala" <?php if(in_array('Scala', $user_languages)) {print 'selected="selected"';}?>>Scala
                                 </select>
                             </label><br>
-                            <label>
+                            <label class="l">
                                 Биография:<br>
                                 <textarea name="biography" <?php if ($errors['biography']) {print 'class="error"';} ?>><?php print $values['biography']; ?></textarea>
                             </label><br>
-                            <label>   
+                            <label class="l">   
                             С контрактом ознакомлен:<br>
                             <input type="checkbox" name="checkbox" <?php if ($errors['checkbox']) {print 'class="error"';} ?>  <?php if (!$errors['checkbox']) {print 'checked="checked"';} ?>> 
                             </label><br>
