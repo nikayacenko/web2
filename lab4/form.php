@@ -12,7 +12,7 @@
           href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
         <script
           src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-        <style>
+        <!--<style>
 /* Сообщения об ошибках и поля с ошибками выводим с красным бордюром. */
             .error {
                 border: 2px solid red;
@@ -27,7 +27,7 @@
             .error_gen {
                 color:rgb(160, 32, 0);
             }
-        </style>
+        </style>-->
 
     </head>
     <body>
