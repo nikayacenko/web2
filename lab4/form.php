@@ -83,11 +83,11 @@
                                 type="date">
                             </label><br>
                             <label>Пол:<br>
-                            <input type="radio"  <?php if ($errors['gen']) {print 'class="error"';} ?>
+                            <input type="radio"  <?php if ($errors['gen']) {print 'class="error_gen"';} ?>
       <?php if ($values['gen']=='female') {print 'checked="checked"';} ?>
                             name="gender" value="female">
                             Женский</label>
-                            <label><input type="radio"  <?php if ($errors['gen']) {print 'class="error"';} ?>
+                            <label><input type="radio"  <?php if ($errors['gen']) {print 'class="error_gen"';} ?>
       <?php if ($values['gen']=='male') {print 'checked="checked"';} ?>
                             name="gender" value="male">
                             Мужской</label><br>
