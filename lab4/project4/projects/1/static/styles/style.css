@@ -103,6 +103,9 @@ footer {
 /*label{
     color: #128ee8;
 }*/
+.l{
+    color: #128ee8;
+}
 #ex:hover{color: aliceblue;}
 tr.tb{
     background-color: #0b094f8a;
