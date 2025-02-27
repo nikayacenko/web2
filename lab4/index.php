@@ -170,7 +170,7 @@ else{
   setcookie('fio_value', $_POST['name'], time() + 365 * 24 * 60 * 60);
  
   $_POST['number']=trim($_POST['number']);
-  if(empty($_POST['number']){
+  if(empty($_POST['number'])){
     setcookie('number_error', '1', time() + 24 * 60 * 60);
     $errors= TRUE;
   }elseif(!preg_match('/^[0-9+]+$/', $_POST['number'])){
