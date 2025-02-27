@@ -3,6 +3,9 @@
 .error_gen {
     color:rgb(160, 32, 0);
 }
+.messages{
+    color: #ff2d2d;
+}
 body{
     background-color:#128ee8;
     background-image: url(../image/корабль.jpg);
