@@ -95,10 +95,10 @@
       <?php if ($values['gen']=='male') {print 'checked="checked"';} ?>
                             name="gender" value="male">
                             Мужской</label><br>
+                             </div>
                              <?php 
       $user_languages = explode(",",  $values['languages']);
       ?>
-                            </div>
                             <label>
                                 Любимый язык программирования:
                                 <br>
