@@ -85,18 +85,20 @@
                                 value="ok"
                                 type="date">
                             </label><br>
+                             <div <?php if ($errors['gen']) {print 'class="error_gen"';} ?>>
                             <label>Пол:<br>
-                            <input type="radio"  <?php if ($errors['gen']) {print 'class="error_gen"';} ?>
+                            <input type="radio"  <?php if ($errors['gen']) {print 'class="error"';} ?>
       <?php if ($values['gen']=='female') {print 'checked="checked"';} ?>
                             name="gender" value="female">
                             Женский</label>
-                            <label><input type="radio"  <?php if ($errors['gen']) {print 'class="error_gen"';} ?>
+                            <label><input type="radio"  <?php if ($errors['gen']) {print 'class="error"';} ?>
       <?php if ($values['gen']=='male') {print 'checked="checked"';} ?>
                             name="gender" value="male">
                             Мужской</label><br>
                              <?php 
       $user_languages = explode(",",  $values['languages']);
       ?>
+                            </div>
                             <label>
                                 Любимый язык программирования:
                                 <br>
