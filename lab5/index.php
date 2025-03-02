@@ -309,7 +309,7 @@ else{
     try {
       $stmt = $db->prepare("INSERT INTO application(name, number, email, gender, bdate, biography, checkbox) values(?,?,?,?,?,?,?)");
       $stmt->execute([$_POST['name'], $_POST['number'], $_POST['email'], $_POST['gender'], $_POST['bdate'], $_POST['biography'], isset($_POST["checkbox"]) ? 1 : 0]);
-      $login = rand()%10000000;
+      /*$login = rand()%10000000;
       $pass = rand()%10000000000;
       // Сохраняем в Cookies.
       $hash_pass=md5($pass);
@@ -318,9 +318,9 @@ else{
       $stmt = $db->prepare("INSERT INTO LOGIN(login, pass) values(?,?)");
       $stmt = execute($_POST['login'], $_POST['pass']);
       $stmt = $db->prepare("INSERT INTO person_LOGIN(id, login) values(?,?)");
-      $stmt = execute($_POST['id'], $_POST['login']);
+      $stmt = execute($_POST['id'], $_POST['login']);*/
           
-      $user_id = $db->lastInsertId();
+      /*$user_id = $db->lastInsertId();
       $stmt = $db->prepare("SELECT id_lang_name FROM prog WHERE lang_name = ?");
       $insert_stmt = $db->prepare("INSERT INTO prog_lang (id, id_lang_name) VALUES (?, ?)");
       foreach ($fav_languages as $language) {
@@ -332,14 +332,29 @@ else{
               // Связываем пользователя с языком
               $insert_stmt->execute([$user_id, $language_id]);
           }
-      }// ID последнего вставленного пользователя
+      }// ID последнего вставленного пользователя*/
     }
     catch(PDOException $e){
       print('Error : ' . $e->getMessage());
       exit();
     }
-  
-    /*$user_id = $db->lastInsertId(); // ID последнего вставленного пользователя
+    try{
+      $login = rand()%10000000;
+      $pass = rand()%10000000000;
+      // Сохраняем в Cookies.
+      $hash_pass=md5($pass);
+      setcookie('login', $login);
+      setcookie('pass', $pass);
+      $stmt = $db->prepare("INSERT INTO LOGIN(login, pass) values(?,?)");
+      $stmt = execute($_POST['login'], $_POST['pass']);
+      $stmt = $db->prepare("INSERT INTO person_LOGIN(id, login) values(?,?)");
+      $stmt = execute($_POST['id'], $_POST['login']);
+    }
+      catch(PDOException $e){
+      print('Error : ' . $e->getMessage());
+      exit();
+    }
+    $user_id = $db->lastInsertId(); // ID последнего вставленного пользователя
     try{
       $stmt = $db->prepare("SELECT id_lang_name FROM prog WHERE lang_name = ?");
       $insert_stmt = $db->prepare("INSERT INTO prog_lang (id, id_lang_name) VALUES (?, ?)");
@@ -358,7 +373,7 @@ else{
     catch (PDOException $e) {
       print('Ошибка БД: ' . $e->getMessage());
       exit();
-    }*/
+    }
   }
   setcookie('save', '1');
   header('Location: index.php');
