@@ -338,7 +338,7 @@ else{
       print('Error : ' . $e->getMessage());
       exit();
     }
-    /*try{
+    try{
       $login = rand()%10000000;
       $pass = rand()%10000000000;
       // Сохраняем в Cookies.
@@ -357,7 +357,7 @@ else{
       catch(PDOException $e){
       print('Error : ' . $e->getMessage());
       exit();
-    }*/
+    }
     $user_id = $db->lastInsertId(); // ID последнего вставленного пользователя
     try{
       $stmt = $db->prepare("SELECT id_lang_name FROM prog WHERE lang_name = ?");
