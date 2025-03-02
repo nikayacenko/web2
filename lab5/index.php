@@ -339,8 +339,8 @@ else{
       exit();
     }
     try{
-      $login = rand()%10000000;
-      $pass = rand()%10000000000;
+      $login = /*rand()%10000000*/123;
+      $pass = /*rand()%10000000000*/123;
       // Сохраняем в Cookies.
       $hash_pass=md5($pass);
       setcookie('login', $login);
