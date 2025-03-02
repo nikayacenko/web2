@@ -51,6 +51,16 @@ else {
   // Если все ок, то авторизуем пользователя.
   $_SESSION['login'] = $_POST['login'];
   // Записываем ID пользователя.
+  // Записываем ID пользователя.
+//   $user = 'u68598'; // Заменить на ваш логин uXXXXX
+//   $pass = '8795249'; // Заменить на пароль
+//   $db = new PDO('mysql:host=localhost;dbname=u68598', $user, $pass,
+//     [PDO::ATTR_PERSISTENT => true, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]); // Заменить test на имя БД, совпадает с логином uXXXXX
+//     $stmt = $db->prepare("SELECT id FROM person_LOGIN WHERE login=:login");
+//     $stmt->bindValue(':login', $_SESSION['login'], PDO::PARAM_STR);
+//     if (!$stmt->execute()) {
+//         error_log("Ошибка выполнения запроса: " . $stmt->errorInfo()[2]); 
+//       }
   $_SESSION['uid'] = 123;
 
   // Делаем перенаправление.
