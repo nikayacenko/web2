@@ -60,7 +60,7 @@
                             ?>
                             <label>
                                 ФИО:<br>
-                                <input name="name" <?php if ($errors['name1'] || $errors['name2'] || $errors['name3']) {print 'class="error"';} ?> value="<?php print $values['name']; ?>"
+                                <input name="name" <?php if ($errors['name']) {print 'class="error"';} ?> value="<?php print $values['name']; ?>"
                                 value="ok">
                             </label><br>
                             <label>
@@ -82,11 +82,11 @@
                                 type="date">
                             </label><br>
                             <label>Пол:<br>
-                            <input type="radio"  <?php if ($errors['gen1']) {print 'class="error"';} ?>
+                            <input type="radio"  <?php if ($errors['gen']) {print 'class="error"';} ?>
       <?php if ($values['gen']=='female') {print 'checked="checked"';} ?>
                             name="gender" value="female">
                             Женский</label>
-                            <label><input type="radio"  <?php if ($errors['gen1']) {print 'class="error"';} ?>
+                            <label><input type="radio"  <?php if ($errors['gen']) {print 'class="error"';} ?>
       <?php if ($values['gen']=='male') {print 'checked="checked"';} ?>
                             name="gender" value="male">
                             Мужской</label><br>
@@ -96,7 +96,7 @@
                             <label>
                                 Любимый язык программирования:
                                 <br>
-                                <select name="languages[]" multiple="multiple" <?php if ($errors['languages1']) {print 'class="error"';} ?>>
+                                <select name="languages[]" multiple="multiple" <?php if ($errors['languages']) {print 'class="error"';} ?>>
                                 <option value="Pascal" <?php if(in_array('Pascal', $user_languages)) {print 'selected="selected"';}?>>Pascal</option>
                                 <option value="C" <?php if(in_array('C', $user_languages)) {print 'selected="selected"';}?>>C
                                 <option value="C++" <?php if(in_array('C++', $user_languages)) {print 'selected="selected"';}?>>C++
