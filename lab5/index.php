@@ -338,6 +338,7 @@ else{
       print('Error : ' . $e->getMessage());
       exit();
     }
+    $user_id = $db->lastInsertId(); 
     try{
       $login = rand()%10000000;
       $pass = rand()%10000000000;
@@ -350,7 +351,7 @@ else{
       $stmt->bindParam(':pass', $hash_pass);
       $stmt->execute();
       $stmt = $db->prepare("INSERT INTO person_LOGIN (id, login) VALUES (:id, :login)");
-      $stmt->bindParam(':id', $lastInsertId);
+      $stmt->bindParam(':id', $user_id);
       $stmt->bindParam(':login', $login);
       $stmt->execute();
     }
@@ -358,7 +359,7 @@ else{
       print('Error : ' . $e->getMessage());
       exit();
     }
-    $user_id = $db->lastInsertId(); // ID последнего вставленного пользователя
+    //$user_id = $db->lastInsertId(); // ID последнего вставленного пользователя
     try{
       $stmt = $db->prepare("SELECT id_lang_name FROM prog WHERE lang_name = ?");
       $insert_stmt = $db->prepare("INSERT INTO prog_lang (id, id_lang_name) VALUES (?, ?)");
