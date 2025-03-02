@@ -345,10 +345,14 @@ else{
       $hash_pass=md5($pass);
       setcookie('login', $login);
       setcookie('pass', $pass);
-      $stmt = $db->prepare("INSERT INTO LOGIN(login, pass) values(?,?)");
-      $stmt = execute($_POST['login'], $_POST['pass']);
-      $stmt = $db->prepare("INSERT INTO person_LOGIN(id, login) values(?,?)");
-      $stmt = execute($_POST['id'], $_POST['login']);
+      $stmt = $db->prepare("INSERT INTO LOGIN (login, pass) VALUES (:login, :pass)");
+      $stmt->bindParam(':login', $login);
+      $stmt->bindParam(':pass', $hash_pass);
+      $stmt->execute();
+      $stmt = $db->prepare("INSERT INTO person_LOGIN (id, login) VALUES (:id, :login)");
+      $stmt->bindParam(':id', $lastInsertId);
+      $stmt->bindParam(':login', $login);
+      $stmt->execute();
     }
       catch(PDOException $e){
       print('Error : ' . $e->getMessage());
