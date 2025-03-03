@@ -342,7 +342,7 @@ else{
     //update
     try {
         $stmt_update = $db->prepare("UPDATE application SET fio=?, number=?, email=?, bdate=?, gender=?, biography=?, checkbox=? WHERE id=?");
-        $stmt_update->execute([$_POST['fio'], $_POST['number'], $_POST['email'], $_POST['birthdate'], $_POST['radio-group-1'], $_POST['biography'], isset($_POST["checkbox"]) ? 1 : 0, $user_id ]);
+        $stmt_update->execute([$_POST['name'], $_POST['number'], $_POST['email'], $_POST['bdate'], $_POST['gen'], $_POST['biography'], isset($_POST["checkbox"]) ? 1 : 0, $user_id ]);
     
         $stmt_delete = $db->prepare("DELETE FROM prog_lang WHERE id=?");
         $stmt_delete -> execute([$user_id]);
