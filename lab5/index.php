@@ -134,7 +134,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     // и заполнить переменную $values,
     // предварительно санитизовав.
     // Для загрузки данных из БД делаем запрос SELECT и вызываем метод PDO fetchArray(), fetchObject() или fetchAll() 
-    try{
+    /*try{
       $stmt = $db->prepare("SELECT fio, number, email, biography AS bio, gender AS gen, bdate, checkbox FROM application WHERE login = ?");
       $stmt->execute([$_SESSION['login']]);
       $values = $stmt->fetchArray();
@@ -142,7 +142,45 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     catch (PDOException $e){
       print('Error : ' . $e->getMessage());
       exit();
-    }
+    }*/
+     try{
+       $mas=[];
+
+        $stmt = $db->prepare("SELECT fio, number, email, biography AS bio, gender AS gen, bdate, checkbox FROM application WHERE id = ?");
+        $stmt->execute([$_SESSION['uid']]);
+        $mas = $stmt->fetch(PDO::FETCH_ASSOC);
+        $fields = ['fio', 'number', 'email', 'bio', 'gen', 'bdate', 'checkbox'];
+        foreach($fields as $field) {
+            $values[$field] = strip_tags($mas[$field]);
+        }
+     }
+     catch (PDOException $e){
+       print('ERROR : ' . $e->getMessage());
+       exit();
+     }
+
+    
+    try {
+      $get_lang=[];
+      $mas=[];
+      $stmt_lang = $db->prepare("SELECT id_lang FROM user_lang WHERE id = ?");
+      $stmt_lang->execute([$_SESSION['uid']]);
+      $mas = $stmt_lang->fetch(PDO::FETCH_ASSOC);
+
+      $stmt_get_lang = $db->prepare("SELECT lang_name FROM prog_lang WHERE id_lang=?");
+
+      foreach ($mas as $id) {
+        
+          $stmt_get_lang->execute([$id]);
+          $lang_name = $stmt_get_lang->fetchColumn();
+          $get_lang = $lang_name;
+      }
+          
+      $values['lang'] = $get_lang;
+  } catch (PDOException $e){
+      print('Error : ' . $e->getMessage());
+      exit();
+  }
         // 5. Закрытие курсора (необязательно, но рекомендуется)
     // TODO: загрузить данные пользователя из БД
     // и заполнить переменную $values,
@@ -291,9 +329,44 @@ else{
   }
   if (!empty($_COOKIE[session_name()]) &&
   session_start() && !empty($_SESSION['login'])) {
+    $user_id;
+    try {
+        $stmt_select = $db->prepare("SELECT id FROM LOGIN WHERE login=?");
+        $stmt_select->execute([$_SESSION['login']]);
+        $user_id = $stmt_select->fetchColumn();
+    } catch (PDOException $e){
+        print('Error : ' . $e->getMessage());
+        exit();
+    }
+
+    //update
+    try {
+        $stmt_update = $db->prepare("UPDATE application SET fio=?, number=?, email=?, bdate=?, gender=?, biography=?, checkbox=? WHERE id=?");
+        $stmt_update->execute([$_POST['fio'], $_POST['number'], $_POST['email'], $_POST['birthdate'], $_POST['radio-group-1'], $_POST['biography'], isset($_POST["checkbox"]) ? 1 : 0, $user_id ]);
+    
+        $stmt_delete = $db->prepare("DELETE FROM prog_lang WHERE id=?");
+        $stmt_delete -> execute([$user_id]);
+        $stmt_select = $db->prepare("SELECT id_lang FROM prog WHERE lang_name = ?");
+        $insert_stmt = $db->prepare("INSERT INTO prog_lang (id, id_lang_name) VALUES (?,?)");
+        foreach ($fav_languages as $language) {
+          // Получаем ID языка программирования
+          $stmt->execute([$language]);
+          $language_id = $stmt->fetchColumn();
+          
+          if ($language_id) {
+              // Связываем пользователя с языком
+              $insert_stmt->execute([$user_id, $language_id]);
+          }
+        }
+    } catch (PDOException $e){
+        print('update Error : ' . $e->getMessage());
+        exit();
+    }
+
+  } 
   // TODO: перезаписать данные в БД новыми данными,
   // кроме логина и пароля.
-  }
+  
   // Сохранение в базу данных.
   else{
 
