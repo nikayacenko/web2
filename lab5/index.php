@@ -1,25 +1,20 @@
 <?php
-// Отправляем браузеру правильную кодировку,
-// файл index.php должен быть в кодировке UTF-8 без BOM.
 header('Content-Type: text/html; charset=UTF-8');
   $user = 'u68600'; // Заменить на ваш логин uXXXXX
   $pass = '8589415'; // Заменить на пароль
   $db = new PDO('mysql:host=localhost;dbname=u68600', $user, $pass,
     [PDO::ATTR_PERSISTENT => true, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]); // Заменить test на имя БД, совпадает с логином uXXXXX
 
-// В суперглобальном массиве $_SERVER PHP сохраняет некторые заголовки запроса HTTP
-// и другие сведения о клиненте и сервере, например метод текущего запроса $_SERVER['REQUEST_METHOD'].
+
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-  // Массив для временного хранения сообщений пользователю.
   $messages = array();
-  // В суперглобальном массиве $_GET PHP хранит все параметры, переданные в текущем запросе через URL.
   if (!empty($_COOKIE['save'])) {
-    // Удаляем куку, указывая время устаревания в прошлом.
     setcookie('save', '', 100000);
     setcookie('login', '', 100000);
     setcookie('pass', '', 100000);
-    // Если есть параметр save, то выводим сообщение пользователю.
     $messages[] = '<div class="result">Спасибо, результаты сохранены.</div>';
+
+    
     if (!empty($_COOKIE['pass'])) {
       $messages[] = sprintf('Вы можете <a href="login.php">войти</a> с логином <strong>%s</strong>
       и паролем <strong>%s</strong> для изменения данных.',
@@ -48,11 +43,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     else{
         $messages[] = '<div class="messages">ФИО должно содержать только символы букв и пробелы.</div>';
     }
-    // Удаляем куки, указывая время устаревания в прошлом.
     setcookie('fio_error', '', 100000);
     setcookie('fio_value', '', 100000);
   }
- if ($errors['number']) {
+  if ($errors['number']) {
     if($_COOKIE['number_error']=='1'){
       $messages[] = '<div class="messages">Номер не указан.</div>';
     }
@@ -73,17 +67,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     setcookie('email_value', '', 100000);
   }
   if ($errors['bdate']) {
-    // Удаляем куки, указывая время устаревания в прошлом.
     setcookie('date_error', '', 100000);
     setcookie('date_value', '', 100000);
-    // Выводим сообщение.
     $messages[] = '<div class="messages">Заполните дату верно.</div>';
   }
   if ($errors['checkbox']) {
-    // Удаляем куки, указывая время устаревания в прошлом.
     setcookie('check_error', '', 100000);
     setcookie('check_value', '', 100000);
-    // Выводим сообщение.
     $messages[] = '<div class="messages">Подтвердите, что согласны с контрактом.</div>';
   }
   if ($errors['languages']) {
@@ -93,7 +83,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     elseif($_COOKIE['lang_error']=='2'){
       $messages[] = '<div class="messages">Указан недопустимый язык.</div>';
     }
-    // Удаляем куки, указывая время устаревания в прошлом.
     setcookie('lang_error', '', 100000);
     setcookie('lang_value', '', 100000);
   }
@@ -103,21 +92,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     setcookie('gen_value', '', 100000);
     $messages[] = '<div class="messages">Укажите пол.</div>';
   }
-    if ($errors['biography']) {
-      if($_COOKIE['bio_error']=='1'){
-        $messages[] = '<div class="messages">Внесите данные биографии.</div>';
+  if ($errors['biography']) {
+    if($_COOKIE['bio_error']=='1'){
+      $messages[] = '<div class="messages">Внесите данные биографии.</div>';
       }
       elseif($_COOKIE['bio_error']=='2'){
         $messages[] = '<div class="messages">Используйте только допустимые символы: буквы, цифры, знаки препинания.</div>';
       }
-    // Удаляем куки, указывая время устаревания в прошлом.
     setcookie('bio_error', '', 100000);
     setcookie('bio_value', '', 100000);
   }
 
-  // TODO: тут выдать сообщения об ошибках в других полях.
-
-  // Складываем предыдущие значения полей в массив, если есть.
   $values = array();
   $values['name'] = empty($_COOKIE['fio_value']) ? '' : $_COOKIE['fio_value'];
   $values['number'] = empty($_COOKIE['number_value']) ? '' : $_COOKIE['number_value'];
@@ -130,20 +115,79 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
   if (empty($errors) && !empty($_COOKIE[session_name()]) &&
     session_start() && !empty($_SESSION['login'])) {
-    // TODO: загрузить данные пользователя из БД
-    // и заполнить переменную $values,
-    // предварительно санитизовав.
-    // Для загрузки данных из БД делаем запрос SELECT и вызываем метод PDO fetchArray(), fetchObject() или fetchAll() 
-    /*try{
-      $stmt = $db->prepare("SELECT fio, number, email, biography AS bio, gender AS gen, bdate, checkbox FROM application WHERE login = ?");
-      $stmt->execute([$_SESSION['login']]);
-      $values = $stmt->fetchArray();
-    } 
-    catch (PDOException $e){
+    try{
+      $stmt = $db->prepare(SELECT name FROM application join person_LOGIN using(id) where login = :login";);
+      $stmt->bindValue(':login', $_SESSION['login'], PDO::PARAM_STR);
+      $stmt->execute();
+      $n = $stmt->fetchColumn();
+      $values['name']=$n;
+    }catch(PDOException $e){
       print('Error : ' . $e->getMessage());
       exit();
-    }*/
-     try{
+    }
+    try{
+      $stmt = $db->prepare(SELECT email FROM application join person_LOGIN using(id) where login = :login";);
+      $stmt->bindValue(':login', $_SESSION['login'], PDO::PARAM_STR);
+      $stmt->execute();
+      $mail = $stmt->fetchColumn();
+      $values['email']=$mail;
+    }catch(PDOException $e){
+      print('Error : ' . $e->getMessage());
+      exit();
+    }
+    try{
+      $stmt = $db->prepare("SELECT number FROM application join person_LOGIN using(id) WHERE login = :login";);
+      $stmt->bindValue(':login', $_SESSION['login'], PDO::PARAM_STR);
+      $stmt->execute();
+      $tel = $stmt->fetchColumn();
+      $values['number']=$tel;
+    }catch(PDOException $e){
+      print('Error : ' . $e->getMessage());
+      exit();
+    }
+    try{
+      $stmt = $db->prepare("SELECT bdate FROM application join person_LOGIN using(id) WHERE login = :login"; );
+      $stmt->bindValue(':login', $_SESSION['login'], PDO::PARAM_STR);
+      $stmt->execute();
+      $date = $stmt->fetchColumn();
+      $values['bdate']=$date;
+    }catch(PDOException $e){
+      print('Error : ' . $e->getMessage());
+      exit();
+    }
+    try{
+      $stmt = $db->prepare("SELECT gender FROM application join person_LOGIN using(id) WHERE login = :login";);
+      $stmt->bindValue(':login', $_SESSION['login'], PDO::PARAM_STR);
+      $stmt->execute();
+      $gen = $stmt->fetchColumn();
+      $values['gen']=$gen;
+    }catch(PDOException $e){
+      print('Error : ' . $e->getMessage());
+      exit();
+    }
+    try{
+      $stmt = $db->prepare("SELECT biography FROM application join person_LOGIN using(id) WHERE login = :login";);
+      $stmt->bindValue(':login', $_SESSION['login'], PDO::PARAM_STR);
+      $stmt->execute();
+      $bio = $stmt->fetchColumn();
+      $values['bio']=$bio;
+    }catch(PDOException $e){
+      print('Error : ' . $e->getMessage());
+      exit();
+    }
+    /*$sql = "SELECT pl.lang_id FROM personlang pl JOIN person_LOGIN l ON pl.pers_id = l.id  WHERE l.login = :login;";*/
+    try{
+      $stmt = $db->prepare("SELECT id_lang_name FROM prog_lang join person_LOGIN using(id) WHERE login = :login";);
+      $stmt->bindValue(':login', $_SESSION['login'], PDO::PARAM_STR);
+      $stmt->execute();
+      $lang = $stmt->fetchAll(PDO::FETCH_COLUMN, 0);
+      $langs_value1 =(implode(",", $lang));
+      $values['languages']=$langs_value1;
+    }catch(PDOException $e){
+      print('Error : ' . $e->getMessage());
+      exit();
+    }
+     /*try{
        $mas=[];
 
         $stmt = $db->prepare("SELECT name, number, email, biography AS bio, gender AS gen, bdate, checkbox FROM application WHERE id = ?");
@@ -180,13 +224,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   } catch (PDOException $e){
       print('Error : ' . $e->getMessage());
       exit();
-  }
-        // 5. Закрытие курсора (необязательно, но рекомендуется)
-    // TODO: загрузить данные пользователя из БД
-    // и заполнить переменную $values,
-    // предварительно санитизовав.
-    // Для загрузки данных из БД делаем запрос SELECT и вызываем метод PDO fetchArray(), fetchObject() или fetchAll() 
-    // См. https://www.php.net/manual/en/pdostatement.fetchall.php
+  }*/
+
     $login_message='Вход с логином: '. $_SESSION['login'] . ", uid: ". $_SESSION['uid'];
     $messages[] = $login_message;
         //printf('Вход с логином %s, uid %d', $_SESSION['login'], $_SESSION['uid']);
@@ -197,10 +236,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   // Завершаем работу скрипта.
   //exit();
 }
-// Иначе, если запрос был методом POST, т.е. нужно проверить данные и сохранить их в БД.
 else{
-  // Проверяем ошибки.
-
   $fio = $_POST['name'];
   $number = $_POST['number'];
   $email = $_POST['email'];
