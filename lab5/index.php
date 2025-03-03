@@ -346,7 +346,7 @@ else{
     
         $stmt_delete = $db->prepare("DELETE FROM prog_lang WHERE id=?");
         $stmt_delete -> execute([$user_id]);
-        $stmt_select = $db->prepare("SELECT id_lang FROM prog WHERE lang_name = ?");
+        $stmt_select = $db->prepare("SELECT id_lang_name FROM prog WHERE lang_name = ?");
         $insert_stmt = $db->prepare("INSERT INTO prog_lang (id, id_lang_name) VALUES (?,?)");
         foreach ($fav_languages as $language) {
           // Получаем ID языка программирования
