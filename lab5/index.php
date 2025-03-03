@@ -146,10 +146,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
      try{
        $mas=[];
 
-        $stmt = $db->prepare("SELECT fio, number, email, biography AS bio, gender AS gen, bdate, checkbox FROM application WHERE id = ?");
+        $stmt = $db->prepare("SELECT name, number, email, biography AS bio, gender AS gen, bdate, checkbox FROM application WHERE id = ?");
         $stmt->execute([$_SESSION['uid']]);
         $mas = $stmt->fetch(PDO::FETCH_ASSOC);
-        $fields = ['fio', 'number', 'email', 'bio', 'gen', 'bdate', 'checkbox'];
+        $fields = ['name', 'number', 'email', 'bio', 'gen', 'bdate', 'checkbox'];
         foreach($fields as $field) {
             $values[$field] = strip_tags($mas[$field]);
         }
@@ -163,11 +163,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     try {
       $get_lang=[];
       $mas=[];
-      $stmt_lang = $db->prepare("SELECT id_lang FROM prog_lang WHERE id = ?");
+      $stmt_lang = $db->prepare("SELECT id_lang_name FROM prog_lang WHERE id = ?");
       $stmt_lang->execute([$_SESSION['uid']]);
       $mas = $stmt_lang->fetch(PDO::FETCH_ASSOC);
 
-      $stmt_get_lang = $db->prepare("SELECT lang_name FROM prog WHERE id_lang=?");
+      $stmt_get_lang = $db->prepare("SELECT lang_name FROM prog WHERE id_lang_name=?");
 
       foreach ($mas as $id) {
         
