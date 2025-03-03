@@ -116,7 +116,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   if (empty($errors) && !empty($_COOKIE[session_name()]) &&
     session_start() && !empty($_SESSION['login'])) {
     try{
-      $stmt = $db->prepare(SELECT name FROM application join person_LOGIN using(id) where login = :login";);
+      $stmt = $db->prepare("SELECT name FROM application join person_LOGIN using(id) where login = :login";);
       $stmt->bindValue(':login', $_SESSION['login'], PDO::PARAM_STR);
       $stmt->execute();
       $n = $stmt->fetchColumn();
@@ -126,7 +126,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
       exit();
     }
     try{
-      $stmt = $db->prepare(SELECT email FROM application join person_LOGIN using(id) where login = :login";);
+      $stmt = $db->prepare("SELECT email FROM application join person_LOGIN using(id) where login = :login";);
       $stmt->bindValue(':login', $_SESSION['login'], PDO::PARAM_STR);
       $stmt->execute();
       $mail = $stmt->fetchColumn();
