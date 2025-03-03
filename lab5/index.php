@@ -330,14 +330,14 @@ else{
   if (!empty($_COOKIE[session_name()]) &&
   session_start() && !empty($_SESSION['login'])) {
     $user_id;
-    try {
+    /*try {
         $stmt_select = $db->prepare("SELECT id FROM LOGIN WHERE login=?");
         $stmt_select->execute([$_SESSION['login']]);
         $user_id = $stmt_select->fetchColumn();
     } catch (PDOException $e){
         print('Error : ' . $e->getMessage());
         exit();
-    }
+    }*/
 
     //update
     /*try {
