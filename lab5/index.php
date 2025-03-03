@@ -340,7 +340,7 @@ else{
     }
 
     //update
-    try {
+    /*try {
         $stmt_update = $db->prepare("UPDATE application SET fio=?, number=?, email=?, bdate=?, gender=?, biography=?, checkbox=? WHERE id=?");
         $stmt_update->execute([$_POST['fio'], $_POST['number'], $_POST['email'], $_POST['birthdate'], $_POST['radio-group-1'], $_POST['biography'], isset($_POST["checkbox"]) ? 1 : 0, $user_id ]);
     
@@ -361,7 +361,7 @@ else{
     } catch (PDOException $e){
         print('update Error : ' . $e->getMessage());
         exit();
-    }
+    }*/
 
   } 
   // TODO: перезаписать данные в БД новыми данными,
