@@ -330,17 +330,17 @@ else{
   if (!empty($_COOKIE[session_name()]) &&
   session_start() && !empty($_SESSION['login'])) {
     $user_id;
-    /*try {
-        $stmt_select = $db->prepare("SELECT id FROM LOGIN WHERE login=?");
+    try {
+        $stmt_select = $db->prepare("SELECT id FROM person_LOGIN WHERE login=?");
         $stmt_select->execute([$_SESSION['login']]);
         $user_id = $stmt_select->fetchColumn();
     } catch (PDOException $e){
         print('Error : ' . $e->getMessage());
         exit();
-    }*/
+    }
 
     //update
-    /*try {
+    try {
         $stmt_update = $db->prepare("UPDATE application SET fio=?, number=?, email=?, bdate=?, gender=?, biography=?, checkbox=? WHERE id=?");
         $stmt_update->execute([$_POST['fio'], $_POST['number'], $_POST['email'], $_POST['birthdate'], $_POST['radio-group-1'], $_POST['biography'], isset($_POST["checkbox"]) ? 1 : 0, $user_id ]);
     
@@ -361,7 +361,7 @@ else{
     } catch (PDOException $e){
         print('update Error : ' . $e->getMessage());
         exit();
-    }*/
+    }
 
   } 
   // TODO: перезаписать данные в БД новыми данными,
