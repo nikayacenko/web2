@@ -351,7 +351,7 @@ else{
         foreach ($fav_languages as $language) {
           // Получаем ID языка программирования
           $stmt_select->execute([$language]);
-          $language_id = $stmt->fetchColumn();
+          $language_id = $stmt_select->fetchColumn();
           
           if ($language_id) {
               // Связываем пользователя с языком
