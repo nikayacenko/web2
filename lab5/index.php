@@ -163,11 +163,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     try {
       $get_lang=[];
       $mas=[];
-      $stmt_lang = $db->prepare("SELECT id_lang FROM user_lang WHERE id = ?");
+      $stmt_lang = $db->prepare("SELECT id_lang FROM prog_lang WHERE id = ?");
       $stmt_lang->execute([$_SESSION['uid']]);
       $mas = $stmt_lang->fetch(PDO::FETCH_ASSOC);
 
-      $stmt_get_lang = $db->prepare("SELECT lang_name FROM prog_lang WHERE id_lang=?");
+      $stmt_get_lang = $db->prepare("SELECT lang_name FROM prog WHERE id_lang=?");
 
       foreach ($mas as $id) {
         
