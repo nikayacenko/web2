@@ -116,7 +116,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   if (empty($errors) && !empty($_COOKIE[session_name()]) &&
     session_start() && !empty($_SESSION['login'])) {
     try{
-      $stmt = $db->prepare("SELECT name FROM application join person_LOGIN using(id) where login = :login";);
+      $stmt = $db->prepare("SELECT name FROM application join person_LOGIN using(id) where login = :login");
       $stmt->bindValue(':login', $_SESSION['login'], PDO::PARAM_STR);
       $stmt->execute();
       $n = $stmt->fetchColumn();
@@ -126,7 +126,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
       exit();
     }
     try{
-      $stmt = $db->prepare("SELECT email FROM application join person_LOGIN using(id) where login = :login";);
+      $stmt = $db->prepare("SELECT email FROM application join person_LOGIN using(id) where login = :login");
       $stmt->bindValue(':login', $_SESSION['login'], PDO::PARAM_STR);
       $stmt->execute();
       $mail = $stmt->fetchColumn();
@@ -136,7 +136,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
       exit();
     }
     try{
-      $stmt = $db->prepare("SELECT number FROM application join person_LOGIN using(id) WHERE login = :login";);
+      $stmt = $db->prepare("SELECT number FROM application join person_LOGIN using(id) WHERE login = :login");
       $stmt->bindValue(':login', $_SESSION['login'], PDO::PARAM_STR);
       $stmt->execute();
       $tel = $stmt->fetchColumn();
@@ -146,7 +146,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
       exit();
     }
     try{
-      $stmt = $db->prepare("SELECT bdate FROM application join person_LOGIN using(id) WHERE login = :login"; );
+      $stmt = $db->prepare("SELECT bdate FROM application join person_LOGIN using(id) WHERE login = :login");
       $stmt->bindValue(':login', $_SESSION['login'], PDO::PARAM_STR);
       $stmt->execute();
       $date = $stmt->fetchColumn();
@@ -156,7 +156,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
       exit();
     }
     try{
-      $stmt = $db->prepare("SELECT gender FROM application join person_LOGIN using(id) WHERE login = :login";);
+      $stmt = $db->prepare("SELECT gender FROM application join person_LOGIN using(id) WHERE login = :login");
       $stmt->bindValue(':login', $_SESSION['login'], PDO::PARAM_STR);
       $stmt->execute();
       $gen = $stmt->fetchColumn();
@@ -166,7 +166,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
       exit();
     }
     try{
-      $stmt = $db->prepare("SELECT biography FROM application join person_LOGIN using(id) WHERE login = :login";);
+      $stmt = $db->prepare("SELECT biography FROM application join person_LOGIN using(id) WHERE login = :login");
       $stmt->bindValue(':login', $_SESSION['login'], PDO::PARAM_STR);
       $stmt->execute();
       $bio = $stmt->fetchColumn();
@@ -177,7 +177,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     }
     /*$sql = "SELECT pl.lang_id FROM personlang pl JOIN person_LOGIN l ON pl.pers_id = l.id  WHERE l.login = :login;";*/
     try{
-      $stmt = $db->prepare("SELECT id_lang_name FROM prog_lang join person_LOGIN using(id) WHERE login = :login";);
+      $stmt = $db->prepare("SELECT id_lang_name FROM prog_lang join person_LOGIN using(id) WHERE login = :login");
       $stmt->bindValue(':login', $_SESSION['login'], PDO::PARAM_STR);
       $stmt->execute();
       $lang = $stmt->fetchAll(PDO::FETCH_COLUMN, 0);
