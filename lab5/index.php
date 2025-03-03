@@ -178,7 +178,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     }
     /*$sql = "SELECT pl.lang_id FROM personlang pl JOIN person_LOGIN l ON pl.pers_id = l.id  WHERE l.login = :login;";*/
     try{
-      $stmt = $db->prepare("SELECT pl.id_lang_name FROM prog_lang pl join person_LOGIN l ON WHERE pl.id=l.id where login = :login");
+      $stmt = $db->prepare("SELECT pl.id_lang_name FROM prog_lang pl join person_LOGIN l ON pl.id=l.id where login = :login");
       $stmt->bindValue(':login', $_SESSION['login'], PDO::PARAM_STR);
       $stmt->execute();
       $lang = $stmt->fetchAll(PDO::FETCH_COLUMN, 0);
