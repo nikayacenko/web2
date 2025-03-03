@@ -187,48 +187,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
       print('Error : ' . $e->getMessage());
       exit();
     }
-     /*try{
-       $mas=[];
 
-        $stmt = $db->prepare("SELECT name, number, email, biography AS bio, gender AS gen, bdate, checkbox FROM application WHERE id = ?");
-        $stmt->execute([$_SESSION['uid']]);
-        $mas = $stmt->fetch(PDO::FETCH_ASSOC);
-        $fields = ['name', 'number', 'email', 'bio', 'gen', 'bdate', 'checkbox'];
-        foreach($fields as $field) {
-            $values[$field] = strip_tags($mas[$field]);
-        }
-     }
-     catch (PDOException $e){
-       print('ERROR : ' . $e->getMessage());
-       exit();
-     }
-
-    
-    try {
-      $get_lang=[];
-      $mas=[];
-      $stmt_lang = $db->prepare("SELECT id_lang_name FROM prog_lang WHERE id = ?");
-      $stmt_lang->execute([$_SESSION['uid']]);
-      $mas = $stmt_lang->fetch(PDO::FETCH_ASSOC);
-
-      $stmt_get_lang = $db->prepare("SELECT lang_name FROM prog WHERE id_lang_name=?");
-
-      foreach ($mas as $id) {
-        
-          $stmt_get_lang->execute([$id]);
-          $lang_name = $stmt_get_lang->fetchColumn();
-          $get_lang = $lang_name;
-      }
-          
-      $values['lang'] = $get_lang;
-  } catch (PDOException $e){
-      print('Error : ' . $e->getMessage());
-      exit();
-  }*/
-
-    $login_message='Вход с логином: '. $_SESSION['login'] . ", uid: ". $_SESSION['uid'];
-    $messages[] = $login_message;
-        //printf('Вход с логином %s, uid %d', $_SESSION['login'], $_SESSION['uid']);
+    //$login_message='Вход с логином: '. $_SESSION['login'] . ", uid: ". $_SESSION['uid'];
+    //$messages[] = $login_message;
+      $messages[] = "<div>Вход с логином " . htmlspecialchars($_SESSION['login']) . ", uid " . (int)$_SESSION['uid'] . "</div>";
+    //printf('Вход с логином %s, uid %d', $_SESSION['login'], $_SESSION['uid']);
     }
 
   include('form.php');
