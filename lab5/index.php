@@ -350,7 +350,7 @@ else{
         $insert_stmt = $db->prepare("INSERT INTO prog_lang (id, id_lang_name) VALUES (?,?)");
         foreach ($fav_languages as $language) {
           // Получаем ID языка программирования
-          $stmt->execute([$language]);
+          $stmt_select->execute([$language]);
           $language_id = $stmt->fetchColumn();
           
           if ($language_id) {
