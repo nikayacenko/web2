@@ -76,7 +76,7 @@ else {
 
   $user = 'u68600';
   $pass = '8589415';
-  $db = new PDO('mysql:host=localhost;dbname=u68598', $user, $pass,
+  $db = new PDO('mysql:host=localhost;dbname=u68600', $user, $pass,
     [PDO::ATTR_PERSISTENT => true, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
 
   if (!$session_started) {
