@@ -83,7 +83,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                 <img id="logo" src="project4/projects/1/static/image/флаг.png" alt="Логотип">
                 <h1 class="name">Мистер Гиббс: все о пиратах</h1>
             </div>
-            </header>
+          </header>
         <div class = "page px-sm-0 mr-sm-0 mb-sm-2">
             <nav class="mt-sm-0 mb-sm-0 px-sm-0 mx-sm-0">
                 <ul class="px-3">
@@ -92,17 +92,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                     <li> <a class="px-sm-2" href="project4/projects/1/bio.html"> Пиратский кодекс </a></li>
                 </ul>
             </nav>
-            <form class="form" action="" method="post">
-              <label class="f">
-                Логин:<br>
-                <input name="login" />
-              </label><br>
-              <label class="f">
-                Пароль:<br>
-                <input name="pass" />
-              </label><br>
-              <input type="submit" value="Войти" />
-            </form>
+        </div>
+        <form class="form" action="" method="post">
+          <label class="f">
+            Логин:<br>
+            <input name="login" />
+          </label><br>
+          <label class="f">
+            Пароль:<br>
+            <input name="pass" />
+          </label><br>
+          <input type="submit" value="Войти" />
+        </form>
 
 <?php
 }
