@@ -26,12 +26,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   $errors['biography'] = !empty($_COOKIE['bio_error']);
 
 
-
-  // TODO: аналогично все поля.
-
-
-  
-  // Выдаем сообщения об ошибках.
   if ($errors['name']) {
     if($_COOKIE['fio_error']=='1'){
         $messages[] = '<div class="messages">Заполните ФИО.</div>';
@@ -84,9 +78,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     if($_COOKIE['lang_error']=='1'){
       $messages[] = '<div class="messages">Отметьте любимый язык программирования.</div>';
     }
-    elseif($_COOKIE['lang_error']=='2'){
+    /*elseif($_COOKIE['lang_error']=='2'){
       $messages[] = '<div class="messages">Указан недопустимый язык.</div>';
-    }
+    }*/
     // Удаляем куки, указывая время устаревания в прошлом.
     setcookie('lang_error', '', 100000);
     setcookie('lang_value', '', 100000);
@@ -109,8 +103,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     setcookie('bio_value', '', 100000);
   }
 
-  // TODO: тут выдать сообщения об ошибках в других полях.
-
   // Складываем предыдущие значения полей в массив, если есть.
   $values = array();
   $values['name'] = empty($_COOKIE['fio_value']) ? '' : $_COOKIE['fio_value'];
@@ -121,10 +113,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   $values['languages'] = empty($_COOKIE['lang_value']) ? '' : $_COOKIE['lang_value'];
   $values['biography'] = empty($_COOKIE['bio_value']) ? '' : $_COOKIE['bio_value'];
   $values['gen'] = empty($_COOKIE['gen_value']) ? '' : $_COOKIE['gen_value'];
-
-
-
-
 
   // Включаем содержимое файла form.php.
 
@@ -137,16 +125,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 else{
   // Проверяем ошибки.
 
-  $fio = $_POST['name'];
-  $number = $_POST['number'];
-  $email = $_POST['email'];
-  $bdate = $_POST['bdate'];
-  $gender = $_POST['gender'];
-  $biography = $_POST['biography'];
-  //$checkbox = $_POST['checkbox'];
   $fav_languages = $_POST['languages'] ?? [];
-
-
 
   $errors = FALSE;
   if (empty($_POST['name'])) {
@@ -156,13 +135,11 @@ else{
   else{
     // Проверка длины
       if (strlen($_POST['name']) > 128) {
-        //print( "ФИО не должно превышать 128 символов.<br>");
         setcookie('fio_error', '2', time() + 24*60*60);
         $errors = TRUE;
       }
     // Проверка на только буквы и пробелы (кириллица и латиница)
       elseif (!preg_match("/^[a-zA-Zа-яА-ЯёЁ\s]+$/u", $_POST['name'])) {
-          //print("ФИО должно содержать только буквы и пробелы.<br>");
           setcookie('fio_error', '3', time() + 24 * 60 * 60);
           $errors = TRUE;
       } 
@@ -190,7 +167,6 @@ else{
   setcookie('email_value', $_POST['email'], time() + 365 * 24 * 60 * 60);
 
   if (empty($_POST['gender'])){
-    //print ('Укажите пол.<br/>');
     setcookie('gen_error', '1', time() + 24 * 60 * 60);
     $errors = TRUE;
   }
@@ -199,7 +175,6 @@ else{
   
   $allowed_languages = ["Pascal", "C", "C++", "JavaScript", "PHP", "Python", "Java", "Haskell", "Clojure", "Prolog", "Scala"];
   if (empty($fav_languages)) {
-    //print('Выберите хотя бы один язык программирования.<br/>');
     setcookie('lang_error', "1", time() + 24 * 60 * 60);
     $errors = TRUE;
   } /*else {
@@ -217,7 +192,6 @@ else{
 
 
   if (empty($_POST['bdate'])) {
-    //print('Заполните дату.<br/>');
     setcookie('date_error', '1', time() + 24 * 60 * 60);
     $errors = TRUE;
   }
@@ -230,11 +204,9 @@ else{
   setcookie('gen_value', $_POST['gender'], time() + 365 * 24 * 60 * 60);
   
   if (empty($_POST['biography'])) {
-    //print('Заполните биографию.<br/>');
     setcookie('bio_error', '1', time() + 24 * 60 * 60);
     $errors = TRUE;
   }elseif(!preg_match('/^[а-яА-Яa-zA-Z1-9.,: ]+$/u', $_POST['biography'])){
-    //print('Поле "биография" содержит недопустимые символы.<br/>');
     setcookie('bio_error', '2', time() + 24 * 60 * 60);
     $errors = TRUE;
   }
@@ -242,7 +214,6 @@ else{
 
   // С КОНТРАКТОМ ОЗНАКОМЛЕН
   if (!isset($_POST["checkbox"])) {
-    //print('Вы должны подтвердить ознакомление с контрактом.<br/>');
     setcookie('check_error', '1', time() + 24 * 60 * 60);
     $errors = TRUE;
   }
