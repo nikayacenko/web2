@@ -120,6 +120,13 @@
                             </label><br>
                             <input type = "submit" value = "Сохранить">
                         </form>
+                        <?php
+                            if(isset($_COOKIE[session_name()]) && !empty($_SESSION['login'])){
+                                echo '<form class="logout_form" action="login.php" method="POST">
+                                        <input type="submit" name="logout" value="Выйти"/> 
+                                    </form>';
+                            }
+                        ?>
                     </div> 
                     <p><a href = "#top">наверх</a></p>
                 </div>
