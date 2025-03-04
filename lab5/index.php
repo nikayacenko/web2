@@ -176,10 +176,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
       print('Error : ' . $e->getMessage());
       exit();
     }
-    /*$sql = "SELECT pl.lang_id FROM personlang pl JOIN person_LOGIN l ON pl.pers_id = l.id  WHERE l.login = :login;";*/
+    /*$sql = "select pl.lang_name from prog_lang pl JOIN user_lang ul ON pl.id_lang=ul.id_lang where ul.id = :login;";*/
     try{
       $stmt = $db->prepare("select pl.lang_name from prog pl JOIN prog_lang ul ON pl.id_lang_name=ul.id_lang_name where ul.id = :login;");
-      $stmt->bindValue(':login', $_SESSION['login'], PDO::PARAM_STR);
+      $stmt->bindValue(':login', $_SESSION['uid'], PDO::PARAM_STR);
       $stmt->execute();
       $lang = $stmt->fetchAll(PDO::FETCH_COLUMN, 0);
       $langs_value1 =(implode(",", $lang));
