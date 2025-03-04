@@ -12,18 +12,7 @@
           href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
         <script
           src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-        <style>
-/* Сообщения об ошибках и поля с ошибками выводим с красным бордюром. */
-            .error {
-              border: 2px solid red;
-            }
-            .messages{
-                color: #ff2d2d;
-            }
-            .result{
-                color: white;
-            }
-        </style>
+        
 
     </head>
     <body>
@@ -81,6 +70,7 @@
                                 value="ok"
                                 type="date">
                             </label><br>
+                            <div <?php if ($errors['gen']) {print 'class="error_gen"';} ?><?php if (!$errors['gen']) {print 'class="l"';} ?>>
                             <label>Пол:<br>
                             <input type="radio"  <?php if ($errors['gen']) {print 'class="error"';} ?>
       <?php if ($values['gen']=='female') {print 'checked="checked"';} ?>

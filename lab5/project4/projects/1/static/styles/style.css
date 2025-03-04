@@ -1,6 +1,18 @@
 .name {padding:40px;text-align: left;font-size:25pt;font-family:B, Haettenschweiler, 'Arial Narrow Bold', sans-serif;color:#128ee8;font-weight:normal}
 #logo {float:left; margin:10px; width:100px; height:100px; border-radius: 100px;}
-
+.error_gen {
+    color:rgb(160, 32, 0);
+}
+.messages{
+    color: #ff2d2d;
+}
+.error {
+    border: 2px solid red;
+    background-color:#b3350379
+}
+.result{
+    color: white;
+}
 body{
     background-color:#128ee8;
     background-image: url(../image/корабль.jpg);
