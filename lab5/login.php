@@ -92,7 +92,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                     <li> <a class="px-sm-2" href="project4/projects/1/bio.html"> Пиратский кодекс </a></li>
                 </ul>
             </nav>
-            <form action="" method="post">
+            <form class="form" action="" method="post">
               <label>
                 Логин:<br>
                 <input name="login" />
