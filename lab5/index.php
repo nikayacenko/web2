@@ -201,16 +201,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   //exit();
 }
 else{
-  $fio = $_POST['name'];
-  $number = $_POST['number'];
-  $email = $_POST['email'];
-  $bdate = $_POST['bdate'];
-  $gender = $_POST['gender'];
-  $biography = $_POST['biography'];
-  //$checkbox = $_POST['checkbox'];
   $fav_languages = $_POST['languages'] ?? [];
-
-
 
   $errors = FALSE;
   if (empty($_POST['name'])) {
