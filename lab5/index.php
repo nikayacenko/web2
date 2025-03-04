@@ -191,7 +191,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
     //$login_message='Вход с логином: '. $_SESSION['login'] . ", uid: ". $_SESSION['uid'];
     //$messages[] = $login_message;
-      $messages[] = "<div>Вход с логином " . htmlspecialchars($_SESSION['login']) . ", uid " . (int)$_SESSION['uid'] . "</div>";
+      $messages[] = '<div class="result">Вход с логином ' . htmlspecialchars($_SESSION['login']) . ", uid " . (int)$_SESSION['uid'] . "</div>";
     //printf('Вход с логином %s, uid %d', $_SESSION['login'], $_SESSION['uid']);
     }
 
