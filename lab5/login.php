@@ -93,8 +93,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                 </ul>
             </nav>
             <form action="" method="post">
-              <input name="login" />
-              <input name="pass" />
+              <lable>
+                Логин:<br>
+                <input name="login" />
+              </label><br>
+              <label>
+                Пароль:<br>
+                <input name="pass" />
+              </label><br>
               <input type="submit" value="Войти" />
             </form>
 
