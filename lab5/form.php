@@ -113,7 +113,7 @@
                         <?php
                             if(isset($_COOKIE[session_name()]) && !empty($_SESSION['login'])){
                                 echo '<form class="logout_form" action="login.php" method="POST">
-                                        <input type="submit" name="logout" value="Выйти"/> 
+                                        <input type="submit" name="logout" value="Выход"/> 
                                     </form>';
                             }
                         ?>
