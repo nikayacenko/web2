@@ -406,7 +406,7 @@ else{
     }
     $user_id = $db->lastInsertId(); 
     try{
-      $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+      $characters = '0123456789';
       $login = rand()%10000000;
       $pass = substr(str_shuffle($characters), 0, 10); //uniqid(string $prefix = "", bool $more_entropy = false);
       $hash_p = password_hash($pass, PASSWORD_DEFAULT);
