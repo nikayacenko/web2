@@ -414,7 +414,7 @@ else{
       setcookie('pass', $pass);
       $stmt = $db->prepare("INSERT INTO LOGIN (login, pass) VALUES (:login, :pass)");
       $stmt->bindParam(':login', $login);
-      $stmt->bindParam(':pass', $hash_pass);
+      $stmt->bindParam(':pass', $hash_p);
       $stmt->execute();
       $stmt = $db->prepare("INSERT INTO person_LOGIN (id, login) VALUES (:id, :login)");
       $stmt->bindParam(':id', $user_id);
