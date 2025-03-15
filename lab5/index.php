@@ -406,10 +406,10 @@ else{
     }
     $user_id = $db->lastInsertId(); 
     try{
+      $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
       $login = rand()%10000000;
-      $pass = rand()%10000000000;
-      // Сохраняем в Cookies.
-      $hash_pass=md5($pass);
+      $pass = substr(str_shuffle($characters), 0, 10); //uniqid(string $prefix = "", bool $more_entropy = false);
+      $hash_p = password_hash($pass, PASSWORD_DEFAULT);
       setcookie('login', $login);
       setcookie('pass', $pass);
       $stmt = $db->prepare("INSERT INTO LOGIN (login, pass) VALUES (:login, :pass)");
