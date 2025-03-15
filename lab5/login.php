@@ -32,12 +32,15 @@ function password_check($login, $password, $db) {
     $stmt->bindParam(':login', $login, PDO::PARAM_STR);
     $stmt->execute();
     $passw = $stmt->fetchColumn();
+    if($passw===false){
+      return false;
+    }
+    return password_verify($password, $passw);
   } 
   catch (PDOException $e){
     print('Error : ' . $e->getMessage());
-    exit();
+    return false;
   }
-  return ($passw==$password);
 }
 // В суперглобальном массиве $_SESSION хранятся переменные сессии.
 // Будем сохранять туда логин после успешной авторизации.
