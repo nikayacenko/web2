@@ -176,7 +176,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
       $stmt->bindValue(':login', $_SESSION['login'], PDO::PARAM_STR);
       $stmt->execute();
       $bio = $stmt->fetchColumn();
-      $values['bio']=$bio;
+      $values['biography']=$bio;
     }catch(PDOException $e){
       print('Error : ' . $e->getMessage());
       exit();
