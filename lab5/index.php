@@ -6,6 +6,11 @@ session_start();
   $db = new PDO('mysql:host=localhost;dbname=u68600', $user, $pass,
     [PDO::ATTR_PERSISTENT => true, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]); // Заменить test на имя БД, совпадает с логином uXXXXX
 
+function generate_pass(int $length=12):string{
+  $characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+';
+  $shuff = str_shuffle($charavters);
+  return sbbstr($shuff, 0, $length);
+
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   $messages = array();
@@ -406,9 +411,10 @@ else{
     }
     $user_id = $db->lastInsertId(); 
     try{
-      $characters = '0123456789';
+      //$characters = '0123456789';
       $login = rand()%10000000;
-      $pass = substr(str_shuffle($characters), 0, 10); //uniqid(string $prefix = "", bool $more_entropy = false);
+      //$pass = substr(str_shuffle($characters), 0, 10); //uniqid(string $prefix = "", bool $more_entropy = false);
+      $pass = generate_pass();
       $hash_p = password_hash($pass, PASSWORD_DEFAULT);
       setcookie('login', $login);
       setcookie('pass', $pass);
