@@ -13,14 +13,6 @@
 .result{
     color: white;
 }
-.form{
-    background-color:#128fe859;
-    text-align:center;
-}
-.f{
-    color:black;
-    font-family:B, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-}
 body{
     background-color:#128ee8;
     background-image: url(../image/корабль.jpg);
@@ -108,14 +100,18 @@ footer {
     margin: 0%;
     margin-top:15px;
 }
+/*label{
+    color: #128ee8;
+}*/
+.l{
+    color: #128ee8;
+}
 #ex:hover{color: aliceblue;}
 tr.tb{
     background-color: #0b094f8a;
 }
 
-label{
-    color: #128ee8;
-}
+
 
 #kn{ padding-bottom: 20px;}
 #й{
@@ -191,4 +187,3 @@ label{
         width:300px;
     }
 }
-
