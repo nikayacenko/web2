@@ -10,7 +10,7 @@ function generate_pass(int $length=12):string{
   $characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+';
   $shuff = str_shuffle($charavters);
   return sbbstr($shuff, 0, $length);
-
+}
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   $messages = array();
