@@ -9,7 +9,7 @@ header('Content-Type: text/html; charset=UTF-8');
 function generate_pass(int $length=12):string{
   $characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+';
   $shuff = str_shuffle($characters);
-  return sabstr($shuff, 0, $length);
+  return substr($shuff, 0, $length);
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
