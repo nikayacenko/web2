@@ -11,7 +11,20 @@ function generate_pass(int $length=12):string{
   $shuff = str_shuffle($characters);
   return substr($shuff, 0, $length);
 }
-
+function check_login($login, $db)
+{
+  try{
+    $stmt = $db->prepare("SELECT COUNT(*) FROM LOGIN WHERE login = :login");
+    $stmt->bindParam(':login', $login, PDO::PARAM_STR);
+    $stmt->execute();
+    $fl = $stmt->fetchColumn();
+  }
+  catch (PDOException $e){
+    print('Error : ' . $e->getMessage());
+    return false;
+  }
+  return $fl;
+}
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   $messages = array();
   if (!empty($_COOKIE['save'])) {
@@ -412,7 +425,12 @@ else{
     $user_id = $db->lastInsertId(); 
     try{
       //$characters = '0123456789';
-      $login = rand()%10000000;
+      //$login = rand()%10000000;
+      $login = generate_pass(7);
+      while(check_login($login, $db)>0)
+      {
+        $login = generate_pass(7);
+      }
       //$pass = substr(str_shuffle($characters), 0, 10); //uniqid(string $prefix = "", bool $more_entropy = false);
       $pass = generate_pass();
       $hash_p = password_hash($pass, PASSWORD_DEFAULT);
