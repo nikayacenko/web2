@@ -119,8 +119,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   $values['biography'] = empty($_COOKIE['bio_value']) ? '' : $_COOKIE['bio_value'];
   $values['gen'] = empty($_COOKIE['gen_value']) ? '' : $_COOKIE['gen_value'];
 
-  if (/*empty($errors) &&*/ !empty($_COOKIE[session_name()]) &&
-    session_start() && !empty($_SESSION['login'])) {
+  if (/*empty($errors) &&*/ !empty($_COOKIE[session_name()]) /*&&
+    session_start()*/ && !empty($_SESSION['login'])) {
     try{
       $stmt = $db->prepare("SELECT name FROM application join person_LOGIN using(id) where login = :login");
       $stmt->bindValue(':login', $_SESSION['login'], PDO::PARAM_STR);
