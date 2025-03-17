@@ -1,6 +1,6 @@
 <?php
 header('Content-Type: text/html; charset=UTF-8');
-//session_start();
+session_start();
   $user = 'u68600'; // Заменить на ваш логин uXXXXX
   $pass = '8589415'; // Заменить на пароль
   $db = new PDO('mysql:host=localhost;dbname=u68600', $user, $pass,
