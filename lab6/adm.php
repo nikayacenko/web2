@@ -61,7 +61,7 @@ $db = new PDO('mysql:host=localhost;dbname=u68600', $user, $pass,
             <td>
             <?php
                 // 3. Используем implode для объединения языков
-                $person_id = $person['id'];
+                $person_id = $row['id'];
                 if (isset($languages_by_person[$person_id])) {
                     $languages_string = implode(', ', $languages_by_person[$person_id]);
                     echo htmlspecialchars($languages_string);
