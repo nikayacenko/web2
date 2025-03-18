@@ -21,20 +21,30 @@ $db = new PDO('mysql:host=localhost;dbname=u68600', $user, $pass,
         $stmt = $db->prepare($query); // Подготавливаем запрос
         $stmt->execute();// Выполняем запрос с параметром
         $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        $query_languages = "SELECT id, id_lang_name FROM prog_lang";
-        $stmt_languages = $db->prepare($query_languages);
-        $stmt_languages->execute();
-        $person_languages = $stmt_languages->fetchAll(PDO::FETCH_ASSOC);
-        $languages_by_person = [];
-        foreach ($person_languages as $row) {
+        $query_languages = "SELECT
+                            pl.id,
+                            l.lang_name
+                        FROM
+                            prog_lang pl
+                        JOIN
+                            prog l ON pl.id_lang_name = l.id_lang_name";
+    $stmt_languages = $db->prepare($query_languages);
+    $stmt_languages->execute();
+    $person_languages = $stmt_languages->fetchAll(PDO::FETCH_ASSOC);
+
+
+    // 2. Группируем данные в PHP
+    $languages_by_person = [];
+    foreach ($person_languages as $row) {
         $person_id = $row['id'];
-        $language_id = $row['id_lang_name'];
+        $language_name = $row['lang_name']; // Используем language_name
         if (!isset($languages_by_person[$person_id])) {
             $languages_by_person[$person_id] = [];
         }
-        $languages_by_person[$person_id][] = $language_id;
+        $languages_by_person[$person_id][] = $language_name; // Добавляем название языка
     }
-        ?>
+
+    ?>
 
         <table border='1'>
         <tr>
