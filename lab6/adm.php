@@ -9,4 +9,54 @@ if (empty($_SERVER['PHP_AUTH_USER']) ||
   exit();
 }
 print('Вы успешно авторизовались и видите защищенные паролем данные.');
-?>
+$user = 'u68600'; // Заменить на ваш логин uXXXXX
+$pass = '8589415'; // Заменить на пароль
+$db = new PDO('mysql:host=localhost;dbname=u68600', $user, $pass,
+    [PDO::ATTR_PERSISTENT => true, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
+
+    if($_SERVER['REQUEST_METHOD'] == 'GET')
+    {
+        $query = "SELECT id, fio, tel, email, bdate, gender, biography FROM person"; // Запрос с параметром
+
+        $stmt = $db->prepare($query); // Подготавливаем запрос
+        $stmt->execute();// Выполняем запрос с параметром
+        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        ?>
+
+        <table border='1'>
+        <tr>
+            <th>ID</th>
+            <th>FIO</th>
+            <th>Tel</th>
+            <th>Email</th>
+            <th>Bdate</th>
+            <th>Gender</th>
+            <th>Biography</th>
+            <th>Languages</th>
+            <th>Действия</th>
+        </tr>
+
+        <?php foreach ($results as $row): ?>
+            <tr>
+            <td><?= htmlspecialchars($row['id']) ?></td>
+            <td><?= htmlspecialchars($row['name']) ?></td>
+            <td><?= htmlspecialchars($row['number']) ?></td>
+            <td><?= htmlspecialchars($row['email']) ?></td>
+            <td><?= htmlspecialchars($row['bdate']) ?></td>
+            <td><?= htmlspecialchars($row['gender']) ?></td>
+            <td><?= htmlspecialchars($row['biography']) ?></td>
+            <td>
+                <form method="post" action="">
+                <input type="hidden" name="delete_id" value="<?= htmlspecialchars($row['id']) ?>">
+                <button type="submit">Удалить</button>
+                </form>
+                <a href="index.php/?uid=<?= htmlspecialchars($row['id']) ?>">Изменить</a>
+            </td>
+            </tr>
+        <?php endforeach; ?>
+        </table>
+
+<?php
+
+    }
+        

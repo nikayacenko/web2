@@ -106,8 +106,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         <input name="pass" />
       </label><br>
       <input type="submit" value="Войти" />
+      <br><a href="adm.php">Вход для администратора</a><br>
     </form>
-    <br><a href="adm.php">Вход для администратора</a><br>
 </body>
 
 <?php
