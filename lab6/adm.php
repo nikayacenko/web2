@@ -16,7 +16,7 @@ $db = new PDO('mysql:host=localhost;dbname=u68600', $user, $pass,
 
     if($_SERVER['REQUEST_METHOD'] == 'GET')
     {
-        $query = "SELECT id, name, tel, email, bdate, gender, biography FROM application"; // Запрос с параметром
+        $query = "SELECT id, name, number, email, bdate, gender, biography FROM application"; // Запрос с параметром
 
         $stmt = $db->prepare($query); // Подготавливаем запрос
         $stmt->execute();// Выполняем запрос с параметром
