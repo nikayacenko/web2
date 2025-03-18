@@ -117,6 +117,7 @@
                                     </form>';
                             }
                         ?>
+                        <a href="login.php">Вход</a>
                     </div> 
                     <p><a href = "#top">наверх</a></p>
                 </div>
