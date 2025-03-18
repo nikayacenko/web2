@@ -31,8 +31,6 @@ $db = new PDO('mysql:host=localhost;dbname=u68600', $user, $pass,
     $stmt_languages = $db->prepare($query_languages);
     $stmt_languages->execute();
     $person_languages = $stmt_languages->fetchAll(PDO::FETCH_ASSOC);
-
-
     // 2. Группируем данные в PHP
     $languages_by_person = [];
     foreach ($person_languages as $row) {
@@ -79,6 +77,8 @@ $db = new PDO('mysql:host=localhost;dbname=u68600', $user, $pass,
                     echo "Нет данных";
                 }
                 ?>
+                </td>
+                <td>
                 <form method="post" action="">
                 <input type="hidden" name="delete_id" value="<?= htmlspecialchars($row['id']) ?>">
                 <button type="submit">Удалить</button>
