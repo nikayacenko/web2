@@ -1,3 +1,4 @@
+<?php
 if (empty($_SERVER['PHP_AUTH_USER']) ||
     empty($_SERVER['PHP_AUTH_PW']) ||
     $_SERVER['PHP_AUTH_USER'] != 'admin' ||
@@ -8,3 +9,4 @@ if (empty($_SERVER['PHP_AUTH_USER']) ||
   exit();
 }
 print('Вы успешно авторизовались и видите защищенные паролем данные.');
+?>
