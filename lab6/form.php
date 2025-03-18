@@ -122,8 +122,8 @@
                 </div>
             </div>
         </div>
-    <footer>
-       <p> (с) Яценко Вероника</p>
-    </footer> 
+        <footer>
+        <p> (с) Яценко Вероника</p>
+        </footer> 
     </body>
 </html>
