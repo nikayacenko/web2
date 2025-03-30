@@ -83,7 +83,7 @@ $db = new PDO('mysql:host=localhost;dbname=u68600', $user, $pass,
                 <input type="hidden" name="delete_id" value="<?= htmlspecialchars($row['id']) ?>">
                 <button type="submit">Удалить</button>
                 </form>
-                <a href="index.php/?uid=<?= htmlspecialchars($row['id']) ?>">Изменить</a>
+                <a href="index.php?uid=<?= htmlspecialchars($row['id']) ?>">Изменить</a>
             </td>
             </tr>
         <?php endforeach; ?>
@@ -92,4 +92,40 @@ $db = new PDO('mysql:host=localhost;dbname=u68600', $user, $pass,
 <?php
 
     }
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['delete_id']) && $_SERVER['PHP_AUTH_USER'] == 'admin') {
+        //if($_SERVER['PHP_AUTH_USER'] == 'admin' || md5($_SERVER['PHP_AUTH_PW']) == md5('123'))
+        //{
+        $delete_id = $_POST['delete_id'];
+        $delete_query = "DELETE FROM application WHERE id = :id";
+        $delete_querylang="DELETE FROM prog_lang WHERE pers_id=:id";
+        $delete_querylogin="DELETE FROM person_LOGIN WHERE id=:id";
+        $addition_query="SELECT login FROM person_LOGIN WHERE id=:id";
+        $delete_LOGIN="DELETE FROM LOGIN WHERE login=:login";
+        try {
+            $delete_stmt = $db->prepare($addition_query);
+            $delete_stmt->bindParam(':id', $delete_id, PDO::PARAM_INT);
+            $delete_stmt->execute();
+            $doplog=$delete_stmt->fetchColumn();
+            $delete_stmt = $db->prepare($delete_querylogin);
+            $delete_stmt->bindParam(':id', $delete_id, PDO::PARAM_INT); 
+            $delete_stmt->execute();
+            $delete_stmt = $db->prepare($delete_LOGIN);
+            $delete_stmt->bindParam(':login', $doplog, PDO::PARAM_STR); 
+            $delete_stmt->execute();
+            $delete_stmt = $db->prepare($delete_querylang);
+            $delete_stmt->bindParam(':id', $delete_id, PDO::PARAM_INT); 
+            $delete_stmt->execute();
+            $delete_stmt = $db->prepare($delete_query);
+            $delete_stmt->bindParam(':id', $delete_id, PDO::PARAM_INT);
+            $delete_stmt->execute();
+        
+            //echo "<p style='color: green;'>Строка с ID " . htmlspecialchars($delete_id) . " успешно удалена.</p>";
+            //$messAction[] = '<p style="color: green;">Строка с ID " . htmlspecialchars($delete_id) . " успешно удалена.</p>';
+            header("Location: adm_page.php");
+            exit;
+        
+            } catch (PDOException $e) {
+            echo "<p style='color: red;'>Ошибка удаления: " . $e->getMessage() . "</p>";
+            }
+}
         
