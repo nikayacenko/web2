@@ -121,7 +121,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['delete_id']) && $_SERV
         
             //echo "<p style='color: green;'>Строка с ID " . htmlspecialchars($delete_id) . " успешно удалена.</p>";
             //$messAction[] = '<p style="color: green;">Строка с ID " . htmlspecialchars($delete_id) . " успешно удалена.</p>';
-            header("Location: adm_page.php");
+            header("Location: adm.php");
             exit;
         
             } catch (PDOException $e) {
