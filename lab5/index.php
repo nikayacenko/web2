@@ -206,11 +206,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
       print('Error : ' . $e->getMessage());
       exit();
     }
-
-    //$login_message='Вход с логином: '. $_SESSION['login'] . ", uid: ". $_SESSION['uid'];
-    //$messages[] = $login_message;
       $messages[] = '<div class="result">Вход с логином ' . htmlspecialchars($_SESSION['login']) . ", uid " . (int)$_SESSION['uid'] . "</div>";
-    //printf('Вход с логином %s, uid %d', $_SESSION['login'], $_SESSION['uid']);
     }
 
   include('form.php');
@@ -377,46 +373,13 @@ else{
   } 
   // TODO: перезаписать данные в БД новыми данными,
   // кроме логина и пароля.
-  
   // Сохранение в базу данных.
   else{
-
-    /*$user = 'u68600'; // Заменить на ваш логин uXXXXX
-    $pass = '8589415'; // Заменить на пароль
-    $db = new PDO('mysql:host=localhost;dbname=u68600', $user, $pass,
-      [PDO::ATTR_PERSISTENT => true, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]); // Заменить test на имя БД, совпадает с логином uXXXXX
-    $table_app = 'applucation';
-    $table_lang = 'prog_lang';
-    $table_ul = 'user_lang';*/
-  
     // Подготовленный запрос. Не именованные метки.
     try {
       $stmt = $db->prepare("INSERT INTO application(name, number, email, gender, bdate, biography, checkbox) values(?,?,?,?,?,?,?)");
       $stmt->execute([$_POST['name'], $_POST['number'], $_POST['email'], $_POST['gender'], $_POST['bdate'], $_POST['biography'], isset($_POST["checkbox"]) ? 1 : 0]);
-      /*$login = rand()%10000000;
-      $pass = rand()%10000000000;
-      // Сохраняем в Cookies.
-      $hash_pass=md5($pass);
-      setcookie('login', $login);
-      setcookie('pass', $pass);
-      $stmt = $db->prepare("INSERT INTO LOGIN(login, pass) values(?,?)");
-      $stmt = execute($_POST['login'], $_POST['pass']);
-      $stmt = $db->prepare("INSERT INTO person_LOGIN(id, login) values(?,?)");
-      $stmt = execute($_POST['id'], $_POST['login']);*/
-          
-      /*$user_id = $db->lastInsertId();
-      $stmt = $db->prepare("SELECT id_lang_name FROM prog WHERE lang_name = ?");
-      $insert_stmt = $db->prepare("INSERT INTO prog_lang (id, id_lang_name) VALUES (?, ?)");
-      foreach ($fav_languages as $language) {
-          // Получаем ID языка программирования
-          $stmt->execute([$language]);
-          $language_id = $stmt->fetchColumn();
-          
-          if ($language_id) {
-              // Связываем пользователя с языком
-              $insert_stmt->execute([$user_id, $language_id]);
-          }
-      }// ID последнего вставленного пользователя*/
+      
     }
     catch(PDOException $e){
       print('Error : ' . $e->getMessage());
@@ -424,14 +387,11 @@ else{
     }
     $user_id = $db->lastInsertId(); 
     try{
-      //$characters = '0123456789';
-      //$login = rand()%10000000;
       $login = generate_pass(7);
       while(check_login($login, $db)>0)
       {
         $login = generate_pass(7);
       }
-      //$pass = substr(str_shuffle($characters), 0, 10); //uniqid(string $prefix = "", bool $more_entropy = false);
       $pass = generate_pass();
       $hash_p = password_hash($pass, PASSWORD_DEFAULT);
       setcookie('login', $login);
@@ -449,7 +409,6 @@ else{
       print('Error : ' . $e->getMessage());
       exit();
     }
-    //$user_id = $db->lastInsertId(); // ID последнего вставленного пользователя
     try{
       $stmt = $db->prepare("SELECT id_lang_name FROM prog WHERE lang_name = ?");
       $insert_stmt = $db->prepare("INSERT INTO prog_lang (id, id_lang_name) VALUES (?, ?)");
