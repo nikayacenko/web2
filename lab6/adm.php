@@ -97,7 +97,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['delete_id']) && $_SERV
         //{
         $delete_id = $_POST['delete_id'];
         $delete_query = "DELETE FROM application WHERE id = :id";
-        $delete_querylang="DELETE FROM prog_lang WHERE pers_id=:id";
+        $delete_querylang="DELETE FROM prog_lang WHERE id=:id";
         $delete_querylogin="DELETE FROM person_LOGIN WHERE id=:id";
         $addition_query="SELECT login FROM person_LOGIN WHERE id=:id";
         $delete_LOGIN="DELETE FROM LOGIN WHERE login=:login";
