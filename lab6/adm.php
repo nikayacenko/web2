@@ -1,4 +1,5 @@
 <?php
+require_once 'function.php';
 if (empty($_SERVER['PHP_AUTH_USER']) ||
     empty($_SERVER['PHP_AUTH_PW']) ||
     $_SERVER['PHP_AUTH_USER'] != admin_login_check($db) ||
