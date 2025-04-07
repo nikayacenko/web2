@@ -1,4 +1,5 @@
 <?php
+require_once 'function.php';
 header('Content-Type: text/html; charset=UTF-8');
 //session_start();
   $user = 'u68600'; // Заменить на ваш логин uXXXXX
@@ -182,7 +183,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
       print('Error : ' . $e->getMessage());
       exit();
     }
-    /*$sql = "select pl.lang_name from prog_lang pl JOIN user_lang ul ON pl.id_lang=ul.id_lang where ul.id = :login;";*/
     try{
       $stmt = $db->prepare("select pl.lang_name from prog pl JOIN prog_lang ul ON pl.id_lang_name=ul.id_lang_name where ul.id = :login;");
       $stmt->bindValue(':login', $_SESSION['uid'], PDO::PARAM_STR);
