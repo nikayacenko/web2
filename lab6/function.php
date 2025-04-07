@@ -59,7 +59,7 @@ function insertData($login, $db) {
     foreach ($queries as $key => $sql) {
         try {
             $stmt = $db->prepare($sql);
-            $stmt->bindValue(':login', $login, PDO::PARAM_STR);
+            $stmt->bindValue(':login', $_SESSION['login'], PDO::PARAM_STR);
             $values[$key] = $stmt->fetchColumn();
         } catch (Exception $e) {
             error_log("Ошибка при выполнении запроса для ключа " . $key . ": " . $e->getMessage());
@@ -73,7 +73,7 @@ function insertData($login, $db) {
             WHERE l.login = :login";
     try {
         $stmt = $db->prepare($sql);
-        $stmt->bindValue(':login', $login, PDO::PARAM_STR);
+        $stmt->bindValue(':login', $_SESSION['login'], PDO::PARAM_STR);
         $stmt->execute();
         $lang = $stmt->fetchAll(PDO::FETCH_COLUMN, 0);
         $values['languages'] = implode(",", $lang);
