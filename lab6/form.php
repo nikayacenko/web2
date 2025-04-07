@@ -49,8 +49,7 @@
                             ?>
                             <label class="l">
                                 ФИО:<br>
-                                <input name="name" <?php if ($errors['name']) {print 'class="error"';} ?> value="<?php print $values['name']; ?>"
-                                value="ok">
+                                <input name="name" <?php if ($errors['name']) {print 'class="error"';} ?> value="<?php print $values['name']; ?>">
                             </label><br>
                             <label class="l">
                                 Номер телефона:<br>

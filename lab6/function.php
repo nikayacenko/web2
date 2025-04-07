@@ -59,15 +59,7 @@ function insertData($login, $db) {
     foreach ($queries as $key => $sql) {
         try {
             $stmt = $db->prepare($sql);
-            if ($stmt === false) {
-                error_log("Ошибка подготовки запроса: " . print_r($db->errorInfo(), true));
-                throw new Exception("Ошибка подготовки запроса"); 
-            }
             $stmt->bindValue(':login', $login, PDO::PARAM_STR);
-            if (!$stmt->execute()) {
-                error_log("Ошибка выполнения запроса: " . print_r($stmt->errorInfo(), true));
-                throw new Exception("Ошибка выполнения запроса"); 
-            }
             $values[$key] = $stmt->fetchColumn();
         } catch (Exception $e) {
             error_log("Ошибка при выполнении запроса для ключа " . $key . ": " . $e->getMessage());
