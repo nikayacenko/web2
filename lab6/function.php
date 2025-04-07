@@ -49,12 +49,12 @@ function insertData($login, $db) {
 
     // SQL-запросы и соответствующие ключи в массиве $values
     $queries = [
-        'name' => "SELECT fio FROM person JOIN person_LOGIN USING(id) WHERE login = :login",
-        'field-email' => "SELECT email FROM person JOIN person_LOGIN USING(id) WHERE login = :login",
-        'field-tel' => "SELECT tel FROM person JOIN person_LOGIN USING(id) WHERE login = :login",
-        'field-date' => "SELECT bdate FROM person JOIN person_LOGIN USING(id) WHERE login = :login",
-        'radio-group-1' => "SELECT gender FROM person JOIN person_LOGIN USING(id) WHERE login = :login",
-        'bio' => "SELECT biography FROM person JOIN person_LOGIN USING(id) WHERE login = :login"
+        'name' => "SELECT name FROM person JOIN person_LOGIN USING(id) WHERE login = :login",
+        'email' => "SELECT email FROM person JOIN person_LOGIN USING(id) WHERE login = :login",
+        'number' => "SELECT number FROM person JOIN person_LOGIN USING(id) WHERE login = :login",
+        'bdate' => "SELECT bdate FROM person JOIN person_LOGIN USING(id) WHERE login = :login",
+        'gen' => "SELECT gender FROM person JOIN person_LOGIN USING(id) WHERE login = :login",
+        'biography' => "SELECT biography FROM person JOIN person_LOGIN USING(id) WHERE login = :login"
     ];
     foreach ($queries as $key => $sql) {
         try {
