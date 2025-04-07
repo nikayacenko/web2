@@ -121,8 +121,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   $values['gen'] = empty($_COOKIE['gen_value']) ? '' : $_COOKIE['gen_value'];
 
   if (isset($_COOKIE[session_name()]) && session_start() &&!empty($_SESSION['login'])) {
-      $values=insertData(strip_tags($_SESSION['login']),$db);
-    /*try{
+      //$values=insertData(strip_tags($_SESSION['login']),$db);
+    try{
       $stmt = $db->prepare("SELECT name FROM application join person_LOGIN using(id) where login = :login");
       $stmt->bindValue(':login', $_SESSION['login'], PDO::PARAM_STR);
       $stmt->execute();
@@ -192,7 +192,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     }catch(PDOException $e){
       print('Error : ' . $e->getMessage());
       exit();
-    }*/
+    }
 
     //$login_message='Вход с логином: '. $_SESSION['login'] . ", uid: ". $_SESSION['uid'];
     //$messages[] = $login_message;
