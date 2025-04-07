@@ -15,7 +15,16 @@ function insertData($login, $db)
     try {
         foreach ($fields as $key => $sql) {
             $stmt = $db->prepare($sql);
+            if ($stmt === false) {
+                error_log("Ошибка подготовки запроса: " . print_r($db->errorInfo(), true));
+                throw new Exception("Ошибка подготовки запроса"); 
+            }
             $stmt->bindValue(':login', $login, PDO::PARAM_STR);
+            $stmt->bindValue(':login', $login, PDO::PARAM_STR);
+            if (!$stmt->execute()) {
+                error_log("Ошибка выполнения запроса: " . print_r($stmt->errorInfo(), true));
+                throw new Exception("Ошибка выполнения запроса"); 
+            }
             $stmt->execute();
             $values[$key] = $stmt->fetchColumn();
         }
