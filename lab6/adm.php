@@ -118,9 +118,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['delete_id']) && $_SERV
             $delete_stmt = $db->prepare($delete_query);
             $delete_stmt->bindParam(':id', $delete_id, PDO::PARAM_INT);
             $delete_stmt->execute();
-        
-            //echo "<p style='color: green;'>Строка с ID " . htmlspecialchars($delete_id) . " успешно удалена.</p>";
-            //$messAction[] = '<p style="color: green;">Строка с ID " . htmlspecialchars($delete_id) . " успешно удалена.</p>';
+
             header("Location: adm.php");
             exit;
         
