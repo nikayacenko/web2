@@ -85,3 +85,60 @@ function insertData($login, $db) {
 
     return $values;
 }
+
+function password_check($login, $password, $db) {
+    $passw;
+    try{
+      $stmt = $db->prepare("SELECT pass FROM LOGIN WHERE login = :login");
+      $stmt->bindParam(':login', $login, PDO::PARAM_STR);
+      $stmt->execute();
+      $passw = $stmt->fetchColumn();
+      if($passw===false){
+        return false;
+      }
+      return password_verify($password, $passw);
+    } 
+    catch (PDOException $e){
+      print('Error : ' . $e->getMessage());
+      return false;
+    }
+  }
+
+  function admin_password_check($login, $password, $db) {
+    $passw;
+    try{
+      $stmt = $db->prepare("SELECT pass FROM LOGIN WHERE login = ? and role='admin'");
+      $stmt->bindParam(':login', $login, PDO::PARAM_STR);
+      $stmt->execute();
+      $passw = $stmt->fetchColumn();
+      if($passw===false){
+        return false;
+      }
+      return password_verify($password, $passw);
+    } 
+    catch (PDOException $e){
+      print('Error : ' . $e->getMessage());
+      return false;
+    }
+  }
+
+  function admin_login_check($db) {
+      $stmt = $db->prepare("SELECT login FROM LOGIN WHERE role='admin'");
+      $stmt->execute();
+      $log = $stmt->fetchColumn();
+      return $log;
+  }
+
+  function loginbyuid($id, $db){
+    $log;
+    try{
+        $stmt_select=$db->prepare("select login from person_LOGIN where id=?");
+        $stmt_select=$db-execute([$id]);
+        $log = $stmt_select->fetchColumn();
+    }
+    catch (PDOException $e){
+        print('Error : ' . $e->getMessage());
+        return false;
+    }
+    return $log;
+  }

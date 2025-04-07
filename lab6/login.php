@@ -1,4 +1,5 @@
 <?php
+require_once 'function.php';
 
 /**
  * Файл login.php для не авторизованного пользователя выводит форму логина.
@@ -25,7 +26,7 @@ function isValid($login, $db) {
   return $count > 0;
 }
 
-function password_check($login, $password, $db) {
+/*function password_check($login, $password, $db) {
   $passw;
   try{
     $stmt = $db->prepare("SELECT pass FROM LOGIN WHERE login = :login");
@@ -41,7 +42,7 @@ function password_check($login, $password, $db) {
     print('Error : ' . $e->getMessage());
     return false;
   }
-}
+}*/
 // В суперглобальном массиве $_SESSION хранятся переменные сессии.
 // Будем сохранять туда логин после успешной авторизации.
 $session_started = false;
