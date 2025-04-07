@@ -49,7 +49,7 @@ function insertData($login, $db) {
 
     // SQL-запросы и соответствующие ключи в массиве $values
     $queries = [
-        'fio' => "SELECT fio FROM person JOIN person_LOGIN USING(id) WHERE login = :login",
+        'name' => "SELECT fio FROM person JOIN person_LOGIN USING(id) WHERE login = :login",
         'field-email' => "SELECT email FROM person JOIN person_LOGIN USING(id) WHERE login = :login",
         'field-tel' => "SELECT tel FROM person JOIN person_LOGIN USING(id) WHERE login = :login",
         'field-date' => "SELECT bdate FROM person JOIN person_LOGIN USING(id) WHERE login = :login",
