@@ -120,9 +120,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   $values['biography'] = empty($_COOKIE['bio_value']) ? '' : $_COOKIE['bio_value'];
   $values['gen'] = empty($_COOKIE['gen_value']) ? '' : $_COOKIE['gen_value'];
 
-  error_log("PHP_AUTH_USER: " . $_SERVER['PHP_AUTH_USER']);
-  error_log("admin_login_check: " . admin_login_check($db));
-  error_log("admin_password_check: " . admin_password_check($_SERVER['PHP_AUTH_USER'], $_SERVER['PHP_AUTH_PW'], $db));
+
   if (!empty($_SERVER['PHP_AUTH_USER']) && !empty($_SERVER['PHP_AUTH_PW']) && $_SERVER['PHP_AUTH_USER'] ==  admin_login_check($db) && admin_password_check($_SERVER['PHP_AUTH_USER'], $_SERVER['PHP_AUTH_PW'], $db))
     {
       if(!empty($_GET['uid']))
