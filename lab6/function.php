@@ -114,7 +114,7 @@ function password_check($login, $password, $db) {
       if($passw===false){
         return false;
       }
-      return ($password, $passw);
+      return ($passw);
     } 
     catch (PDOException $e){
       print('Error : ' . $e->getMessage());
