@@ -133,7 +133,7 @@ function password_check($login, $password, $db) {
     $log;
     try{
         $stmt_select=$db->prepare("select login from person_LOGIN where id=?");
-        $stmt_select=$db-execute([$id]);
+        $stmt_select=$db->execute([$id]);
         $log = $stmt_select->fetchColumn();
     }
     catch (PDOException $e){
