@@ -120,8 +120,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   $values['biography'] = empty($_COOKIE['bio_value']) ? '' : $_COOKIE['bio_value'];
   $values['gen'] = empty($_COOKIE['gen_value']) ? '' : $_COOKIE['gen_value'];
 
-  if (/*empty($errors) &&*/ !empty($_COOKIE[session_name()]) &&
-    session_start() && !empty($_SESSION['login'])) {
+  if (isset($_COOKIE[session_name()]) && session_start() &&!empty($_SESSION['login'])) {
       $values=insertData(strip_tags($_SESSION['login']),$db);
     /*try{
       $stmt = $db->prepare("SELECT name FROM application join person_LOGIN using(id) where login = :login");
