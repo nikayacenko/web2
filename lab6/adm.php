@@ -1,8 +1,8 @@
 <?php
 if (empty($_SERVER['PHP_AUTH_USER']) ||
     empty($_SERVER['PHP_AUTH_PW']) ||
-    $_SERVER['PHP_AUTH_USER'] != 'admin' ||
-    md5($_SERVER['PHP_AUTH_PW']) != md5('123')) {
+    $_SERVER['PHP_AUTH_USER'] != admin_login_check($db) ||
+    !admin_password_check($_SERVER['PHP_AUTH_USER'], $_SERVER['PHP_AUTH_PW'], $db)) {
   header('HTTP/1.1 401 Unanthorized');
   header('WWW-Authenticate: Basic realm="My site"');
   print('<h1>401 Требуется авторизация</h1>');
@@ -92,7 +92,7 @@ $db = new PDO('mysql:host=localhost;dbname=u68600', $user, $pass,
 <?php
 
     }
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['delete_id']) && $_SERVER['PHP_AUTH_USER'] == 'admin') {
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['delete_id']) && !empty($_SERVER['PHP_AUTH_USER']) && !empty($_SERVER['PHP_AUTH_PW'])) {
         //if($_SERVER['PHP_AUTH_USER'] == 'admin' || md5($_SERVER['PHP_AUTH_PW']) == md5('123'))
         //{
         $delete_id = $_POST['delete_id'];
