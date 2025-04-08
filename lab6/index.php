@@ -269,8 +269,8 @@ else{
   if (!empty($_SERVER['PHP_AUTH_USER']) && !empty($_SERVER['PHP_AUTH_PW']) && $_SERVER['PHP_AUTH_USER'] ==  admin_login_check($db) && admin_password_check($_SERVER['PHP_AUTH_USER'], $_SERVER['PHP_AUTH_PW'], $db)){
     if(!empty($_POST['uid'])) {
       $user_id = $_POST['uid'];
-      $languages = $_POST['languages'] ?? [];
-      update();
+      $lang = $_POST['languages'] ?? [];
+      update($user_id,$_POST['name'], $_POST['number'], $_POST['email'], $_POST['bdate'], $_POST['gender'], $_POST['biography'], isset($_POST["checkbox"]) ? 1 : 0,$lang);
       header('Location: admin.php');
       
       exit();

@@ -144,7 +144,7 @@ function password_check($login, $password, $db) {
     return $log;
   }
 
-  function update(){
+  function update($user_id,$name,$number,$email,$bdate,$gen,$bio,$check,$lang){
     try {
         $stmt_update = $db->prepare("UPDATE application SET name=?, number=?, email=?, bdate=?, gender=?, biography=?, checkbox=? WHERE id=?");
         $stmt_update->execute([$_POST['name'], $_POST['number'], $_POST['email'], $_POST['bdate'], $_POST['gender'], $_POST['biography'], isset($_POST["checkbox"]) ? 1 : 0, $user_id ]);
@@ -153,7 +153,7 @@ function password_check($login, $password, $db) {
         $stmt_delete -> execute([$user_id]);
         $stmt_select = $db->prepare("SELECT id_lang_name FROM prog WHERE lang_name = ?");
         $insert_stmt = $db->prepare("INSERT INTO prog_lang (id, id_lang_name) VALUES (?,?)");
-        foreach ($fav_languages as $language) {
+        foreach ($lang as $language) {
           // Получаем ID языка программирования
           $stmt_select->execute([$language]);
           $language_id = $stmt_select->fetchColumn();
