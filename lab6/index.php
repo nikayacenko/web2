@@ -267,6 +267,7 @@ else{
     setcookie('lang_error', "", 100000);
   }
   if (!empty($_SERVER['PHP_AUTH_USER']) && !empty($_SERVER['PHP_AUTH_PW']) && $_SERVER['PHP_AUTH_USER'] ==  admin_login_check($db) && admin_password_check($_SERVER['PHP_AUTH_USER'], $_SERVER['PHP_AUTH_PW'], $db)){
+    error_log("Authentication successful!");
     if(!empty($_POST['uid'])) {
       $user_id = $_POST['uid'];
       $lang = $_POST['languages'] ?? [];
