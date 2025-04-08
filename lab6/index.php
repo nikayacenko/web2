@@ -129,15 +129,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         $log=loginbyuid($update_id, $db);
         $values=insertData($log, $db);
         $values['uid']=$update_id;
-      
-        $user_id = $_POST['uid'];
-        $lang = $_POST['languages'] ?? [];
-        update($user_id,$_POST['name'], $_POST['number'], $_POST['email'], $_POST['bdate'], $_POST['gender'], $_POST['biography'], isset($_POST["checkbox"]) ? 1 : 0,$lang);
-        header('Location: adm.php');
-        
-        exit();
-      } else{
-        print('Пользователь для изменения не выбран');
       }
   }
   
@@ -148,6 +139,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
 
   include('form.php');
+
 }
 else{
   $fav_languages = $_POST['languages'] ?? [];
@@ -284,7 +276,7 @@ else{
       print('Пользователь для изменения не выбран');
     }
   }
-  else{
+  /*else{
     if (isset($_COOKIE[session_name()]) && session_start() && !empty($_SESSION['login'])) {
       $user_id;
       try {
@@ -410,7 +402,7 @@ else{
         print('Ошибка БД: ' . $e->getMessage());
         exit();
       }
-    }
+    }*/
 }
   setcookie('save', '1');
   header('Location: index.php');
