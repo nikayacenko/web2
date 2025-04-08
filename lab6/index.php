@@ -409,5 +409,5 @@ else{
     }
 }
   setcookie('save', '1');
-  header('Location: adm.php');
+  header('Location: index.php');
 }
