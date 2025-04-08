@@ -328,7 +328,7 @@ else{
       $table_ul = 'user_lang';*/
     
       // Подготовленный запрос. Не именованные метки.
-      try {
+      /*try {
         $stmt = $db->prepare("INSERT INTO application(name, number, email, gender, bdate, biography, checkbox) values(?,?,?,?,?,?,?)");
         $stmt->execute([$_POST['name'], $_POST['number'], $_POST['email'], $_POST['gender'], $_POST['bdate'], $_POST['biography'], isset($_POST["checkbox"]) ? 1 : 0]);
         /*$login = rand()%10000000;
@@ -355,7 +355,7 @@ else{
                 $insert_stmt->execute([$user_id, $language_id]);
             }
         }// ID последнего вставленного пользователя*/
-      }
+      /*}
       catch(PDOException $e){
         print('Error : ' . $e->getMessage());
         exit();
@@ -402,8 +402,8 @@ else{
         print('Ошибка БД: ' . $e->getMessage());
         exit();
       }
-    }*/
-}
+    }
+}*/
   setcookie('save', '1');
   header('Location: index.php');
 }
