@@ -75,7 +75,8 @@ function insertData($login, $db) {
         }
     }
     $sql = "select pl.lang_name from prog pl JOIN prog_lang ul
-     ON pl.id_lang_name=ul.id_lang_name where ul.id = :login;";
+     ON pl.id_lang_name=ul.id_lang_name
+     join person_LOGIN l on ul.id=l.id where l.login = :login;";
     try {
         $stmt = $db->prepare($sql);
         $stmt->bindValue(':login', $login, PDO::PARAM_STR);
