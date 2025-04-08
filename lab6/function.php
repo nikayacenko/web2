@@ -1,5 +1,11 @@
 <?php
 require_once 'db.php';
+global $db;
+$user = 'u68600';
+$pass = '8589415';
+$db = new PDO('mysql:host=localhost;dbname=u68600', $user, $pass,
+    [PDO::ATTR_PERSISTENT => true, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
+
 /*function insertData($login, $db)
 {
     $values = [];
@@ -103,7 +109,7 @@ function password_check($login, $password, $db) {
       print('Error : ' . $e->getMessage());
       return false;
     }
-  }
+}
 
   function admin_password_check($login, $password, $db) {
     $passw;
@@ -121,14 +127,14 @@ function password_check($login, $password, $db) {
       print('Error : ' . $e->getMessage());
       return false;
     }
-  }
+}
 
   function admin_login_check($db) {
       $stmt = $db->prepare("SELECT login FROM LOGIN WHERE role='admin'");
       $stmt->execute();
       $log = $stmt->fetchColumn();
       return $log;
-  }
+}
 
   function loginbyuid($id, $db){
     $log;
@@ -142,9 +148,10 @@ function password_check($login, $password, $db) {
         return false;
     }
     return $log;
-  }
+}
 
   function update($user_id,$name,$number,$email,$bdate,$gen,$bio,$check,$lang){
+    global $db;
     try {
         $stmt_update = $db->prepare("UPDATE application SET name=?, number=?, email=?, bdate=?, gender=?, biography=?, checkbox=? WHERE id=?");
         $stmt_update->execute([$name, $number, $email, $bdate, $gen,$bio, $check, $user_id ]);
@@ -167,4 +174,4 @@ function password_check($login, $password, $db) {
         print('update Error : ' . $e->getMessage());
         exit();
     }
-  }
+}
