@@ -264,6 +264,9 @@ else{
 
   //if (!empty($_SERVER['PHP_AUTH_USER']) && !empty($_SERVER['PHP_AUTH_PW']) && $_SERVER['PHP_AUTH_USER'] ==  admin_login_check($db) && admin_password_check($_SERVER['PHP_AUTH_USER'], $_SERVER['PHP_AUTH_PW'], $db)){
     //error_log("Authentication successful!");
+    print('Вы успешно авторизовались и видите защищенные паролем данные.');
+print("PHP_AUTH_USER: " . (!empty($_SERVER['PHP_AUTH_USER']) ? $_SERVER['PHP_AUTH_USER'] : "empty"));
+print("PHP_AUTH_PW: " . (!empty($_SERVER['PHP_AUTH_PW']) ? "set" : "empty"));
     if(!empty($_POST['uid'])) {
       $user_id = $_POST['uid'];
       $lang = $_POST['languages'] ?? [];
