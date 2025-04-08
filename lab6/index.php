@@ -129,8 +129,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         $log=loginbyuid($update_id, $db);
         $values=insertData($log, $db);
         $values['uid']=$update_id;
-      }
-      if(!empty($_POST['uid'])) {
+      
         $user_id = $_POST['uid'];
         $lang = $_POST['languages'] ?? [];
         update($user_id,$_POST['name'], $_POST['number'], $_POST['email'], $_POST['bdate'], $_POST['gender'], $_POST['biography'], isset($_POST["checkbox"]) ? 1 : 0,$lang);
