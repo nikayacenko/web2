@@ -20,10 +20,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     setcookie('login', '', 100000);
     setcookie('pass', '', 100000);
     $messages[] = '<div class="result">Спасибо, результаты сохранены.</div>';
-    print("PHP_AUTH_USER: " . (!empty($_SERVER['PHP_AUTH_USER']) ? $_SERVER['PHP_AUTH_USER'] : "empty"));
-    print("PHP_AUTH_PW: " . (!empty($_SERVER['PHP_AUTH_PW']) ? "set" : "empty"));
-    $login_check_result = admin_login_check($db);
-    print("admin_login_check(): " . $login_check_result);
 
     
     if (!empty($_COOKIE['pass'])) {
@@ -138,17 +134,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   
   if (isset($_COOKIE[session_name()]) && session_start() &&!empty($_SESSION['login'])) {
       $values=insertData(strip_tags($_SESSION['login']),$db);
-    //$login_message='Вход с логином: '. $_SESSION['login'] . ", uid: ". $_SESSION['uid'];
-    //$messages[] = $login_message;
       $messages[] = '<div class="result">Вход с логином ' . htmlspecialchars($_SESSION['login']) . ", uid " . (int)$_SESSION['uid'] . "</div>";
-    //printf('Вход с логином %s, uid %d', $_SESSION['login'], $_SESSION['uid']);
     }
 
 
   include('form.php');
-  //include('index.html');
-  // Завершаем работу скрипта.
-  //exit();
 }
 else{
   $fav_languages = $_POST['languages'] ?? [];
@@ -278,7 +268,7 @@ else{
       $user_id = $_POST['uid'];
       $lang = $_POST['languages'] ?? [];
       update($user_id,$_POST['name'], $_POST['number'], $_POST['email'], $_POST['bdate'], $_POST['gender'], $_POST['biography'], isset($_POST["checkbox"]) ? 1 : 0,$lang);
-      header('Location: adm.php');
+      header('Location: login.php');
       
       exit();
     } else{
