@@ -266,16 +266,8 @@ else{
     setcookie('bio_error', "", 100000);
     setcookie('lang_error', "", 100000);
   }
-  error_log("Starting authentication check...");
 
-error_log("PHP_AUTH_USER: " . (!empty($_SERVER['PHP_AUTH_USER']) ? $_SERVER['PHP_AUTH_USER'] : "empty"));
-error_log("PHP_AUTH_PW: " . (!empty($_SERVER['PHP_AUTH_PW']) ? "set" : "empty")); // Не выводите сам пароль!
 
-$login_check_result = admin_login_check($db);
-error_log("admin_login_check(): " . $login_check_result);
-
-$password_check_result = admin_password_check($_SERVER['PHP_AUTH_USER'], $_SERVER['PHP_AUTH_PW'], $db);
-error_log("admin_password_check(): " . ($password_check_result ? "true" : "false"));
   if (!empty($_SERVER['PHP_AUTH_USER']) && !empty($_SERVER['PHP_AUTH_PW']) && $_SERVER['PHP_AUTH_USER'] ==  admin_login_check($db) && admin_password_check($_SERVER['PHP_AUTH_USER'], $_SERVER['PHP_AUTH_PW'], $db)){
     error_log("Authentication successful!");
     if(!empty($_POST['uid'])) {
