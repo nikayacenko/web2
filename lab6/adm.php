@@ -103,8 +103,6 @@ $db = new PDO('mysql:host=localhost;dbname=u68600', $user, $pass,
 
     }
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['delete_id']) && !empty($_SERVER['PHP_AUTH_USER']) && !empty($_SERVER['PHP_AUTH_PW'])) {
-        //if($_SERVER['PHP_AUTH_USER'] == 'admin' || md5($_SERVER['PHP_AUTH_PW']) == md5('123'))
-        //{
         $delete_id = $_POST['delete_id'];
         $delete_query = "DELETE FROM application WHERE id = :id";
         $delete_querylang="DELETE FROM prog_lang WHERE id=:id";

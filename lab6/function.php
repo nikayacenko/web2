@@ -74,10 +74,10 @@ function insertData($login, $db) {
             $values[$key] = null;
         }
     }
-    $sql = "SELECT lang.namelang
-            FROM personlang pl
-            JOIN person_LOGIN l ON pl.pers_id = l.id
-            JOIN languages lang ON pl.lang_id = lang.id
+    $sql = "SELECT lang.lang_name
+            FROM prog_lang pl
+            JOIN person_LOGIN l ON pl.id = l.id
+            JOIN prog lang ON pl.id_lang_name = lang.id
             WHERE l.login = :login";
     try {
         $stmt = $db->prepare($sql);

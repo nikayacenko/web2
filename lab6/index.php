@@ -251,7 +251,6 @@ else{
     exit();
   }
   else {
-    // Удаляем Cookies с признаками ошибок.
     setcookie('fio_error', "", 100000);
     setcookie('number_error',"", 100000);
     setcookie('email_error', "", 100000);
@@ -276,7 +275,7 @@ else{
       print('Пользователь для изменения не выбран');
     }
   }
-  /*else{
+  else{
     if (isset($_COOKIE[session_name()]) && session_start() && !empty($_SESSION['login'])) {
       $user_id;
       try {
@@ -298,12 +297,10 @@ else{
           $stmt_select = $db->prepare("SELECT id_lang_name FROM prog WHERE lang_name = ?");
           $insert_stmt = $db->prepare("INSERT INTO prog_lang (id, id_lang_name) VALUES (?,?)");
           foreach ($fav_languages as $language) {
-            // Получаем ID языка программирования
             $stmt_select->execute([$language]);
             $language_id = $stmt_select->fetchColumn();
             
             if ($language_id) {
-                // Связываем пользователя с языком
                 $insert_stmt->execute([$user_id, $language_id]);
             }
           }
@@ -313,49 +310,11 @@ else{
       }
 
     } 
-    // TODO: перезаписать данные в БД новыми данными,
-    // кроме логина и пароля.
-    
-    // Сохранение в базу данных.
     else{
-
-      /*$user = 'u68600'; // Заменить на ваш логин uXXXXX
-      $pass = '8589415'; // Заменить на пароль
-      $db = new PDO('mysql:host=localhost;dbname=u68600', $user, $pass,
-        [PDO::ATTR_PERSISTENT => true, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]); // Заменить test на имя БД, совпадает с логином uXXXXX
-      $table_app = 'applucation';
-      $table_lang = 'prog_lang';
-      $table_ul = 'user_lang';*/
-    
-      // Подготовленный запрос. Не именованные метки.
-      /*try {
+      try {
         $stmt = $db->prepare("INSERT INTO application(name, number, email, gender, bdate, biography, checkbox) values(?,?,?,?,?,?,?)");
         $stmt->execute([$_POST['name'], $_POST['number'], $_POST['email'], $_POST['gender'], $_POST['bdate'], $_POST['biography'], isset($_POST["checkbox"]) ? 1 : 0]);
-        /*$login = rand()%10000000;
-        $pass = rand()%10000000000;
-        // Сохраняем в Cookies.
-        $hash_pass=md5($pass);
-        setcookie('login', $login);
-        setcookie('pass', $pass);
-        $stmt = $db->prepare("INSERT INTO LOGIN(login, pass) values(?,?)");
-        $stmt = execute($_POST['login'], $_POST['pass']);
-        $stmt = $db->prepare("INSERT INTO person_LOGIN(id, login) values(?,?)");
-        $stmt = execute($_POST['id'], $_POST['login']);*/
-            
-        /*$user_id = $db->lastInsertId();
-        $stmt = $db->prepare("SELECT id_lang_name FROM prog WHERE lang_name = ?");
-        $insert_stmt = $db->prepare("INSERT INTO prog_lang (id, id_lang_name) VALUES (?, ?)");
-        foreach ($fav_languages as $language) {
-            // Получаем ID языка программирования
-            $stmt->execute([$language]);
-            $language_id = $stmt->fetchColumn();
-            
-            if ($language_id) {
-                // Связываем пользователя с языком
-                $insert_stmt->execute([$user_id, $language_id]);
-            }
-        }// ID последнего вставленного пользователя*/
-      /*}
+      }
       catch(PDOException $e){
         print('Error : ' . $e->getMessage());
         exit();
@@ -382,18 +341,14 @@ else{
         print('Error : ' . $e->getMessage());
         exit();
       }
-      //$user_id = $db->lastInsertId(); // ID последнего вставленного пользователя
       try{
         $stmt = $db->prepare("SELECT id_lang_name FROM prog WHERE lang_name = ?");
         $insert_stmt = $db->prepare("INSERT INTO prog_lang (id, id_lang_name) VALUES (?, ?)");
         
         foreach ($fav_languages as $language) {
-            // Получаем ID языка программирования
             $stmt->execute([$language]);
             $language_id = $stmt->fetchColumn();
-            
             if ($language_id) {
-                // Связываем пользователя с языком
                 $insert_stmt->execute([$user_id, $language_id]);
             }
         }
@@ -403,7 +358,7 @@ else{
         exit();
       }
     }
-}*/
+}
   setcookie('save', '1');
   header('Location: index.php');
 }
