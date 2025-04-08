@@ -143,9 +143,23 @@ function password_check($login, $password, $db) {
     }
     catch (PDOException $e){
         print('Error : ' . $e->getMessage());
-        return false;
+        exit();
     }
     return $log;
+}
+
+function getuid($login, $db){
+    $uid;
+    try{
+        $stmt_select=$db->prepare("select id from person_LOGIN where login=?");
+        $stmt_select->execute([$login]);
+        $log = $stmt_select->fetchColumn();
+    }
+    catch (PDOException $e){
+        print('Error : ' . $e->getMessage());
+        exit();
+    }
+    return $uid;
 }
 
   function update($user_id,$name,$number,$email,$bdate,$gen,$bio,$check,$lang){
