@@ -20,6 +20,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     setcookie('login', '', 100000);
     setcookie('pass', '', 100000);
     $messages[] = '<div class="result">Спасибо, результаты сохранены.</div>';
+    print("PHP_AUTH_USER: " . (!empty($_SERVER['PHP_AUTH_USER']) ? $_SERVER['PHP_AUTH_USER'] : "empty"));
+    print("PHP_AUTH_PW: " . (!empty($_SERVER['PHP_AUTH_PW']) ? "set" : "empty"));
+    $login_check_result = admin_login_check($db);
+    print("admin_login_check(): " . $login_check_result);
 
     
     if (!empty($_COOKIE['pass'])) {
