@@ -74,11 +74,8 @@ function insertData($login, $db) {
             $values[$key] = null;
         }
     }
-    $sql = "SELECT lang.lang_name
-            FROM prog_lang pl
-            JOIN person_LOGIN l ON pl.id = l.id
-            JOIN prog lang ON pl.id = lang.id_lang_name
-            WHERE l.login = :login";
+    $sql = "select pl.lang_name from prog pl JOIN prog_lang ul
+     ON pl.id_lang_name=ul.id_lang_name where ul.id = :login;";
     try {
         $stmt = $db->prepare($sql);
         $stmt->bindValue(':login', $login, PDO::PARAM_STR);
