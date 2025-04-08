@@ -280,7 +280,7 @@ else{
     } else{
       print('Пользователь для изменения не выбран');
     }
-  }
+  //}
   //else{
     if (!empty($_COOKIE[session_name()]) &&
     session_start() && !empty($_SESSION['login'])) {
@@ -409,7 +409,7 @@ else{
         exit();
       }
     }
-}
+//}
   setcookie('save', '1');
   header('Location: index.php');
 }
