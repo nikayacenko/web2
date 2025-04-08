@@ -130,6 +130,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         $values=insertData($log, $db);
         $values['uid']=$update_id;
       }
+      if(!empty($_POST['uid'])) {
+        $user_id = $_POST['uid'];
+        $lang = $_POST['languages'] ?? [];
+        update($user_id,$_POST['name'], $_POST['number'], $_POST['email'], $_POST['bdate'], $_POST['gender'], $_POST['biography'], isset($_POST["checkbox"]) ? 1 : 0,$lang);
+        header('Location: adm.php');
+        
+        exit();
+      } else{
+        print('Пользователь для изменения не выбран');
+      }
   }
   
   if (isset($_COOKIE[session_name()]) && session_start() &&!empty($_SESSION['login'])) {
@@ -268,7 +278,7 @@ else{
       $user_id = $_POST['uid'];
       $lang = $_POST['languages'] ?? [];
       update($user_id,$_POST['name'], $_POST['number'], $_POST['email'], $_POST['bdate'], $_POST['gender'], $_POST['biography'], isset($_POST["checkbox"]) ? 1 : 0,$lang);
-      header('Location: login.php');
+      header('Location: adm.php');
       
       exit();
     } else{
