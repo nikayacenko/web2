@@ -125,7 +125,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     {
       if(!empty($_GET['uid']))
       {
-        $update_id = strip_tags($_GET['uid']);//XSS
+        $update_id = $_GET['uid'];//XSS
         $log=loginbyuid($update_id, $db);
         $values=insertData($log, $db);
         $values['uid']=$update_id;
