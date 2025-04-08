@@ -15,6 +15,10 @@ if (empty($_SERVER['PHP_AUTH_USER']) ||
 print('Вы успешно авторизовались и видите защищенные паролем данные.');
 print("PHP_AUTH_USER: " . (!empty($_SERVER['PHP_AUTH_USER']) ? $_SERVER['PHP_AUTH_USER'] : "empty"));
 print("PHP_AUTH_PW: " . (!empty($_SERVER['PHP_AUTH_PW']) ? "set" : "empty"));
+$login_check_result = admin_login_check($db);
+print("admin_login_check(): " . $login_check_result);
+$password_check_result = admin_password_check($_SERVER['PHP_AUTH_USER'], $_SERVER['PHP_AUTH_PW'], $db);
+print("admin_password_check(): " . ($password_check_result ? "true" : "false"));
 $user = 'u68600'; // Заменить на ваш логин uXXXXX
 $pass = '8589415'; // Заменить на пароль
 $db = new PDO('mysql:host=localhost;dbname=u68600', $user, $pass,
