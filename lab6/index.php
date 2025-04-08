@@ -134,7 +134,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   }
   
   if (isset($_COOKIE[session_name()]) && session_start() &&!empty($_SESSION['login'])) {
-    $_SESSION['uid']=getuid($_SESSION['login']);
+    $_SESSION['uid']=getuid($_SESSION['login'],$db);
       $values=insertData(strip_tags($_SESSION['login']),$db);
       $messages[] = '<div class="result">Вход с логином ' . htmlspecialchars($_SESSION['login']) . ", uid " . (int)$_SESSION['uid'] . "</div>";
     }
@@ -280,7 +280,7 @@ else{
   else{
     if (isset($_COOKIE[session_name()]) && session_start() && !empty($_SESSION['login'])) {
       try {
-        $user_id=getuid($_SESSION['login']);
+        $user_id=getuid($_SESSION['login'],$db);
         update($user_id,$_POST['name'], $_POST['number'], $_POST['email'], $_POST['bdate'], $_POST['gender'], $_POST['biography'], isset($_POST["checkbox"]) ? 1 : 0,$lang);
       }
       catch(PDOException $e){
