@@ -147,6 +147,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         $log=loginbyuid($update_id, $db);
         $values=insertData($log, $db);
         $values['uid']=$update_id;
+        $_POST['uid']=$update_id;
         $messages[] = '<div class="result">Измените данные </div>';
       }
   }
