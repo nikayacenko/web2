@@ -47,7 +47,7 @@ $db = new PDO('mysql:host=localhost;dbname=u68600', $user, $pass,
     include 'tablehtml.php';
     ?>
         <div class="t container-fluid mt-sm-0">
-            <div class="table_responsive">
+            <div class="table-responsive">
                 <div class="table table-bordered">
                     <table border='1'>
                     <tr>
