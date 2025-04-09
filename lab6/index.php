@@ -134,7 +134,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   $values['gen'] = empty($_COOKIE['gen_value']) ? '' : $_COOKIE['gen_value'];
 
 
-  if (!empty($_SERVER['PHP_AUTH_USER']) && !empty($_SERVER['PHP_AUTH_PW']) && $_SERVER['PHP_AUTH_USER'] ==  admin_login_check($db) && admin_password_check($_SERVER['PHP_AUTH_USER'], $_SERVER['PHP_AUTH_PW'], $db))
+  /*if (!empty($_SERVER['PHP_AUTH_USER']) && !empty($_SERVER['PHP_AUTH_PW']) && $_SERVER['PHP_AUTH_USER'] ==  admin_login_check($db) && admin_password_check($_SERVER['PHP_AUTH_USER'], $_SERVER['PHP_AUTH_PW'], $db))
     {
       if(!empty($_GET['uid']))
       {
@@ -144,7 +144,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         $values['uid']=$update_id;
         $messages[] = '<div class="result">Измените данные </div>';
       }
-  }
+  }*/
   
   if (/*empty($errors) &&*/ !empty($_COOKIE[session_name()]) &&
     session_start() && !empty($_SESSION['login'])) {
@@ -347,7 +347,7 @@ else{
   }
 
 
-  if (!empty($_SERVER['PHP_AUTH_USER']) && !empty($_SERVER['PHP_AUTH_PW']) && $_SERVER['PHP_AUTH_USER'] ==  admin_login_check($db) && admin_password_check($_SERVER['PHP_AUTH_USER'], $_SERVER['PHP_AUTH_PW'], $db)){
+  /*if (!empty($_SERVER['PHP_AUTH_USER']) && !empty($_SERVER['PHP_AUTH_PW']) && $_SERVER['PHP_AUTH_USER'] ==  admin_login_check($db) && admin_password_check($_SERVER['PHP_AUTH_USER'], $_SERVER['PHP_AUTH_PW'], $db)){
     error_log("Authentication successful!");
     if(!empty($_POST['uid'])) {
       $user_id = $_POST['uid'];
@@ -360,7 +360,7 @@ else{
       print('Пользователь для изменения не выбран');
     }
   }
-  else{
+  else{*/
     if (isset($_COOKIE[session_name()]) && session_start() && !empty($_SESSION['login'])) {
       /*try {
         $user_id=getuid($_SESSION['login'],$db);
@@ -453,7 +453,7 @@ else{
         exit();
       }
     }
-}
+
   setcookie('save', '1');
   header('Location: index.php');
 }
