@@ -281,24 +281,25 @@ else{
     setcookie('bio_error', "", 100000);
     setcookie('lang_error', "", 100000);
   }
-  $p = 1;
   if (!empty($_SERVER['PHP_AUTH_USER'])){
     error_log("Authentication successful!");
-    if($p==1) {
-      if (isset($_POST['uid'])) {
-        echo "UID существует.<br>";
-    } else {
-        echo "UID не существует.<br>";
-    }
-      $user_id = $_POST['uid'];
-      $lang = $_POST['languages'] ?? [];
-      update($user_id,$_POST['name'], $_POST['number'], $_POST['email'], $_POST['bdate'], $_POST['gender'], $_POST['biography'], isset($_POST["checkbox"]) ? 1 : 0,$lang);
-      header('Location: adm.php');
-      
-      exit();
-    } else{
-      print('Пользователь для изменения не выбран');
-    }
+    if(isset($_POST['uid'])) {
+      try{
+        $update_id = strip_tags($_POST['uid']);//XSS
+        $doplog=loginbyuid($update_id, $db);
+        update($user_id,$_POST['name'], $_POST['number'], $_POST['email'], $_POST['bdate'], $_POST['gender'], $_POST['biography'], isset($_POST["checkbox"]) ? 1 : 0,$lang);
+        header('Location: adm.php');
+        exit();
+        }
+        catch(PDOException $e){
+          header('Location:adm.php');
+          exit();
+        }
+      }
+      else{
+        print('Вы не выбрали пользователя для изменения');
+        exit();
+      }
   }
   else{
     if (isset($_COOKIE[session_name()]) && session_start() && !empty($_SESSION['login'])) {
