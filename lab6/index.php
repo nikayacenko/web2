@@ -286,7 +286,7 @@ else{
     if(!empty($_POST['uid'])) {
       $user_id = $_POST['uid'];
       $lang = $_POST['languages'] ?? [];
-      update($user_id,$_POST['name'], $_POST['number'], $_POST['email'], $_POST['bdate'], $_POST['gender'], $_POST['biography'], isset($_POST["checkbox"]) ? 1 : 0,$lang);
+      update($user_id,$_POST['name'], $_POST['number'], $_POST['email'], $_POST['bdate'], $_POST['gender'], $_POST['biography'], isset($_POST["checkbox"]) ? 1 : 0,$fav_languages);
       header('Location: adm.php');
       
       exit();
