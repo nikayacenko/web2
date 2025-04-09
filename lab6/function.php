@@ -70,7 +70,7 @@ function insertData($login, $db) {
             $stmt->execute();
             $values[$key] = $stmt->fetchColumn();
         } catch (Exception $e) {
-            error_log("Ошибка при выполнении запроса для ключа " . $key . ": " . $e->getMessage());
+            print("Ошибка при выполнении запроса для ключа " . $key . ": " . $e->getMessage());
             $values[$key] = null;
         }
     }
@@ -84,7 +84,7 @@ function insertData($login, $db) {
         $lang = $stmt->fetchAll(PDO::FETCH_COLUMN, 0);
         $values['languages'] = implode(",", $lang);
     } catch (PDOException $e) {
-        error_log("Ошибка при получении языков: " . $e->getMessage());
+        print("Ошибка при получении языков: " . $e->getMessage());
         $values['languages'] = null; 
     }
 

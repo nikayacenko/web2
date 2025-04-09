@@ -153,7 +153,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   }
   
   if (isset($_COOKIE[session_name()]) && session_start() &&!empty($_SESSION['login'])) {
-    $_SESSION['uid']=getuid($_SESSION['login'],$db);
+    //$_SESSION['uid']=getuid($_SESSION['login'],$db);
       $values=insertData(strip_tags($_SESSION['login']),$db);
       $messages[] = '<div class="result">Вход с логином ' . htmlspecialchars($_SESSION['login']) . ", uid " . (int)$_SESSION['uid'] . "</div>";
     }
