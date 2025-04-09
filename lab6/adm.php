@@ -2,7 +2,7 @@
 require_once 'function.php';
 require_once 'db.php';
 
-if (empty($_SERVER['PHP_AUTH_USER']) ||
+/*if (empty($_SERVER['PHP_AUTH_USER']) ||
     empty($_SERVER['PHP_AUTH_PW']) ||
     $_SERVER['PHP_AUTH_USER'] != admin_login_check($db) ||
     !admin_password_check($_SERVER['PHP_AUTH_USER'], $_SERVER['PHP_AUTH_PW'], $db)) {
@@ -10,7 +10,7 @@ if (empty($_SERVER['PHP_AUTH_USER']) ||
   header('WWW-Authenticate: Basic realm="My site"');
   print('<h1>401 Требуется авторизация</h1>');
   exit();
-}
+}*/
 
 print('Вы успешно авторизовались и видите защищенные паролем данные.');
 print("PHP_AUTH_USER: " . (!empty($_SERVER['PHP_AUTH_USER']) ? $_SERVER['PHP_AUTH_USER'] : "empty"));
@@ -26,6 +26,15 @@ $db = new PDO('mysql:host=localhost;dbname=u68600', $user, $pass,
 
     if($_SERVER['REQUEST_METHOD'] == 'GET')
     {
+        if (empty($_SERVER['PHP_AUTH_USER']) ||
+        empty($_SERVER['PHP_AUTH_PW']) ||
+        $_SERVER['PHP_AUTH_USER'] != admin_login_check($db) ||
+        !admin_password_check($_SERVER['PHP_AUTH_USER'], $_SERVER['PHP_AUTH_PW'], $db)) {
+        header('HTTP/1.1 401 Unanthorized');
+        header('WWW-Authenticate: Basic realm="My site"');
+        print('<h1>401 Требуется авторизация</h1>');
+        exit();
+        }
         $query = "SELECT id, name, number, email, bdate, gender, biography FROM application"; // Запрос с параметром
 
         $stmt = $db->prepare($query); // Подготавливаем запрос
