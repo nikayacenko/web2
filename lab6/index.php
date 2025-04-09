@@ -311,50 +311,9 @@ else{
         print('Error : ' . $e->getMessage());
         exit();
       }
-      /*$user_id;
-      try {
-          $stmt_select = $db->prepare("SELECT id FROM person_LOGIN WHERE login=?");
-          $stmt_select->execute([$_SESSION['login']]);
-          $user_id = $stmt_select->fetchColumn();
-      } catch (PDOException $e){
-          print('Error : ' . $e->getMessage());
-          exit();
-      }
-
-      //update
-      try {
-          $stmt_update = $db->prepare("UPDATE application SET name=?, number=?, email=?, bdate=?, gender=?, biography=?, checkbox=? WHERE id=?");
-          $stmt_update->execute([$_POST['name'], $_POST['number'], $_POST['email'], $_POST['bdate'], $_POST['gender'], $_POST['biography'], isset($_POST["checkbox"]) ? 1 : 0, $user_id ]);
-      
-          $stmt_delete = $db->prepare("DELETE FROM prog_lang WHERE id=?");
-          $stmt_delete -> execute([$user_id]);
-          $stmt_select = $db->prepare("SELECT id_lang_name FROM prog WHERE lang_name = ?");
-          $insert_stmt = $db->prepare("INSERT INTO prog_lang (id, id_lang_name) VALUES (?,?)");
-          foreach ($fav_languages as $language) {
-            $stmt_select->execute([$language]);
-            $language_id = $stmt_select->fetchColumn();
-            
-            if ($language_id) {
-                $insert_stmt->execute([$user_id, $language_id]);
-            }
-          }
-      } catch (PDOException $e){
-          print('update Error : ' . $e->getMessage());
-          exit();
-      }*/
-
     } 
     else{
-      try {
-        $stmt = $db->prepare("INSERT INTO application(name, number, email, gender, bdate, biography, checkbox) values(?,?,?,?,?,?,?)");
-        $stmt->execute([$_POST['name'], $_POST['number'], $_POST['email'], $_POST['gender'], $_POST['bdate'], $_POST['biography'], isset($_POST["checkbox"]) ? 1 : 0]);
-      }
-      catch(PDOException $e){
-        print('Error : ' . $e->getMessage());
-        exit();
-      }
-      $user_id = $db->lastInsertId(); 
-      try{
+
         $login = generate_pass(7);
       while(check_login($login, $db)>0)
       {
@@ -364,30 +323,8 @@ else{
         $hash_p = password_hash($pass, PASSWORD_DEFAULT);
         setcookie('login', $login);
         setcookie('pass', $pass);
-        $stmt = $db->prepare("INSERT INTO LOGIN (login, pass) VALUES (:login, :pass)");
-        $stmt->bindParam(':login', $login);
-        $stmt->bindParam(':pass', $hash_p);
-        $stmt->execute();
-        $stmt = $db->prepare("INSERT INTO person_LOGIN (id, login) VALUES (:id, :login)");
-        $stmt->bindParam(':id', $user_id);
-        $stmt->bindParam(':login', $login);
-        $stmt->execute();
-      }
-        catch(PDOException $e){
-        print('Error : ' . $e->getMessage());
-        exit();
-      }
       try{
-        $stmt = $db->prepare("SELECT id_lang_name FROM prog WHERE lang_name = ?");
-        $insert_stmt = $db->prepare("INSERT INTO prog_lang (id, id_lang_name) VALUES (?, ?)");
-        
-        foreach ($fav_languages as $language) {
-            $stmt->execute([$language]);
-            $language_id = $stmt->fetchColumn();
-            if ($language_id) {
-                $insert_stmt->execute([$user_id, $language_id]);
-            }
-        }
+        insert($login,$hash_p, $db);
       }
       catch (PDOException $e) {
         print('Ошибка БД: ' . $e->getMessage());
