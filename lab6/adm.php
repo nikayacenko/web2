@@ -47,50 +47,55 @@ $db = new PDO('mysql:host=localhost;dbname=u68600', $user, $pass,
     include 'tablehtml.php';
     ?>
         <div class="t container-fluid mt-sm-0">
-        <table border='1'>
-        <tr>
-            <th>ID</th>
-            <th>FIO</th>
-            <th>Tel</th>
-            <th>Email</th>
-            <th>Bdate</th>
-            <th>Gender</th>
-            <th>Biography</th>
-            <th>Languages</th>
-            <th>Действия</th>
-        </tr>
+            <div class="table_responsive">
+                <div class="table table-bordered">
+                    <table border='1'>
+                    <tr>
+                        <th>ID</th>
+                        <th>FIO</th>
+                        <th>Tel</th>
+                        <th>Email</th>
+                        <th>Bdate</th>
+                        <th>Gender</th>
+                        <th>Biography</th>
+                        <th>Languages</th>
+                        <th>Действия</th>
+                    </tr>
 
-        <?php foreach ($results as $row): ?>
-            <tr>
-            <td><?= htmlspecialchars($row['id']) ?></td>
-            <td><?= htmlspecialchars($row['name']) ?></td>
-            <td><?= htmlspecialchars($row['number']) ?></td>
-            <td><?= htmlspecialchars($row['email']) ?></td>
-            <td><?= htmlspecialchars($row['bdate']) ?></td>
-            <td><?= htmlspecialchars($row['gender']) ?></td>
-            <td><?= htmlspecialchars($row['biography']) ?></td>
-            <td>
-            <?php
-                // 3. Используем implode для объединения языков
-                $person_id = $row['id'];
-                if (isset($languages_by_person[$person_id])) {
-                    $languages_string = implode(', ', $languages_by_person[$person_id]);
-                    echo htmlspecialchars($languages_string);
-                } else {
-                    echo "Нет данных";
-                }
-                ?>
-                </td>
-                <td>
-                <form method="post" action="">
-                <input type="hidden" name="delete_id" value="<?= htmlspecialchars($row['id']) ?>">
-                <button type="submit">Удалить</button>
-                </form>
-                <a href="index.php?uid=<?= htmlspecialchars($row['id']) ?>">Изменить</a>
-            </td>
-            </tr>
-        <?php endforeach; ?>
-        </table>
+                    <?php foreach ($results as $row): ?>
+                        <tr>
+                        <td><?= htmlspecialchars($row['id']) ?></td>
+                        <td><?= htmlspecialchars($row['name']) ?></td>
+                        <td><?= htmlspecialchars($row['number']) ?></td>
+                        <td><?= htmlspecialchars($row['email']) ?></td>
+                        <td><?= htmlspecialchars($row['bdate']) ?></td>
+                        <td><?= htmlspecialchars($row['gender']) ?></td>
+                        <td><?= htmlspecialchars($row['biography']) ?></td>
+                        <td>
+                        <?php
+                            // 3. Используем implode для объединения языков
+                            $person_id = $row['id'];
+                            if (isset($languages_by_person[$person_id])) {
+                                $languages_string = implode(', ', $languages_by_person[$person_id]);
+                                echo htmlspecialchars($languages_string);
+                            } else {
+                                echo "Нет данных";
+                            }
+                            ?>
+                            </td>
+                            <td>
+                            <form method="post" action="">
+                            <input type="hidden" name="delete_id" value="<?= htmlspecialchars($row['id']) ?>">
+                            <button type="submit">Удалить</button>
+                            </form>
+                            <a href="index.php?uid=<?= htmlspecialchars($row['id']) ?>">Изменить</a>
+                        </td>
+                        </tr>
+                    <?php endforeach; ?>
+                    </table>
+                </div>
+            </div>
+        </div>
 
 <?php
 
