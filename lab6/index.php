@@ -12,13 +12,26 @@ function generate_pass(int $length=12):string{
   $shuff = str_shuffle($characters);
   return substr($shuff, 0, $length);
 }
-
+function check_login($login, $db)
+{
+  try{
+    $stmt = $db->prepare("SELECT COUNT(*) FROM LOGIN WHERE login = :login");
+    $stmt->bindParam(':login', $login, PDO::PARAM_STR);
+    $stmt->execute();
+    $fl = $stmt->fetchColumn();
+  }
+  catch (PDOException $e){
+    print('Error : ' . $e->getMessage());
+    return false;
+  }
+  return $fl;
+}
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   $messages = array();
   if (!empty($_COOKIE['save'])) {
     setcookie('save', '', 100000);
     setcookie('login', '', 100000);
-    setcookie('password', '', 100000);
+    setcookie('pass', '', 100000);
     $messages[] = '<div class="result">Спасибо, результаты сохранены.</div>';
 
     
@@ -26,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
       $messages[] = sprintf('<div class="result">Вы можете <a href="login.php">войти</a> с логином <strong>%s</strong>
       и паролем <strong>%s</strong> для изменения данных.</div>',
       strip_tags($_COOKIE['login']),
-      strip_tags($_COOKIE['password']));
+      strip_tags($_COOKIE['pass']));
     }
   }
   $errors = array();
@@ -133,12 +146,82 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
       }
   }
   
-  if (isset($_COOKIE[session_name()]) && session_start() &&!empty($_SESSION['login'])) {
-    $_SESSION['uid']=getuid($_SESSION['login'],$db);
-      $values=insertData(strip_tags($_SESSION['login']),$db);
+  if (/*empty($errors) &&*/ !empty($_COOKIE[session_name()]) &&
+    session_start() && !empty($_SESSION['login'])) {
+    try{
+      $stmt = $db->prepare("SELECT name FROM application join person_LOGIN using(id) where login = :login");
+      $stmt->bindValue(':login', $_SESSION['login'], PDO::PARAM_STR);
+      $stmt->execute();
+      $n = $stmt->fetchColumn();
+      $values['name']=$n;
+    }catch(PDOException $e){
+      print('Error : ' . $e->getMessage());
+      exit();
+    }
+    try{
+      $stmt = $db->prepare("SELECT email FROM application join person_LOGIN using(id) where login = :login");
+      $stmt->bindValue(':login', $_SESSION['login'], PDO::PARAM_STR);
+      $stmt->execute();
+      $mail = $stmt->fetchColumn();
+      $values['email']=$mail;
+    }catch(PDOException $e){
+      print('Error : ' . $e->getMessage());
+      exit();
+    }
+    try{
+      $stmt = $db->prepare("SELECT number FROM application join person_LOGIN using(id) WHERE login = :login");
+      $stmt->bindValue(':login', $_SESSION['login'], PDO::PARAM_STR);
+      $stmt->execute();
+      $tel = $stmt->fetchColumn();
+      $values['number']=$tel;
+    }catch(PDOException $e){
+      print('Error : ' . $e->getMessage());
+      exit();
+    }
+    try{
+      $stmt = $db->prepare("SELECT bdate FROM application join person_LOGIN using(id) WHERE login = :login");
+      $stmt->bindValue(':login', $_SESSION['login'], PDO::PARAM_STR);
+      $stmt->execute();
+      $date = $stmt->fetchColumn();
+      $values['bdate']=$date;
+    }catch(PDOException $e){
+      print('Error : ' . $e->getMessage());
+      exit();
+    }
+    try{
+      $stmt = $db->prepare("SELECT gender FROM application join person_LOGIN using(id) WHERE login = :login");
+      $stmt->bindValue(':login', $_SESSION['login'], PDO::PARAM_STR);
+      $stmt->execute();
+      $gen = $stmt->fetchColumn();
+      $values['gen']=$gen;
+    }catch(PDOException $e){
+      print('Error : ' . $e->getMessage());
+      exit();
+    }
+    try{
+      $stmt = $db->prepare("SELECT biography FROM application join person_LOGIN using(id) WHERE login = :login");
+      $stmt->bindValue(':login', $_SESSION['login'], PDO::PARAM_STR);
+      $stmt->execute();
+      $bio = $stmt->fetchColumn();
+      $values['biography']=$bio;
+    }catch(PDOException $e){
+      print('Error : ' . $e->getMessage());
+      exit();
+    }
+    /*$sql = "select pl.lang_name from prog_lang pl JOIN user_lang ul ON pl.id_lang=ul.id_lang where ul.id = :login;";*/
+    try{
+      $stmt = $db->prepare("select pl.lang_name from prog pl JOIN prog_lang ul ON pl.id_lang_name=ul.id_lang_name where ul.id = :login;");
+      $stmt->bindValue(':login', $_SESSION['uid'], PDO::PARAM_STR);
+      $stmt->execute();
+      $lang = $stmt->fetchAll(PDO::FETCH_COLUMN, 0);
+      $langs_value1 =(implode(",", $lang));
+      $values['languages']=$langs_value1;
+    }catch(PDOException $e){
+      print('Error : ' . $e->getMessage());
+      exit();
+    }
       $messages[] = '<div class="result">Вход с логином ' . htmlspecialchars($_SESSION['login']) . ", uid " . (int)$_SESSION['uid'] . "</div>";
     }
-
 
   include('form.php');
 
@@ -331,9 +414,11 @@ else{
       }
       $user_id = $db->lastInsertId(); 
       try{
-        //$characters = '0123456789';
-        $login = rand()%10000000;
-        //$pass = substr(str_shuffle($characters), 0, 10); //uniqid(string $prefix = "", bool $more_entropy = false);
+        $login = generate_pass(7);
+      while(check_login($login, $db)>0)
+      {
+        $login = generate_pass(7);
+      }
         $pass = generate_pass();
         $hash_p = password_hash($pass, PASSWORD_DEFAULT);
         setcookie('login', $login);
