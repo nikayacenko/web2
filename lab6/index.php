@@ -33,7 +33,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     setcookie('login', '', 100000);
     setcookie('pass', '', 100000);
     $messages[] = '<div class="result">Спасибо, результаты сохранены.</div>';
-
+    print('Вы успешно авторизовались и видите защищенные паролем данные.');
+      print("PHP_AUTH_USER: " . (!empty($_SERVER['PHP_AUTH_USER']) ? $_SERVER['PHP_AUTH_USER'] : "empty"));
+      print("PHP_AUTH_PW: " . (!empty($_SERVER['PHP_AUTH_PW']) ? "set" : "empty"));
     
     if (!empty($_COOKIE['pass'])) {
       $messages[] = sprintf('<div class="result">Вы можете <a href="login.php">войти</a> с логином <strong>%s</strong>
