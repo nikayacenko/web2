@@ -278,7 +278,8 @@ else{
     }
   }
   else{
-    if (isset($_COOKIE[session_name()]) && session_start() && !empty($_SESSION['login'])) {
+    if (!empty($_COOKIE[session_name()]) &&
+    session_start() && !empty($_SESSION['login'])) {
       /*try {
         $user_id=getuid($_SESSION['login'],$db);
         update($user_id,$_POST['name'], $_POST['number'], $_POST['email'], $_POST['bdate'], $_POST['gender'], $_POST['biography'], isset($_POST["checkbox"]) ? 1 : 0,$lang);
