@@ -282,7 +282,7 @@ else{
     setcookie('lang_error', "", 100000);
   }
   $p = 1;
-  if ($p){
+  if ($p==1){
     error_log("Authentication successful!");
     if(!empty($_POST['uid'])) {
       $user_id = $_POST['uid'];
