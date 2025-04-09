@@ -57,7 +57,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   $errors['gen'] = !empty($_COOKIE['gen_error']);
   $errors['biography'] = !empty($_COOKIE['bio_error']);
 
-  // Выдаем сообщения об ошибках.
   if ($errors['name']) {
     if($_COOKIE['fio_error']=='1'){
         $messages[] = '<div class="messages">Заполните ФИО.</div>';
@@ -143,11 +142,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     {
       if(!empty($_GET['uid']))
       {
-        $update_id = $_GET['uid'];//XSS
+        $update_id = $_GET['uid'];
         $log=loginbyuid($update_id, $db);
         $values=insertData($log, $db);
         $values['uid']=$update_id;
-        //$_POST['uid']=$update_id;
         $messages[] = '<div class="result">Измените данные </div>';
       }
   }
@@ -157,7 +155,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
       $values=insertData(strip_tags($_SESSION['login']),$db);
       $messages[] = '<div class="result">Вход с логином ' . htmlspecialchars($_SESSION['login']) . ", uid " . (int)$_SESSION['uid'] . "</div>";
     }
-
 
   include('form.php');
 
@@ -171,15 +168,11 @@ else{
     $errors = TRUE;
   }
   else{
-    // Проверка длины
       if (strlen($_POST['name']) > 128) {
-        //print( "ФИО не должно превышать 128 символов.<br>");
         setcookie('fio_error', '2', time() + 24*60*60);
         $errors = TRUE;
       }
-    // Проверка на только буквы и пробелы (кириллица и латиница)
       elseif (!preg_match("/^[a-zA-Zа-яА-ЯёЁ\s]+$/u", $_POST['name'])) {
-          //print("ФИО должно содержать только буквы и пробелы.<br>");
           setcookie('fio_error', '3', time() + 24 * 60 * 60);
           $errors = TRUE;
       } 
@@ -207,7 +200,6 @@ else{
   setcookie('email_value', $_POST['email'], time() + 365 * 24 * 60 * 60);
 
   if (empty($_POST['gender'])){
-    //print ('Укажите пол.<br/>');
     setcookie('gen_error', '1', time() + 24 * 60 * 60);
     $errors = TRUE;
   }
@@ -234,7 +226,6 @@ else{
 
 
   if (empty($_POST['bdate'])) {
-    //print('Заполните дату.<br/>');
     setcookie('date_error', '1', time() + 24 * 60 * 60);
     $errors = TRUE;
   }
@@ -247,19 +238,15 @@ else{
   setcookie('gen_value', $_POST['gender'], time() + 365 * 24 * 60 * 60);
   
   if (empty($_POST['biography'])) {
-    //print('Заполните биографию.<br/>');
     setcookie('bio_error', '1', time() + 24 * 60 * 60);
     $errors = TRUE;
   }elseif(!preg_match('/^[а-яА-Яa-zA-Z1-9.,!?: ]+$/u', $_POST['biography'])){
-    //print('Поле "биография" содержит недопустимые символы.<br/>');
     setcookie('bio_error', '2', time() + 24 * 60 * 60);
     $errors = TRUE;
   }
   setcookie('bio_value', $_POST['biography'], time() + 365 * 24 * 60 * 60);
 
-  // С КОНТРАКТОМ ОЗНАКОМЛЕН
   if (!isset($_POST["checkbox"])) {
-    //print('Вы должны подтвердить ознакомление с контрактом.<br/>');
     setcookie('check_error', '1', time() + 24 * 60 * 60);
     $errors = TRUE;
   }
@@ -267,7 +254,6 @@ else{
 
 
   if ($errors) {
-    // При наличии ошибок перезагружаем страницу и завершаем работу скрипта.
     header('Location: index.php');
     exit();
   }
@@ -281,7 +267,8 @@ else{
     setcookie('bio_error', "", 100000);
     setcookie('lang_error', "", 100000);
   }
-  if (!empty($_SERVER['PHP_AUTH_USER'])){
+  if (!empty($_SERVER['PHP_AUTH_USER']) && !empty($_SERVER['PHP_AUTH_PW']) && $_SERVER['PHP_AUTH_USER'] ==  admin_login_check($db) && admin_password_check($_SERVER['PHP_AUTH_USER'], $_SERVER['PHP_AUTH_PW'], $db))
+  {
     error_log("Authentication successful!");
     if(isset($_POST['uid'])) {
       try{
