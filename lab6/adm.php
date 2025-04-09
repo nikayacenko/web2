@@ -52,9 +52,9 @@ $db = new PDO('mysql:host=localhost;dbname=u68600', $user, $pass,
         }
         $languages_by_person[$person_id][] = $language_name; // Добавляем название языка
     }
-
+    include 'tablehtml.php';
     ?>
-
+        <div class="t">
         <table border='1'>
         <tr>
             <th>ID</th>
