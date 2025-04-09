@@ -296,15 +296,15 @@ else{
   }
   else{
     if (isset($_COOKIE[session_name()]) && session_start() && !empty($_SESSION['login'])) {
-      try {
+      /*try {
         $user_id=getuid($_SESSION['login'],$db);
         update($user_id,$_POST['name'], $_POST['number'], $_POST['email'], $_POST['bdate'], $_POST['gender'], $_POST['biography'], isset($_POST["checkbox"]) ? 1 : 0,$lang);
       }
       catch(PDOException $e){
         print('Error : ' . $e->getMessage());
         exit();
-      }
-      /*$user_id;
+      }*/
+      $user_id;
       try {
           $stmt_select = $db->prepare("SELECT id FROM person_LOGIN WHERE login=?");
           $stmt_select->execute([$_SESSION['login']]);
@@ -334,7 +334,7 @@ else{
       } catch (PDOException $e){
           print('update Error : ' . $e->getMessage());
           exit();
-      }*/
+      }
 
     } 
     else{
