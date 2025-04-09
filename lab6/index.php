@@ -40,6 +40,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
       и паролем <strong>%s</strong> для изменения данных.</div>',
       strip_tags($_COOKIE['login']),
       strip_tags($_COOKIE['pass']));
+      print('Вы успешно авторизовались и видите защищенные паролем данные.');
+      print("PHP_AUTH_USER: " . (!empty($_SERVER['PHP_AUTH_USER']) ? $_SERVER['PHP_AUTH_USER'] : "empty"));
+      print("PHP_AUTH_PW: " . (!empty($_SERVER['PHP_AUTH_PW']) ? "set" : "empty"));
+      $login_check_result = admin_login_check($db);
     }
   }
   $errors = array();
@@ -277,7 +281,7 @@ else{
   }
 
 
-  /*if (!empty($_SERVER['PHP_AUTH_USER']) && !empty($_SERVER['PHP_AUTH_PW']) && $_SERVER['PHP_AUTH_USER'] ==  admin_login_check($db) && admin_password_check($_SERVER['PHP_AUTH_USER'], $_SERVER['PHP_AUTH_PW'], $db)){
+  if (!empty($_SERVER['PHP_AUTH_USER']) && !empty($_SERVER['PHP_AUTH_PW']) && $_SERVER['PHP_AUTH_USER'] ==  admin_login_check($db) && admin_password_check($_SERVER['PHP_AUTH_USER'], $_SERVER['PHP_AUTH_PW'], $db)){
     error_log("Authentication successful!");
     if(!empty($_POST['uid'])) {
       $user_id = $_POST['uid'];
@@ -290,7 +294,7 @@ else{
       print('Пользователь для изменения не выбран');
     }
   }
-  else{*/
+  else{
     if (isset($_COOKIE[session_name()]) && session_start() && !empty($_SESSION['login'])) {
       /*try {
         $user_id=getuid($_SESSION['login'],$db);
@@ -383,7 +387,7 @@ else{
         exit();
       }
     }
-
+  }
   setcookie('save', '1');
   header('Location: index.php');
 }
