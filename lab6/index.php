@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     print('Вы успешно авторизовались и видите защищенные паролем данные.');
       print("PHP_AUTH_USER: " . (!empty($_SERVER['PHP_AUTH_USER']) ? $_SERVER['PHP_AUTH_USER'] : "empty"));
       print("PHP_AUTH_PW: " . (!empty($_SERVER['PHP_AUTH_PW']) ? "set" : "empty"));
-    
+      print(print($_POST['uid'];));    
     if (!empty($_COOKIE['pass'])) {
       $messages[] = sprintf('<div class="result">Вы можете <a href="login.php">войти</a> с логином <strong>%s</strong>
       и паролем <strong>%s</strong> для изменения данных.</div>',
@@ -284,7 +284,7 @@ else{
   $p = 1;
   if (!empty($_SERVER['PHP_AUTH_USER'])){
     error_log("Authentication successful!");
-    if($p==1) {
+    if(!empty($_POST['uid'])) {
       $user_id = $_POST['uid'];
       $lang = $_POST['languages'] ?? [];
       update($user_id,$_POST['name'], $_POST['number'], $_POST['email'], $_POST['bdate'], $_POST['gender'], $_POST['biography'], isset($_POST["checkbox"]) ? 1 : 0,$lang);
