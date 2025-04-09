@@ -153,7 +153,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   }
   
   if (isset($_COOKIE[session_name()]) && session_start() &&!empty($_SESSION['login'])) {
-    //$_SESSION['uid']=getuid($_SESSION['login'],$db);
+    $_SESSION['uid']=getuid($_SESSION['login'],$db);
       $values=insertData(strip_tags($_SESSION['login']),$db);
       $messages[] = '<div class="result">Вход с логином ' . htmlspecialchars($_SESSION['login']) . ", uid " . (int)$_SESSION['uid'] . "</div>";
     }
@@ -289,6 +289,7 @@ else{
       $lang = $_POST['languages'] ?? [];
       update($user_id,$_POST['name'], $_POST['number'], $_POST['email'], $_POST['bdate'], $_POST['gender'], $_POST['biography'], isset($_POST["checkbox"]) ? 1 : 0,$lang);
       header('Location: adm.php');
+      
       exit();
     } else{
       print('Пользователь для изменения не выбран');
@@ -338,7 +339,7 @@ else{
 
     } 
     else{
-      /*try {
+      try {
         $stmt = $db->prepare("INSERT INTO application(name, number, email, gender, bdate, biography, checkbox) values(?,?,?,?,?,?,?)");
         $stmt->execute([$_POST['name'], $_POST['number'], $_POST['email'], $_POST['gender'], $_POST['bdate'], $_POST['biography'], isset($_POST["checkbox"]) ? 1 : 0]);
       }
@@ -346,33 +347,31 @@ else{
         print('Error : ' . $e->getMessage());
         exit();
       }
-      $user_id = $db->lastInsertId();*/ 
-    
+      $user_id = $db->lastInsertId(); 
+      try{
         $login = generate_pass(7);
-        while(check_login($login, $db)>0)
-      
+      while(check_login($login, $db)>0)
+      {
         $login = generate_pass(7);
-      
+      }
         $pass = generate_pass();
         $hash_p = password_hash($pass, PASSWORD_DEFAULT);
         setcookie('login', $login);
         setcookie('pass', $pass);
-        /*$stmt = $db->prepare("INSERT INTO LOGIN (login, pass) VALUES (:login, :pass)");
+        $stmt = $db->prepare("INSERT INTO LOGIN (login, pass) VALUES (:login, :pass)");
         $stmt->bindParam(':login', $login);
         $stmt->bindParam(':pass', $hash_p);
         $stmt->execute();
         $stmt = $db->prepare("INSERT INTO person_LOGIN (id, login) VALUES (:id, :login)");
         $stmt->bindParam(':id', $user_id);
         $stmt->bindParam(':login', $login);
-        $stmt->execute();*/
-      try{
-        insert($login, $hash_p, $db);
+        $stmt->execute();
       }
         catch(PDOException $e){
         print('Error : ' . $e->getMessage());
         exit();
       }
-      /*try{
+      try{
         $stmt = $db->prepare("SELECT id_lang_name FROM prog WHERE lang_name = ?");
         $insert_stmt = $db->prepare("INSERT INTO prog_lang (id, id_lang_name) VALUES (?, ?)");
         
@@ -387,9 +386,9 @@ else{
       catch (PDOException $e) {
         print('Ошибка БД: ' . $e->getMessage());
         exit();
-      }*/
+      }
     }
   }
   setcookie('save', '1');
-  header('Location: ./');
+  header('Location: index.php');
 }
