@@ -338,7 +338,7 @@ else{
 
     } 
     else{
-      try {
+      /*try {
         $stmt = $db->prepare("INSERT INTO application(name, number, email, gender, bdate, biography, checkbox) values(?,?,?,?,?,?,?)");
         $stmt->execute([$_POST['name'], $_POST['number'], $_POST['email'], $_POST['gender'], $_POST['bdate'], $_POST['biography'], isset($_POST["checkbox"]) ? 1 : 0]);
       }
@@ -346,31 +346,33 @@ else{
         print('Error : ' . $e->getMessage());
         exit();
       }
-      $user_id = $db->lastInsertId(); 
-      try{
+      $user_id = $db->lastInsertId();*/ 
+    
         $login = generate_pass(7);
-      while(check_login($login, $db)>0)
-      {
+        while(check_login($login, $db)>0)
+      
         $login = generate_pass(7);
-      }
+      
         $pass = generate_pass();
         $hash_p = password_hash($pass, PASSWORD_DEFAULT);
         setcookie('login', $login);
         setcookie('pass', $pass);
-        $stmt = $db->prepare("INSERT INTO LOGIN (login, pass) VALUES (:login, :pass)");
+        /*$stmt = $db->prepare("INSERT INTO LOGIN (login, pass) VALUES (:login, :pass)");
         $stmt->bindParam(':login', $login);
         $stmt->bindParam(':pass', $hash_p);
         $stmt->execute();
         $stmt = $db->prepare("INSERT INTO person_LOGIN (id, login) VALUES (:id, :login)");
         $stmt->bindParam(':id', $user_id);
         $stmt->bindParam(':login', $login);
-        $stmt->execute();
+        $stmt->execute();*/
+      try{
+        insert($login, $hash_p, $db);
       }
         catch(PDOException $e){
         print('Error : ' . $e->getMessage());
         exit();
       }
-      try{
+      /*try{
         $stmt = $db->prepare("SELECT id_lang_name FROM prog WHERE lang_name = ?");
         $insert_stmt = $db->prepare("INSERT INTO prog_lang (id, id_lang_name) VALUES (?, ?)");
         
@@ -385,9 +387,9 @@ else{
       catch (PDOException $e) {
         print('Ошибка БД: ' . $e->getMessage());
         exit();
-      }
+      }*/
     }
   }
   setcookie('save', '1');
-  header('Location: index.php');
+  header('Location: ./');
 }

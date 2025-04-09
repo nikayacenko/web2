@@ -187,3 +187,45 @@ function getuid($login, $db){
         exit();
     }
 }
+
+function insert($login, $pass, $db){
+    try {
+        $stmt = $db->prepare("INSERT INTO application(name, number, email, gender, bdate, biography, checkbox) values(?,?,?,?,?,?,?)");
+        $stmt->execute([$_POST['name'], $_POST['number'], $_POST['email'], $_POST['gender'], $_POST['bdate'], $_POST['biography'], isset($_POST["checkbox"]) ? 1 : 0]);
+      }
+      catch(PDOException $e){
+        print('Error : ' . $e->getMessage());
+        exit();
+      }
+      $user_id = $db->lastInsertId();
+      try{
+        $stmt = $db->prepare("INSERT INTO LOGIN (login, pass) VALUES (:login, :pass)");
+        $stmt->bindParam(':login', $login);
+        $stmt->bindParam(':pass', $hash_p);
+        $stmt->execute();
+        $stmt = $db->prepare("INSERT INTO person_LOGIN (id, login) VALUES (:id, :login)");
+        $stmt->bindParam(':id', $user_id);
+        $stmt->bindParam(':login', $login);
+        $stmt->execute();
+      }
+        catch(PDOException $e){
+        print('Error : ' . $e->getMessage());
+        exit();
+      }
+      try{
+        $stmt = $db->prepare("SELECT id_lang_name FROM prog WHERE lang_name = ?");
+        $insert_stmt = $db->prepare("INSERT INTO prog_lang (id, id_lang_name) VALUES (?, ?)");
+        
+        foreach ($fav_languages as $language) {
+            $stmt->execute([$language]);
+            $language_id = $stmt->fetchColumn();
+            if ($language_id) {
+                $insert_stmt->execute([$user_id, $language_id]);
+            }
+        }
+      }
+      catch (PDOException $e) {
+        print('Ошибка БД: ' . $e->getMessage());
+        exit();
+      }
+}
