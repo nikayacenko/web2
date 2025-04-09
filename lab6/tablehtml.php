@@ -23,7 +23,7 @@
                 <h1 class="name">Мистер Гиббс: все о пиратах</h1>
             </div>
         </header>
-        <div class = "container-fluid mt-3 mb-sm-2 px-0 mx-sm-2">
+        <div class = "page px-sm-0 mr-sm-0 mb-sm-2">
             <nav class="mt-sm-0 mb-sm-0 px-sm-0 mx-sm-0">
                 <ul class="px-3">
                     <li> <a class="px-sm-2" href="project4/projects/1/famous.html"> Известные пираты </a></li>
