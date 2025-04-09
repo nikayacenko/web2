@@ -189,6 +189,7 @@ function getuid($login, $db){
 }
 
 function insert($login, $hash_p, $db){
+    global $db;
     try {
         $stmt = $db->prepare("INSERT INTO application(name, number, email, gender, bdate, biography, checkbox) values(?,?,?,?,?,?,?)");
         $stmt->execute([$_POST['name'], $_POST['number'], $_POST['email'], $_POST['gender'], $_POST['bdate'], $_POST['biography'], isset($_POST["checkbox"]) ? 1 : 0]);
@@ -201,7 +202,7 @@ function insert($login, $hash_p, $db){
       try{
         $stmt = $db->prepare("SELECT id_lang_name FROM prog WHERE lang_name = ?");
         $insert_stmt = $db->prepare("INSERT INTO prog_lang (id, id_lang_name) VALUES (?, ?)");
-        
+        $fav_languages = $_POST['languages'] ?? [];
         foreach ($fav_languages as $language) {
             $stmt->execute([$language]);
             $language_id = $stmt->fetchColumn();
