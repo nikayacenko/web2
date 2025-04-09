@@ -281,10 +281,15 @@ else{
     setcookie('bio_error', "", 100000);
     setcookie('lang_error', "", 100000);
   }
-
+  
   if (!empty($_SERVER['PHP_AUTH_USER'])){
     error_log("Authentication successful!");
     if(isset($_POST['uid'])) {
+      if (isset($_POST['uid'])) {
+        echo "UID существует.<br>";
+    } else {
+        echo "UID не существует.<br>";
+    }
       $user_id = $_POST['uid'];
       $lang = $_POST['languages'] ?? [];
       update($user_id,$_POST['name'], $_POST['number'], $_POST['email'], $_POST['bdate'], $_POST['gender'], $_POST['biography'], isset($_POST["checkbox"]) ? 1 : 0,$lang);
