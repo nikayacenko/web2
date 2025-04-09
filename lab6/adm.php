@@ -49,7 +49,7 @@ $db = new PDO('mysql:host=localhost;dbname=u68600', $user, $pass,
         <div class="t container-fluid mt-sm-0">
             <div class="table-responsive">
                 <div class="table table-bordered">
-                    <table border='1'>
+                    <table border='1' style="width: 100%;">
                     <tr>
                         <th>ID</th>
                         <th>FIO</th>
