@@ -17,21 +17,19 @@
   </head>
   <body>
     <div class="container-fluid page px-sm-0">
-        <div class="row d-flex mx-sm-0 mb-sm-2">
-            <header>
-                <div id = "fir">
-                    <img id="logo" src="project4/projects/1/static/image/флаг.png" alt="Логотип">
-                    <h1 class="name">Мистер Гиббс: все о пиратах</h1>
-                </div>
-            </header>
-            <div class = "page px-sm-0 mr-sm-0 mb-sm-2">
-                <nav class="mt-sm-0 mb-sm-0 px-sm-0 mx-sm-0">
-                    <ul class="px-3">
-                        <li> <a class="px-sm-2" href="project4/projects/1/famous.html"> Известные пираты </a></li>
-                        <li> <a class="px-sm-2" href="project4/projects/1/myths.html"> Мифы о пиратах </a></li>
-                        <li> <a class="px-sm-2" href="project4/projects/1/bio.html"> Пиратский кодекс </a></li>
-                    </ul>
-                </nav>
+        <header>
+            <div id = "fir">
+                <img id="logo" src="project4/projects/1/static/image/флаг.png" alt="Логотип">
+                <h1 class="name">Мистер Гиббс: все о пиратах</h1>
             </div>
+        </header>
+        <div class = "container-fluid mt-3 mb-sm-2 px-0 mx-sm-2">
+            <nav class="mt-sm-0 mb-sm-0 px-sm-0 mx-sm-0">
+                <ul class="px-3">
+                    <li> <a class="px-sm-2" href="project4/projects/1/famous.html"> Известные пираты </a></li>
+                    <li> <a class="px-sm-2" href="project4/projects/1/myths.html"> Мифы о пиратах </a></li>
+                    <li> <a class="px-sm-2" href="project4/projects/1/bio.html"> Пиратский кодекс </a></li>
+                </ul>
+            </nav>
         </div>
     </div>
