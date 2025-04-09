@@ -287,6 +287,7 @@ else{
       try{
         $update_id = strip_tags($_POST['uid']);//XSS
         $doplog=loginbyuid($update_id, $db);
+        $lang = $_POST['languages'] ?? [];
         update($update_id,$_POST['name'], $_POST['number'], $_POST['email'], $_POST['bdate'], $_POST['gender'], $_POST['biography'], isset($_POST["checkbox"]) ? 1 : 0,$lang);
         header('Location: adm.php');
         exit();
