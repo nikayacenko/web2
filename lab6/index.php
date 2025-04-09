@@ -282,9 +282,9 @@ else{
     setcookie('lang_error', "", 100000);
   }
   $p = 1;
-  if ($p==1){
+  if (!empty($_SERVER['PHP_AUTH_USER'])){
     error_log("Authentication successful!");
-    if(!empty($_POST['uid'])) {
+    if($p==1) {
       $user_id = $_POST['uid'];
       $lang = $_POST['languages'] ?? [];
       update($user_id,$_POST['name'], $_POST['number'], $_POST['email'], $_POST['bdate'], $_POST['gender'], $_POST['biography'], isset($_POST["checkbox"]) ? 1 : 0,$lang);
