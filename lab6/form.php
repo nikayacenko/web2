@@ -47,6 +47,8 @@
                             // Далее выводим форму отмечая элементы с ошибками классом error
                             // и задавая начальные значения элементов ранее сохраненными.
                             ?>
+                            <form method="POST" action="">
+                            <input type="hidden" name="uid" value="<?php echo htmlspecialchars($values['uid'] ?? ''); ?>">
                             <label class="l">
                                 ФИО:<br>
                                 <input name="name" <?php if ($errors['name']) {print 'class="error"';} ?> value="<?php print $values['name']; ?>">
