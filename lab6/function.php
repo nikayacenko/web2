@@ -188,7 +188,7 @@ function getuid($login, $db){
     }
 }
 
-function insert($login, $pass, $db){
+function insert($login, $hash_p, $db){
     try {
         $stmt = $db->prepare("INSERT INTO application(name, number, email, gender, bdate, biography, checkbox) values(?,?,?,?,?,?,?)");
         $stmt->execute([$_POST['name'], $_POST['number'], $_POST['email'], $_POST['gender'], $_POST['bdate'], $_POST['biography'], isset($_POST["checkbox"]) ? 1 : 0]);
