@@ -281,10 +281,10 @@ else{
     setcookie('bio_error', "", 100000);
     setcookie('lang_error', "", 100000);
   }
-  
+  $p = 1;
   if (!empty($_SERVER['PHP_AUTH_USER'])){
     error_log("Authentication successful!");
-    if(isset($_POST['uid'])) {
+    if($p==1) {
       if (isset($_POST['uid'])) {
         echo "UID существует.<br>";
     } else {
