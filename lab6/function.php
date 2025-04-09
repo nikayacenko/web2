@@ -199,20 +199,6 @@ function insert($login, $hash_p, $db){
       }
       $user_id = $db->lastInsertId();
       try{
-        $stmt = $db->prepare("INSERT INTO LOGIN (login, pass) VALUES (:login, :pass)");
-        $stmt->bindParam(':login', $login);
-        $stmt->bindParam(':pass', $hash_p);
-        $stmt->execute();
-        $stmt = $db->prepare("INSERT INTO person_LOGIN (id, login) VALUES (:id, :login)");
-        $stmt->bindParam(':id', $user_id);
-        $stmt->bindParam(':login', $login);
-        $stmt->execute();
-      }
-        catch(PDOException $e){
-        print('Error : ' . $e->getMessage());
-        exit();
-      }
-      try{
         $stmt = $db->prepare("SELECT id_lang_name FROM prog WHERE lang_name = ?");
         $insert_stmt = $db->prepare("INSERT INTO prog_lang (id, id_lang_name) VALUES (?, ?)");
         
@@ -226,6 +212,20 @@ function insert($login, $hash_p, $db){
       }
       catch (PDOException $e) {
         print('Ошибка БД: ' . $e->getMessage());
+        exit();
+      }
+      try{
+        $stmt = $db->prepare("INSERT INTO LOGIN (login, pass) VALUES (:login, :pass)");
+        $stmt->bindParam(':login', $login);
+        $stmt->bindParam(':pass', $hash_p);
+        $stmt->execute();
+        $stmt = $db->prepare("INSERT INTO person_LOGIN (id, login) VALUES (:id, :login)");
+        $stmt->bindParam(':id', $user_id);
+        $stmt->bindParam(':login', $login);
+        $stmt->execute();
+      }
+        catch(PDOException $e){
+        print('Error : ' . $e->getMessage());
         exit();
       }
 }
