@@ -296,7 +296,7 @@ else{
     //print('Заполните биографию.<br/>');
     setcookie('bio_error', '1', time() + 24 * 60 * 60);
     $errors = TRUE;
-  }elseif(!preg_match('/^[а-яА-Яa-zA-Z1-9.,!?)({}[]<>|: ]+$/u', $_POST['biography'])){
+  }elseif(!preg_match('/^[\)!]+$/u', $_POST['biography'])){
     //print('Поле "биография" содержит недопустимые символы.<br/>');
     setcookie('bio_error', '2', time() + 24 * 60 * 60);
     $errors = TRUE;
