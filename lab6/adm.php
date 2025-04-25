@@ -97,7 +97,6 @@ $db = new PDO('mysql:host=localhost;dbname=u68600', $user, $pass,
             </div>
         </div>
 
-<?php
 
 <?php
         try {
