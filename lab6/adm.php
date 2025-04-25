@@ -101,7 +101,7 @@ $db = new PDO('mysql:host=localhost;dbname=u68600', $user, $pass,
 <?php
         try {
             echo "<table class='stat'><thead> <tr class='nametb px-sm-2 pt-sm-2 pb-sm-2'><td>LANGUAGE</td><td>COUNT</td></tr></thead> ";
-            $stmt = $db->prepare("SELECT l.namelang, COUNT(pl.pers_id) AS cnt
+            $stmt = $db->prepare("SELECT l.lang_name, COUNT(pl.id) AS cnt
             FROM prog_lang pl
             JOIN prog l ON pl.id_lang_name = l.id_lang_name
             GROUP BY l.lang_name");
