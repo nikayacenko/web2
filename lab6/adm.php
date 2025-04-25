@@ -100,8 +100,7 @@ $db = new PDO('mysql:host=localhost;dbname=u68600', $user, $pass,
 
 <?php
         try {
-            echo "<div class='container'>"; // Оборачиваем таблицу в контейнер для Bootstrap
-            echo "<table class='stat table table-bordered table-striped w-100'>"; // Добавляем классы Bootstrap
+            echo "<table class='stat full-width-table'>"; // Добавляем класс для таблицы
             echo "<thead><tr class='nametb px-sm-2 pt-sm-2 pb-sm-2'><td>LANGUAGE</td><td>COUNT</td></tr></thead>";
             echo "<tbody>";
         
@@ -120,7 +119,6 @@ $db = new PDO('mysql:host=localhost;dbname=u68600', $user, $pass,
         
             echo "</tbody>";
             echo "</table>";
-            echo "</div>"; // Закрываем контейнер
         } catch (PDOException $e) {
             error_log('Database error: ' . $e->getMessage());
             echo "<p class='error'>An error occurred while retrieving data. Please try again later.</p>";

@@ -18,6 +18,22 @@
     text-align: center;
     font-family:B, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
+.full-width-table {
+    width: 100%; /* Занимает всю ширину родительского элемента */
+    border-collapse: collapse; /* Убирает двойные границы между ячейками */
+  }
+  
+  .full-width-table th,
+  .full-width-table td {
+    border: 1px solid #ddd; /* Добавляет тонкую рамку к ячейкам */
+    padding: 8px; /* Добавляет отступы внутри ячеек */
+    text-align: left; /* Выравнивает текст по левому краю */
+  }
+  
+  .full-width-table thead {
+    background-color: #f2f2f2; /* Задаёт цвет фона для заголовка */
+  }
+  
 body{
     background-color:#128ee8;
     background-image: url(../image/корабль.jpg);
@@ -192,3 +208,4 @@ tr.tb{
         width:300px;
     }
 }
+
