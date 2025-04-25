@@ -20,18 +20,14 @@
 }
 .full-width-table {
     width: 100%; /* Занимает всю ширину родительского элемента */
-    border-collapse: collapse; /* Убирает двойные границы между ячейками */
+    border-collapse: collapse;
   }
   
   .full-width-table th,
   .full-width-table td {
     border: 1px solid #ddd; /* Добавляет тонкую рамку к ячейкам */
-    padding: 8px; /* Добавляет отступы внутри ячеек */
-    text-align: left; /* Выравнивает текст по левому краю */
-  }
-  
-  .full-width-table thead {
-    background-color: #f2f2f2; /* Задаёт цвет фона для заголовка */
+    padding: 8px;
+    font-size:15px;
   }
   
 body{
