@@ -100,27 +100,30 @@ $db = new PDO('mysql:host=localhost;dbname=u68600', $user, $pass,
 
 <?php
         try {
-            echo "<table class='stat'>";
+            echo "<div class='container'>"; // Оборачиваем таблицу в контейнер для Bootstrap
+            echo "<table class='stat table table-bordered table-striped w-100'>"; // Добавляем классы Bootstrap
             echo "<thead><tr class='nametb px-sm-2 pt-sm-2 pb-sm-2'><td>LANGUAGE</td><td>COUNT</td></tr></thead>";
-            echo "<tbody>"; // Добавлено для семантической корректности
+            echo "<tbody>";
         
             $stmt = $db->prepare("SELECT l.lang_name, COUNT(pl.id) AS cnt
                                    FROM prog_lang pl
                                    JOIN prog l ON pl.id_lang_name = l.id_lang_name
                                    GROUP BY l.lang_name");
             $stmt->execute();
-            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {  // Используем ассоциативный массив
-                $lang_name = htmlspecialchars($row['lang_name'], ENT_QUOTES, 'UTF-8'); // Экранирование для безопасности
-                $count = intval($row['cnt']); // Преобразуем в целое число
+        
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $lang_name = htmlspecialchars($row['lang_name'] ?? '', ENT_QUOTES, 'UTF-8');
+                $count = (int) ($row['cnt'] ?? 0);
         
                 echo "<tr><td>{$lang_name}</td><td>{$count}</td></tr>";
             }
-            echo "</tbody>"; // Закрываем body таблицы
+        
+            echo "</tbody>";
             echo "</table>";
-            echo "</div>";
+            echo "</div>"; // Закрываем контейнер
         } catch (PDOException $e) {
-            error_log('Database error: ' . $e->getMessage()); // Логируем ошибку
-            echo "<p class='error'>An error occurred while retrieving data. Please try again later.</p>"; // Дружелюбное сообщение пользователю
+            error_log('Database error: ' . $e->getMessage());
+            echo "<p class='error'>An error occurred while retrieving data. Please try again later.</p>";
         }
     ?>
 <?php
