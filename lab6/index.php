@@ -1,31 +1,9 @@
 <?php
 require_once 'function.php';
+require_once 'db.php';
 header('Content-Type: text/html; charset=UTF-8');
-//session_start();
-  $user = 'u68600'; // Заменить на ваш логин uXXXXX
-  $pass = '8589415'; // Заменить на пароль
-  $db = new PDO('mysql:host=localhost;dbname=u68600', $user, $pass,
-    [PDO::ATTR_PERSISTENT => true, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]); // Заменить test на имя БД, совпадает с логином uXXXXX
 
-function generate_pass(int $length=12):string{
-  $characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+';
-  $shuff = str_shuffle($characters);
-  return substr($shuff, 0, $length);
-}
-function check_login($login, $db)
-{
-  try{
-    $stmt = $db->prepare("SELECT COUNT(*) FROM LOGIN WHERE login = :login");
-    $stmt->bindParam(':login', $login, PDO::PARAM_STR);
-    $stmt->execute();
-    $fl = $stmt->fetchColumn();
-  }
-  catch (PDOException $e){
-    print('Error : ' . $e->getMessage());
-    return false;
-  }
-  return $fl;
-}
+
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   $messages = array();
   if (!empty($_COOKIE['save'])) {

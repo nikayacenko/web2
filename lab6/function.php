@@ -230,3 +230,23 @@ function insert($login, $hash_p, $db){
         exit();
       }
 }
+
+function generate_pass(int $length=12):string{
+  $characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+';
+  $shuff = str_shuffle($characters);
+  return substr($shuff, 0, $length);
+}
+function check_login($login, $db)
+{
+  try{
+    $stmt = $db->prepare("SELECT COUNT(*) FROM LOGIN WHERE login = :login");
+    $stmt->bindParam(':login', $login, PDO::PARAM_STR);
+    $stmt->execute();
+    $fl = $stmt->fetchColumn();
+  }
+  catch (PDOException $e){
+    print('Error : ' . $e->getMessage());
+    return false;
+  }
+  return $fl;
+}
