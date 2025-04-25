@@ -100,21 +100,27 @@ $db = new PDO('mysql:host=localhost;dbname=u68600', $user, $pass,
 
 <?php
         try {
-            echo "<table class='stat'><thead> <tr class='nametb px-sm-2 pt-sm-2 pb-sm-2'><td>LANGUAGE</td><td>COUNT</td></tr></thead> ";
+            echo "<table class='stat'>";
+            echo "<thead><tr class='nametb px-sm-2 pt-sm-2 pb-sm-2'><td>LANGUAGE</td><td>COUNT</td></tr></thead>";
+            echo "<tbody>"; // Добавлено для семантической корректности
+        
             $stmt = $db->prepare("SELECT l.lang_name, COUNT(pl.id) AS cnt
-            FROM prog_lang pl
-            JOIN prog l ON pl.id_lang_name = l.id_lang_name
-            GROUP BY l.lang_name");
+                                   FROM prog_lang pl
+                                   JOIN prog l ON pl.id_lang_name = l.id_lang_name
+                                   GROUP BY l.lang_name");
             $stmt->execute();
-            while($row = $stmt->fetch(PDO::FETCH_OBJ)){
-                echo "<tr><td>$row->lang_name</td><td>$row->cnt</td></tr>";
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {  // Используем ассоциативный массив
+                $lang_name = htmlspecialchars($row['lang_name'], ENT_QUOTES, 'UTF-8'); // Экранирование для безопасности
+                $count = intval($row['cnt']); // Преобразуем в целое число
+        
+                echo "<tr><td>{$lang_name}</td><td>{$count}</td></tr>";
             }
+            echo "</tbody>"; // Закрываем body таблицы
             echo "</table>";
-            echo"</div>";
-        }
-        catch (PDOException $e){
-            print('ERROR : ' . $e->getMessage());
-            exit();
+            echo "</div>";
+        } catch (PDOException $e) {
+            error_log('Database error: ' . $e->getMessage()); // Логируем ошибку
+            echo "<p class='error'>An error occurred while retrieving data. Please try again later.</p>"; // Дружелюбное сообщение пользователю
         }
     ?>
 <?php
