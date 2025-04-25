@@ -107,7 +107,7 @@ $db = new PDO('mysql:host=localhost;dbname=u68600', $user, $pass,
             GROUP BY l.lang_name");
             $stmt->execute();
             while($row = $stmt->fetch(PDO::FETCH_OBJ)){
-                echo "<tr><td>$row->namelang</td><td>$row->cnt</td></tr>";
+                echo "<tr><td>$row->lang_name</td><td>$row->cnt</td></tr>";
             }
             echo "</table>";
             echo"</div>";
