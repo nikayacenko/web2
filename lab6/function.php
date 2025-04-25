@@ -250,3 +250,16 @@ function check_login($login, $db)
   }
   return $fl;
 }
+function isValid($login, $db) {
+  $count;
+  try{
+    $stmt = $db->prepare("SELECT COUNT(*) FROM person_LOGIN WHERE login = ?");
+    $stmt->execute([$login]);
+    $count = $stmt->fetchColumn();
+  } 
+  catch (PDOException $e){
+    print('Error : ' . $e->getMessage());
+    exit();
+  }
+  return $count > 0;
+}
