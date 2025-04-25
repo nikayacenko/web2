@@ -126,7 +126,9 @@ $db = new PDO('mysql:host=localhost;dbname=u68600', $user, $pass,
     ?>
 <?php
     }
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['delete_id']) && !empty($_SERVER['PHP_AUTH_USER']) && !empty($_SERVER['PHP_AUTH_PW'])) {
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['delete_id'])) {
+            if (!empty($_SERVER['PHP_AUTH_USER']) && !empty($_SERVER['PHP_AUTH_PW']) &&  $_SERVER['PHP_AUTH_USER'] == admin_login_check($db) &&
+            admin_password_check($_SERVER['PHP_AUTH_USER'], $_SERVER['PHP_AUTH_PW'], $db)){
         $delete_id = $_POST['delete_id'];
         $delete_query = "DELETE FROM application WHERE id = :id";
         $delete_querylang="DELETE FROM prog_lang WHERE id=:id";
@@ -157,5 +159,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['delete_id']) && !empty
             } catch (PDOException $e) {
             echo "<p style='color: red;'>Ошибка удаления: " . $e->getMessage() . "</p>";
             }
+        }
 }
         
