@@ -117,7 +117,7 @@ $db = new PDO('mysql:host=localhost;dbname=u68600', $user, $pass,
             exit();
         }
     ?>
-
+<?php
     }
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['delete_id']) && !empty($_SERVER['PHP_AUTH_USER']) && !empty($_SERVER['PHP_AUTH_PW'])) {
         $delete_id = $_POST['delete_id'];
