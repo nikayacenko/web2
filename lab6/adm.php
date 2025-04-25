@@ -99,6 +99,26 @@ $db = new PDO('mysql:host=localhost;dbname=u68600', $user, $pass,
 
 <?php
 
+<?php
+        try {
+            echo "<table class='stat'><thead> <tr class='nametb px-sm-2 pt-sm-2 pb-sm-2'><td>LANGUAGE</td><td>COUNT</td></tr></thead> ";
+            $stmt = $db->prepare("SELECT l.namelang, COUNT(pl.pers_id) AS cnt
+            FROM personlang pl
+            JOIN languages l ON pl.lang_id = l.id
+            GROUP BY l.namelang");
+            $stmt->execute();
+            while($row = $stmt->fetch(PDO::FETCH_OBJ)){
+                echo "<tr><td>$row->namelang</td><td>$row->cnt</td></tr>";
+            }
+            echo "</table>";
+            echo"</div>";
+        }
+        catch (PDOException $e){
+            print('ERROR : ' . $e->getMessage());
+            exit();
+        }
+    ?>
+
     }
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['delete_id']) && !empty($_SERVER['PHP_AUTH_USER']) && !empty($_SERVER['PHP_AUTH_PW'])) {
         $delete_id = $_POST['delete_id'];
