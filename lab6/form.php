@@ -54,7 +54,7 @@
                                 <input name="name" <?php if ($errors['name']) {print 'class="error"';} ?> value="<?php print $values['name']; ?>">
                             </label><br>
                             <label class="l">
-                                Номер телефона:<br>
+                                Номер телефона (начиная с +):<br>
                                 <input name="number" <?php if ($errors['number']) {print 'class="error"';} ?> value="<?php print $values['number']; ?>"
                                 value="ok"
                                 type="tel">

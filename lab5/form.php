@@ -53,7 +53,7 @@
                                 value="ok">
                             </label><br>
                             <label class="l">
-                                Номер телефона:<br>
+                                Номер телефона(начиная с +):<br>
                                 <input name="number" <?php if ($errors['number']) {print 'class="error"';} ?> value="<?php print $values['number']; ?>"
                                 value="ok"
                                 type="tel">
