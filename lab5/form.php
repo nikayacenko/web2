@@ -117,7 +117,7 @@
                                     </form>';
                             }
                         ?>
-                        <br><a href="login.php">Вход</a><br>
+                        <!-- <br><a href="login.php">Вход</a><br> -->
                     </div> 
                 </div>
             </div>
