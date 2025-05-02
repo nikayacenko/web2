@@ -18,14 +18,17 @@
     text-align: center;
     font-family:B, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
+td a{
+    color:aliceblue;
+}
 .full-width-table {
-    width: 100%; /* Занимает всю ширину родительского элемента */
+    width: 100%; 
     border-collapse: collapse;
   }
   
   .full-width-table th,
   .full-width-table td {
-    border: 1px solid #ddd; /* Добавляет тонкую рамку к ячейкам */
+    border: 1px solid #ddd; 
     padding: 8px;
     font-size:15px;
   }
