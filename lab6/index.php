@@ -226,8 +226,15 @@ else{
 
 
   if ($errors) {
-    header('Location: index.php');
+    if (!empty($_SERVER['PHP_AUTH_USER']) && !empty($_SERVER['PHP_AUTH_PW']) && $_SERVER['PHP_AUTH_USER'] ==  adminlog($db) && password_check(adminlog($db), $_SERVER['PHP_AUTH_PW'], $db))
+  {
+    header('Location: index.php?uid=' . $_POST['uid'] . '');
     exit();
+  }
+else{
+  header('Location: index.php');
+    exit();
+}
   }
   else {
     setcookie('fio_error', "", 100000);
