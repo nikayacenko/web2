@@ -21,6 +21,10 @@
 td a{
     color:aliceblue;
 }
+.form a{
+    color:aliceblue;
+    font-size:16px;
+}
 .full-width-table {
     width: 100%; 
     border-collapse: collapse;
