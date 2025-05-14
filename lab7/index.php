@@ -127,7 +127,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
       // $values=insertData(strip_tags($_SESSION['login']),$db);
       // $messages[] = '<div class="result">Вход с логином ' . htmlspecialchars($_SESSION['login']) . ", uid " . (int)$_SESSION['uid'] . "</div>";
 
-      $messages[] = 'Вы успешно авторизовались!';
+      $messages[] = '<div class="result">Вы успешно авторизовались!</div>';
     }
 
   include('form.php');
