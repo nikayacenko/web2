@@ -135,17 +135,17 @@ else{
 
   $errors = false;
   if (empty($_POST['name'])) {
-      setcookie('fio_error', '1', time() + 24 * 60 * 60);
+      setcookie('fio_error', '1');
       $errors = true;
   } else {
       // Санитизация: удаляем лишние пробелы и экранируем спецсимволы
       $name = trim($_POST['name']);
       $name = htmlspecialchars($name, ENT_QUOTES | ENT_HTML5, 'UTF-8');
       if (strlen($name) > 128) {
-          setcookie('fio_error', '2', time() + 24 * 60 * 60);
+          setcookie('fio_error', '2');
           $errors = true;
       } elseif (!preg_match("/^[a-zA-Zа-яА-ЯёЁ\s]+$/u", $name)) {
-          setcookie('fio_error', '3', time() + 24 * 60 * 60);
+          setcookie('fio_error', '3');
           $errors = true;
       }
   }
@@ -153,10 +153,10 @@ else{
  
   $number = trim($_POST['number'] ?? '');
   if (empty($number)) {
-    setcookie('number_error', '1', time() + 24 * 60 * 60);
+    setcookie('number_error', '1');
     $errors = true;
   } elseif (!preg_match('/^\+7\d{10}$/', $number)) {
-    setcookie('number_error', '2', time() + 24 * 60 * 60); 
+    setcookie('number_error', '2'); 
     $errors = true;
   }
   setcookie('number_value', $number, time() + 365 * 24 * 60 * 60);
@@ -164,23 +164,23 @@ else{
 
   $email = trim($_POST['email'] ?? '');
   if (empty($email)) {
-    setcookie('email_error', '1', time() + 24 * 60 * 60);
+    setcookie('email_error', '1');
     $errors = true;
   } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-    setcookie('email_error', '2', time() + 24 * 60 * 60);
+    setcookie('email_error', '2');
     $errors = true;
   }
   setcookie('email_value', $email, time() + 365 * 24 * 60 * 60);
 
   if (empty($_POST['gender'])){
-    setcookie('gen_error', '1', time() + 24 * 60 * 60);
+    setcookie('gen_error', '1');
     $errors = TRUE;
   }
   setcookie('gen_value', $_POST['gender'], time() + 365 * 24 * 60 * 60);
   
   $allowed_languages = ["Pascal", "C", "C++", "JavaScript", "PHP", "Python", "Java", "Haskell", "Clojure", "Prolog", "Scala"];
   if (empty($fav_languages)) {
-    setcookie('lang_error', "1", time() + 24 * 60 * 60);
+    setcookie('lang_error', '1');
     $errors = TRUE;
   } /*else {
     foreach ($fav_languages as $lang) {
@@ -195,23 +195,23 @@ else{
   setcookie('lang_value', $langs_value, time() + 365 * 24 * 60 * 60);
   
   if (empty($_POST['bdate'])) {
-    setcookie('date_error', '1', time() + 24 * 60 * 60);
+    setcookie('date_error', '1');
     $errors = TRUE;
   }
   setcookie('date_value', $_POST['bdate'], time() + 365 * 24 * 60 * 60);
   
   $biography = trim($_POST['biography'] ?? '');
   if (empty($biography)) {
-    setcookie('bio_error', '1', time() + 24 * 60 * 60);
+    setcookie('bio_error', '1');
     $errors = true;
   } elseif (!preg_match('/^[а-яА-Яa-zA-Z0-9.,!?)({}<>|: \-]+$/u', $biography)) {
-    setcookie('bio_error', '2', time() + 24 * 60 * 60);
+    setcookie('bio_error', '2');
     $errors = true;
   }
   setcookie('bio_value', htmlspecialchars($biography, ENT_QUOTES, 'UTF-8'), time() + 365 * 24 * 60 * 60);
 
   if (!isset($_POST["checkbox"])) {
-    setcookie('check_error', '1', time() + 24 * 60 * 60);
+    setcookie('check_error', '1');
     $errors = TRUE;
   }
   setcookie('check_value', $_POST['checkbox'], time() + 365 * 24 * 60 * 60);
