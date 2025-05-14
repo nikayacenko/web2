@@ -142,14 +142,14 @@ else{
       $name = trim($_POST['name']);
       $name = htmlspecialchars($name, ENT_QUOTES | ENT_HTML5, 'UTF-8');
       if (strlen($name) > 128) {
-          setcookie('fio_error', '2', time() + 24 * 60 * 60, '/', '', true, true);
+          setcookie('fio_error', '2', time() + 24 * 60 * 60);
           $errors = true;
       } elseif (!preg_match("/^[a-zA-Zа-яА-ЯёЁ\s]+$/u", $name)) {
-          setcookie('fio_error', '3', time() + 24 * 60 * 60, '/', '', true, true);
+          setcookie('fio_error', '3', time() + 24 * 60 * 60);
           $errors = true;
       }
   }
-  setcookie('fio_value', $name, time() + 365 * 24 * 60 * 60, '/', '', true, true);
+  setcookie('fio_value', $name, time() + 365 * 24 * 60 * 60);
  
   $number = trim($_POST['number'] ?? '');
   if (empty($number)) {
@@ -282,7 +282,7 @@ else{
         $hash_p = password_hash($pass, PASSWORD_DEFAULT);
 
         setcookie('login', htmlspecialchars($login, ENT_QUOTES, 'UTF-8'));
-        
+
         setcookie('pass', $pass);
       try{
         insert($login,$hash_p, $db);
