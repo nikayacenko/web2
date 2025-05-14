@@ -123,8 +123,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   
   if (isset($_COOKIE[session_name()]) && session_start() &&!empty($_SESSION['login'])) {
     $_SESSION['uid']=getuid($_SESSION['login'],$db);
-      $values=insertData(strip_tags($_SESSION['login']),$db);
-      $messages[] = '<div class="result">Вход с логином ' . htmlspecialchars($_SESSION['login']) . ", uid " . (int)$_SESSION['uid'] . "</div>";
+
+      // $values=insertData(strip_tags($_SESSION['login']),$db);
+      // $messages[] = '<div class="result">Вход с логином ' . htmlspecialchars($_SESSION['login']) . ", uid " . (int)$_SESSION['uid'] . "</div>";
+
+      $messages[] = 'Вы успешно авторизовались!';
     }
 
   include('form.php');
@@ -138,7 +141,6 @@ else{
       setcookie('fio_error', '1');
       $errors = true;
   } else {
-      // Санитизация: удаляем лишние пробелы и экранируем спецсимволы
       $name = trim($_POST['name']);
       $name = htmlspecialchars($name, ENT_QUOTES | ENT_HTML5, 'UTF-8');
       if (strlen($name) > 128) {
