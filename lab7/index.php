@@ -125,7 +125,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $_SESSION['uid']=getuid($_SESSION['login'],$db);
 
       // $values=insertData(strip_tags($_SESSION['login']),$db);
-      // $messages[] = '<div class="result">Вход с логином ' . htmlspecialchars($_SESSION['login']) . ", uid " . (int)$_SESSION['uid'] . "</div>";
+      // $messages[] = '<div class="result">Вход с логином ' . 
+      // htmlspecialchars($_SESSION['login']) . ", uid " . (int)$_SESSION['uid'] . "</div>";
 
       $messages[] = '<div class="result">Вы успешно авторизовались!</div>';
     }
@@ -134,6 +135,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
 }
 else{
+
+  if (!validateCsrfToken()) {
+    http_response_code(403); 
+  }
+
   $fav_languages = $_POST['languages'] ?? [];
 
   $errors = false;

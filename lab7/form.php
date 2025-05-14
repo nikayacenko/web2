@@ -110,6 +110,7 @@
                             <input type="checkbox" name="checkbox" <?php if ($errors['checkbox']) {print 'class="error"';} ?>  <?php if (!$errors['checkbox']) {print 'checked="checked"';} ?>> 
                             </label><br>
                             <input type = "submit" value = "Сохранить">
+                            <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars(generateCsrfToken()); ?>">
                         </form>
                         <?php
                             if(isset($_COOKIE[session_name()]) && !empty($_SESSION['login'])){
