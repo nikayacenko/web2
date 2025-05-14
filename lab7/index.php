@@ -133,22 +133,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 else{
   $fav_languages = $_POST['languages'] ?? [];
 
-  $errors = FALSE;
+  $errors = false;
   if (empty($_POST['name'])) {
-    setcookie('fio_error', '1', time() + 24*60*60);
-    $errors = TRUE;
-  }
-  else{
-      if (strlen($_POST['name']) > 128) {
-        setcookie('fio_error', '2', time() + 24*60*60);
-        $errors = TRUE;
-      }
-      elseif (!preg_match("/^[a-zA-Zа-яА-ЯёЁ\s]+$/u", $_POST['name'])) {
+      setcookie('fio_error', '1', time() + 24 * 60 * 60);
+      $errors = true;
+  } else {
+      // Санитизация: удаляем лишние пробелы и экранируем спецсимволы
+      $name = trim($_POST['name']);
+      $name = htmlspecialchars($name, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+      if (strlen($name) > 128) {
+          setcookie('fio_error', '2', time() + 24 * 60 * 60);
+          $errors = true;
+      } elseif (!preg_match("/^[a-zA-Zа-яА-ЯёЁ\s]+$/u", $name)) {
           setcookie('fio_error', '3', time() + 24 * 60 * 60);
-          $errors = TRUE;
-      } 
+          $errors = true;
+      }
   }
-  setcookie('fio_value', $_POST['name'], time() + 365 * 24 * 60 * 60);
+  setcookie('fio_value', $name, time() + 365 * 24 * 60 * 60);
  
   $_POST['number']=trim($_POST['number']);
   if(empty($_POST['number'])){
