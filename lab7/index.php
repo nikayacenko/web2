@@ -153,24 +153,24 @@ else{
  
   $number = trim($_POST['number'] ?? '');
   if (empty($number)) {
-    setcookie('number_error', '1', time() + 24 * 60 * 60, '/', '', true, true);
+    setcookie('number_error', '1', time() + 24 * 60 * 60);
     $errors = true;
   } elseif (!preg_match('/^\+7\d{10}$/', $number)) {
-    setcookie('number_error', '2', time() + 24 * 60 * 60, '/', '', true, true); 
+    setcookie('number_error', '2', time() + 24 * 60 * 60); 
     $errors = true;
   }
-  setcookie('number_value', $number, time() + 365 * 24 * 60 * 60, '/', '', true, true);
+  setcookie('number_value', $number, time() + 365 * 24 * 60 * 60);
 
 
   $email = trim($_POST['email'] ?? '');
   if (empty($email)) {
-    setcookie('email_error', '1', time() + 24 * 60 * 60, '/', '', true, true);
+    setcookie('email_error', '1', time() + 24 * 60 * 60);
     $errors = true;
   } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-    setcookie('email_error', '2', time() + 24 * 60 * 60, '/', '', true, true);
+    setcookie('email_error', '2', time() + 24 * 60 * 60);
     $errors = true;
   }
-  setcookie('email_value', $email, time() + 365 * 24 * 60 * 60, '/', '', true, true);
+  setcookie('email_value', $email, time() + 365 * 24 * 60 * 60);
 
   if (empty($_POST['gender'])){
     setcookie('gen_error', '1', time() + 24 * 60 * 60);
@@ -202,13 +202,13 @@ else{
   
   $biography = trim($_POST['biography'] ?? '');
   if (empty($biography)) {
-    setcookie('bio_error', '1', time() + 24 * 60 * 60, '/', '', true, true);
+    setcookie('bio_error', '1', time() + 24 * 60 * 60);
     $errors = true;
   } elseif (!preg_match('/^[а-яА-Яa-zA-Z0-9.,!?)({}<>|: \-]+$/u', $biography)) {
-    setcookie('bio_error', '2', time() + 24 * 60 * 60, '/', '', true, true);
+    setcookie('bio_error', '2', time() + 24 * 60 * 60);
     $errors = true;
   }
-  setcookie('bio_value', htmlspecialchars($biography, ENT_QUOTES, 'UTF-8'), time() + 365 * 24 * 60 * 60, '/', '', true, true);
+  setcookie('bio_value', htmlspecialchars($biography, ENT_QUOTES, 'UTF-8'), time() + 365 * 24 * 60 * 60);
 
   if (!isset($_POST["checkbox"])) {
     setcookie('check_error', '1', time() + 24 * 60 * 60);
