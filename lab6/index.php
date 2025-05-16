@@ -193,26 +193,16 @@ else{
   $langs_value =(implode(",", $fav_languages));
   setcookie('lang_value', $langs_value, time() + 365 * 24 * 60 * 60);
   
-
-
   if (empty($_POST['bdate'])) {
     setcookie('date_error', '1', time() + 24 * 60 * 60);
     $errors = TRUE;
   }
   setcookie('date_value', $_POST['bdate'], time() + 365 * 24 * 60 * 60);
-
-  if (!isset($_POST["gender"])) {
-    setcookie('gen_error', '1', time() + 24 * 60 * 60);
-    $errors = TRUE;
-  }
-  setcookie('gen_value', $_POST['gender'], time() + 365 * 24 * 60 * 60);
   
   if (empty($_POST['biography'])) {
-    //print('Заполните биографию.<br/>');
     setcookie('bio_error', '1', time() + 24 * 60 * 60);
     $errors = TRUE;
   }elseif(!preg_match('/^[а-яА-Яa-zA-Z0-9.,!?)({}<>|: ]+$/u', $_POST['biography'])){
-    //print('Поле "биография" содержит недопустимые символы.<br/>');
     setcookie('bio_error', '2', time() + 24 * 60 * 60);
     $errors = TRUE;
   }
